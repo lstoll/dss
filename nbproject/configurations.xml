@@ -1,0 +1,1940 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="42">
+  <logicalFolder name="root" displayName="root" projectFiles="true">
+    <logicalFolder name="dss" displayName="dss" projectFiles="true">
+      <logicalFolder name="APICommonCode"
+                     displayName="APICommonCode"
+                     projectFiles="true">
+        <itemPath>APICommonCode/QTAccessFile.cpp</itemPath>
+        <itemPath>APICommonCode/QTAccessFile.h</itemPath>
+        <itemPath>APICommonCode/QTSSMemoryDeleter.h</itemPath>
+        <itemPath>APICommonCode/QTSSModuleUtils.cpp</itemPath>
+        <itemPath>APICommonCode/QTSSModuleUtils.h</itemPath>
+        <itemPath>APICommonCode/QTSSRollingLog.cpp</itemPath>
+        <itemPath>APICommonCode/QTSSRollingLog.h</itemPath>
+        <itemPath>APICommonCode/SDPSourceInfo.cpp</itemPath>
+        <itemPath>APICommonCode/SDPSourceInfo.h</itemPath>
+        <itemPath>APICommonCode/SourceInfo.cpp</itemPath>
+        <itemPath>APICommonCode/SourceInfo.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="APIModules" displayName="APIModules" projectFiles="true">
+        <logicalFolder name="OSMemory_Modules"
+                       displayName="OSMemory_Modules"
+                       projectFiles="true">
+          <itemPath>APIModules/OSMemory_Modules/OSMemory_Modules.cpp</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSAccessLogModule"
+                       displayName="QTSSAccessLogModule"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSAccessLogModule/QTSSAccessLogModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSAccessLogModule/QTSSAccessLogModule.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSAccessModule"
+                       displayName="QTSSAccessModule"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSAccessModule/AccessChecker.cpp</itemPath>
+          <itemPath>APIModules/QTSSAccessModule/AccessChecker.h</itemPath>
+          <itemPath>APIModules/QTSSAccessModule/QTSSAccessModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSAccessModule/QTSSAccessModule.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSAdminModule"
+                       displayName="QTSSAdminModule"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSAdminModule/AdminElementNode.cpp</itemPath>
+          <itemPath>APIModules/QTSSAdminModule/AdminElementNode.h</itemPath>
+          <itemPath>APIModules/QTSSAdminModule/AdminQuery.cpp</itemPath>
+          <itemPath>APIModules/QTSSAdminModule/AdminQuery.h</itemPath>
+          <itemPath>APIModules/QTSSAdminModule/QTSSAdminModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSAdminModule/QTSSAdminModule.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSDemoAuthorizationModule.bproj"
+                       displayName="QTSSDemoAuthorizationModule.bproj"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSDemoAuthorizationModule.bproj/AccessCheck.cpp</itemPath>
+          <itemPath>APIModules/QTSSDemoAuthorizationModule.bproj/AccessCheck.h</itemPath>
+          <itemPath>APIModules/QTSSDemoAuthorizationModule.bproj/QTSSDemoModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSDemoAuthorizationModule.bproj/QTSSDemoModule.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSDemoSMILModule.bproj"
+                       displayName="QTSSDemoSMILModule.bproj"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSDemoSMILModule.bproj/QTSSDemoSMILModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSDemoSMILModule.bproj/QTSSDemoSMILModule.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSFileModule"
+                       displayName="QTSSFileModule"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSFileModule/QTSSFileModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSFileModule/QTSSFileModule.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSFilePrivsModule.bproj"
+                       displayName="QTSSFilePrivsModule.bproj"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSFilePrivsModule.bproj/QTSSFilePrivsModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSFilePrivsModule.bproj/QTSSFilePrivsModule.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSFlowControlModule"
+                       displayName="QTSSFlowControlModule"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSFlowControlModule/QTSSFlowControlModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSFlowControlModule/QTSSFlowControlModule.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSHomeDirectoryModule"
+                       displayName="QTSSHomeDirectoryModule"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSHomeDirectoryModule/DirectoryInfo.cpp</itemPath>
+          <itemPath>APIModules/QTSSHomeDirectoryModule/DirectoryInfo.h</itemPath>
+          <itemPath>APIModules/QTSSHomeDirectoryModule/QTSSHomeDirectoryModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSHomeDirectoryModule/QTSSHomeDirectoryModule.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSHttpFileModule"
+                       displayName="QTSSHttpFileModule"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSHttpFileModule/QTSSHttpFileModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSHttpFileModule/QTSSHttpFileModule.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSMP3StreamingModule"
+                       displayName="QTSSMP3StreamingModule"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSMP3StreamingModule/QTSSMP3StreamingModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSMP3StreamingModule/QTSSMP3StreamingModule.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSODAuthModule"
+                       displayName="QTSSODAuthModule"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSODAuthModule/AccessCheck.cpp</itemPath>
+          <itemPath>APIModules/QTSSODAuthModule/AccessCheck.h</itemPath>
+          <itemPath>APIModules/QTSSODAuthModule/QTSSODAuthModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSODAuthModule/QTSSODAuthModule.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSPOSIXFileSysModule"
+                       displayName="QTSSPOSIXFileSysModule"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSPOSIXFileSysModule/QTSSPosixFileSysModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSPOSIXFileSysModule/QTSSPosixFileSysModule.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSProxyModule"
+                       displayName="QTSSProxyModule"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSProxyModule/QTSSProxyModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSProxyModule/QTSSProxyModule.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSRawFileModule.bproj"
+                       displayName="QTSSRawFileModule.bproj"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSRawFileModule.bproj/QTSSRawFileModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSRawFileModule.bproj/QTSSRawFileModule.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSReflectorModule"
+                       displayName="QTSSReflectorModule"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSReflectorModule/QTSSReflectorModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/QTSSReflectorModule.h</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/QTSSRelayModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/QTSSRelayModule.h</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/QTSSSplitterModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/QTSSSplitterModule.h</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/RCFSourceInfo.cpp</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/RCFSourceInfo.h</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/ReflectorOutput.h</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/ReflectorSession.cpp</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/ReflectorSession.h</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/ReflectorStream.cpp</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/ReflectorStream.h</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/RelayOutput.cpp</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/RelayOutput.h</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/RelaySDPSourceInfo.cpp</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/RelaySDPSourceInfo.h</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/RelaySession.cpp</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/RelaySession.h</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/RTPSessionOutput.cpp</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/RTPSessionOutput.h</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/RTSPSourceInfo.cpp</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/RTSPSourceInfo.h</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/SequenceNumberMap.cpp</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/SequenceNumberMap.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSRefMovieModule"
+                       displayName="QTSSRefMovieModule"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSRefMovieModule/QTSSRefMovieModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSRefMovieModule/QTSSRefMovieModule.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSRTPFileModule"
+                       displayName="QTSSRTPFileModule"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSRTPFileModule/QTSSRTPFileModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSRTPFileModule/QTSSRTPFileModule.h</itemPath>
+          <itemPath>APIModules/QTSSRTPFileModule/RTPFileSession.cpp</itemPath>
+          <itemPath>APIModules/QTSSRTPFileModule/RTPFileSession.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSSpamDefenseModule.bproj"
+                       displayName="QTSSSpamDefenseModule.bproj"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSSpamDefenseModule.bproj/QTSSSpamDefenseModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSSpamDefenseModule.bproj/QTSSSpamDefenseModule.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSSvrControlModule"
+                       displayName="QTSSSvrControlModule"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSSvrControlModule/QTSSvrControlModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSSvrControlModule/QTSSvrControlModule.h</itemPath>
+          <itemPath>APIModules/QTSSSvrControlModule/SCRPITypes.h</itemPath>
+          <itemPath>APIModules/QTSSSvrControlModule/ServerControlAPI.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSWebDebugModule"
+                       displayName="QTSSWebDebugModule"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSWebDebugModule/QTSSWebDebugModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSWebDebugModule/QTSSWebDebugModule.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSWebStatsModule"
+                       displayName="QTSSWebStatsModule"
+                       projectFiles="true">
+          <itemPath>APIModules/QTSSWebStatsModule/QTSSWebStatsModule.cpp</itemPath>
+          <itemPath>APIModules/QTSSWebStatsModule/QTSSWebStatsModule.h</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="APIStubLib" displayName="APIStubLib" projectFiles="true">
+        <itemPath>APIStubLib/QTSS.h</itemPath>
+        <itemPath>APIStubLib/QTSS_Private.cpp</itemPath>
+        <itemPath>APIStubLib/QTSS_Private.h</itemPath>
+        <itemPath>APIStubLib/QTSSRTSPProtocol.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="AtomicLib" displayName="AtomicLib" projectFiles="true">
+        <itemPath>AtomicLib/atomic.h</itemPath>
+        <itemPath>AtomicLib/hmi.c</itemPath>
+        <itemPath>AtomicLib/timescale.c</itemPath>
+        <itemPath>AtomicLib/timestamp.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="broadcasterctl"
+                     displayName="broadcasterctl"
+                     projectFiles="true">
+        <itemPath>broadcasterctl/BroadcasterAdminController.h</itemPath>
+        <itemPath>broadcasterctl/BroadcasterAdminController.m</itemPath>
+        <itemPath>broadcasterctl/broadcasterctl_main.m</itemPath>
+        <itemPath>broadcasterctl/BroadcasterRemoteAdmin.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="CommonUtilitiesLib"
+                     displayName="CommonUtilitiesLib"
+                     projectFiles="true">
+        <itemPath>CommonUtilitiesLib/atomic.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/atomic.h</itemPath>
+        <itemPath>CommonUtilitiesLib/base64.c</itemPath>
+        <itemPath>CommonUtilitiesLib/base64.h</itemPath>
+        <itemPath>CommonUtilitiesLib/ConfParser.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/ConfParser.h</itemPath>
+        <itemPath>CommonUtilitiesLib/daemon.c</itemPath>
+        <itemPath>CommonUtilitiesLib/daemon.h</itemPath>
+        <itemPath>CommonUtilitiesLib/DateTranslator.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/DateTranslator.h</itemPath>
+        <itemPath>CommonUtilitiesLib/DssStopwatch.h</itemPath>
+        <itemPath>CommonUtilitiesLib/ev.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/ev.h</itemPath>
+        <itemPath>CommonUtilitiesLib/EventContext.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/EventContext.h</itemPath>
+        <itemPath>CommonUtilitiesLib/FastCopyMacros.h</itemPath>
+        <itemPath>CommonUtilitiesLib/getopt.c</itemPath>
+        <itemPath>CommonUtilitiesLib/getopt.h</itemPath>
+        <itemPath>CommonUtilitiesLib/GetWord.c</itemPath>
+        <itemPath>CommonUtilitiesLib/GetWord.h</itemPath>
+        <itemPath>CommonUtilitiesLib/IdleTask.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/IdleTask.h</itemPath>
+        <itemPath>CommonUtilitiesLib/MakeDir.c</itemPath>
+        <itemPath>CommonUtilitiesLib/MakeDir.h</itemPath>
+        <itemPath>CommonUtilitiesLib/md5.c</itemPath>
+        <itemPath>CommonUtilitiesLib/md5.h</itemPath>
+        <itemPath>CommonUtilitiesLib/md5digest.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/md5digest.h</itemPath>
+        <itemPath>CommonUtilitiesLib/MyAssert.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/MyAssert.h</itemPath>
+        <itemPath>CommonUtilitiesLib/mycondition.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/mycondition.h</itemPath>
+        <itemPath>CommonUtilitiesLib/mymutex.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/mymutex.h</itemPath>
+        <itemPath>CommonUtilitiesLib/OS.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/OS.h</itemPath>
+        <itemPath>CommonUtilitiesLib/OSArrayObjectDeleter.h</itemPath>
+        <itemPath>CommonUtilitiesLib/OSBufferPool.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/OSBufferPool.h</itemPath>
+        <itemPath>CommonUtilitiesLib/OSCodeFragment.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/OSCodeFragment.h</itemPath>
+        <itemPath>CommonUtilitiesLib/OSCond.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/OSCond.h</itemPath>
+        <itemPath>CommonUtilitiesLib/OSFileSource.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/OSFileSource.h</itemPath>
+        <itemPath>CommonUtilitiesLib/OSHashTable.h</itemPath>
+        <itemPath>CommonUtilitiesLib/OSHeaders.h</itemPath>
+        <itemPath>CommonUtilitiesLib/OSHeap.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/OSHeap.h</itemPath>
+        <itemPath>CommonUtilitiesLib/OSMemory.h</itemPath>
+        <itemPath>CommonUtilitiesLib/OSMutex.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/OSMutex.h</itemPath>
+        <itemPath>CommonUtilitiesLib/OSMutexRW.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/OSMutexRW.h</itemPath>
+        <itemPath>CommonUtilitiesLib/OSQueue.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/OSQueue.h</itemPath>
+        <itemPath>CommonUtilitiesLib/OSRef.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/OSRef.h</itemPath>
+        <itemPath>CommonUtilitiesLib/OSThread.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/OSThread.h</itemPath>
+        <itemPath>CommonUtilitiesLib/PathDelimiter.h</itemPath>
+        <itemPath>CommonUtilitiesLib/PLDoubleLinkedList.h</itemPath>
+        <itemPath>CommonUtilitiesLib/QueryParamList.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/QueryParamList.h</itemPath>
+        <itemPath>CommonUtilitiesLib/ResizeableStringFormatter.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/ResizeableStringFormatter.h</itemPath>
+        <itemPath>CommonUtilitiesLib/SafeStdLib.h</itemPath>
+        <itemPath>CommonUtilitiesLib/SDPUtils.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/SDPUtils.h</itemPath>
+        <itemPath>CommonUtilitiesLib/Socket.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/Socket.h</itemPath>
+        <itemPath>CommonUtilitiesLib/SocketUtils.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/SocketUtils.h</itemPath>
+        <itemPath>CommonUtilitiesLib/StopWatch.h</itemPath>
+        <itemPath>CommonUtilitiesLib/StringFormatter.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/StringFormatter.h</itemPath>
+        <itemPath>CommonUtilitiesLib/StringParser.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/StringParser.h</itemPath>
+        <itemPath>CommonUtilitiesLib/StringTranslator.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/StringTranslator.h</itemPath>
+        <itemPath>CommonUtilitiesLib/StrPtrLen.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/StrPtrLen.h</itemPath>
+        <itemPath>CommonUtilitiesLib/Task.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/Task.h</itemPath>
+        <itemPath>CommonUtilitiesLib/TCPListenerSocket.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/TCPListenerSocket.h</itemPath>
+        <itemPath>CommonUtilitiesLib/TCPSocket.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/TCPSocket.h</itemPath>
+        <itemPath>CommonUtilitiesLib/tempcalls.h</itemPath>
+        <itemPath>CommonUtilitiesLib/TimeoutTask.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/TimeoutTask.h</itemPath>
+        <itemPath>CommonUtilitiesLib/Trim.c</itemPath>
+        <itemPath>CommonUtilitiesLib/Trim.h</itemPath>
+        <itemPath>CommonUtilitiesLib/UDPDemuxer.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/UDPDemuxer.h</itemPath>
+        <itemPath>CommonUtilitiesLib/UDPSocket.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/UDPSocket.h</itemPath>
+        <itemPath>CommonUtilitiesLib/UDPSocketPool.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/UDPSocketPool.h</itemPath>
+        <itemPath>CommonUtilitiesLib/UserAgentParser.cpp</itemPath>
+        <itemPath>CommonUtilitiesLib/UserAgentParser.h</itemPath>
+        <itemPath>CommonUtilitiesLib/win32ev.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="HTTPUtilitiesLib"
+                     displayName="HTTPUtilitiesLib"
+                     projectFiles="true">
+        <itemPath>HTTPUtilitiesLib/HTTPProtocol.cpp</itemPath>
+        <itemPath>HTTPUtilitiesLib/HTTPProtocol.h</itemPath>
+        <itemPath>HTTPUtilitiesLib/HTTPRequest.cpp</itemPath>
+        <itemPath>HTTPUtilitiesLib/HTTPRequest.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="MP3Broadcaster"
+                     displayName="MP3Broadcaster"
+                     projectFiles="true">
+        <itemPath>MP3Broadcaster/BroadcasterMain.cpp</itemPath>
+        <itemPath>MP3Broadcaster/MP3Broadcaster.cpp</itemPath>
+        <itemPath>MP3Broadcaster/MP3Broadcaster.h</itemPath>
+        <itemPath>MP3Broadcaster/MP3BroadcasterLog.cpp</itemPath>
+        <itemPath>MP3Broadcaster/MP3BroadcasterLog.h</itemPath>
+        <itemPath>MP3Broadcaster/MP3FileBroadcaster.cpp</itemPath>
+        <itemPath>MP3Broadcaster/MP3FileBroadcaster.h</itemPath>
+        <itemPath>MP3Broadcaster/MP3MetaInfoUpdater.cpp</itemPath>
+        <itemPath>MP3Broadcaster/MP3MetaInfoUpdater.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="OSMemoryLib" displayName="OSMemoryLib" projectFiles="true">
+        <itemPath>OSMemoryLib/OSMemory.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="PlaylistBroadcaster.tproj"
+                     displayName="PlaylistBroadcaster.tproj"
+                     projectFiles="true">
+        <itemPath>PlaylistBroadcaster.tproj/BCasterTracker.cpp</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/BCasterTracker.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/BogusDefs.c</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/BroadcasterSession.cpp</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/BroadcasterSession.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/BroadcastLog.cpp</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/BroadcastLog.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/GetLocalIPAddressString.c</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/GetLocalIPAddressString.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/NoRepeat.cpp</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/NoRepeat.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/notes.c</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/PickerFromFile.cpp</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/PickerFromFile.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/playlist_array.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/playlist_broadcaster.cpp</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/playlist_broadcaster.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/playlist_elements.cpp</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/playlist_elements.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/playlist_lists.cpp</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/playlist_lists.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/playlist_parsers.cpp</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/playlist_parsers.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/playlist_QTRTPBroadcastFile.cpp</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/playlist_QTRTPBroadcastFile.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/playlist_SDPGen.cpp</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/playlist_SDPGen.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/playlist_SimpleParse.cpp</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/playlist_SimpleParse.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/playlist_timestamp.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/playlist_utils.cpp</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/playlist_utils.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/PlaylistBroadcaster.cpp</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/PlaylistPicker.cpp</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/PlaylistPicker.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/PLBroadcastDef.cpp</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/PLBroadcastDef.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/SimplePlayListElement.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/StSmartArrayPointer.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/tailor.h</itemPath>
+        <itemPath>PlaylistBroadcaster.tproj/TrackingElement.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="PrefsSourceLib"
+                     displayName="PrefsSourceLib"
+                     projectFiles="true">
+        <itemPath>PrefsSourceLib/FilePrefsSource.cpp</itemPath>
+        <itemPath>PrefsSourceLib/FilePrefsSource.h</itemPath>
+        <itemPath>PrefsSourceLib/NetInfoPrefsSource.cpp</itemPath>
+        <itemPath>PrefsSourceLib/NetInfoPrefsSource.h</itemPath>
+        <itemPath>PrefsSourceLib/nilib2.c</itemPath>
+        <itemPath>PrefsSourceLib/nilib2.h</itemPath>
+        <itemPath>PrefsSourceLib/PrefsSource.h</itemPath>
+        <itemPath>PrefsSourceLib/XMLParser.cpp</itemPath>
+        <itemPath>PrefsSourceLib/XMLParser.h</itemPath>
+        <itemPath>PrefsSourceLib/XMLPrefsParser.cpp</itemPath>
+        <itemPath>PrefsSourceLib/XMLPrefsParser.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="QTFileLib" displayName="QTFileLib" projectFiles="true">
+        <itemPath>QTFileLib/QTAtom.cpp</itemPath>
+        <itemPath>QTFileLib/QTAtom.h</itemPath>
+        <itemPath>QTFileLib/QTAtom_dref.cpp</itemPath>
+        <itemPath>QTFileLib/QTAtom_dref.h</itemPath>
+        <itemPath>QTFileLib/QTAtom_elst.cpp</itemPath>
+        <itemPath>QTFileLib/QTAtom_elst.h</itemPath>
+        <itemPath>QTFileLib/QTAtom_hinf.cpp</itemPath>
+        <itemPath>QTFileLib/QTAtom_hinf.h</itemPath>
+        <itemPath>QTFileLib/QTAtom_mdhd.cpp</itemPath>
+        <itemPath>QTFileLib/QTAtom_mdhd.h</itemPath>
+        <itemPath>QTFileLib/QTAtom_mvhd.cpp</itemPath>
+        <itemPath>QTFileLib/QTAtom_mvhd.h</itemPath>
+        <itemPath>QTFileLib/QTAtom_stco.cpp</itemPath>
+        <itemPath>QTFileLib/QTAtom_stco.h</itemPath>
+        <itemPath>QTFileLib/QTAtom_stsc.cpp</itemPath>
+        <itemPath>QTFileLib/QTAtom_stsc.h</itemPath>
+        <itemPath>QTFileLib/QTAtom_stsd.cpp</itemPath>
+        <itemPath>QTFileLib/QTAtom_stsd.h</itemPath>
+        <itemPath>QTFileLib/QTAtom_stss.cpp</itemPath>
+        <itemPath>QTFileLib/QTAtom_stss.h</itemPath>
+        <itemPath>QTFileLib/QTAtom_stsz.cpp</itemPath>
+        <itemPath>QTFileLib/QTAtom_stsz.h</itemPath>
+        <itemPath>QTFileLib/QTAtom_stts.cpp</itemPath>
+        <itemPath>QTFileLib/QTAtom_stts.h</itemPath>
+        <itemPath>QTFileLib/QTAtom_tkhd.cpp</itemPath>
+        <itemPath>QTFileLib/QTAtom_tkhd.h</itemPath>
+        <itemPath>QTFileLib/QTAtom_tref.cpp</itemPath>
+        <itemPath>QTFileLib/QTAtom_tref.h</itemPath>
+        <itemPath>QTFileLib/QTFile.cpp</itemPath>
+        <itemPath>QTFileLib/QTFile.h</itemPath>
+        <itemPath>QTFileLib/QTFile_FileControlBlock.cpp</itemPath>
+        <itemPath>QTFileLib/QTFile_FileControlBlock.h</itemPath>
+        <itemPath>QTFileLib/QTHintTrack.cpp</itemPath>
+        <itemPath>QTFileLib/QTHintTrack.h</itemPath>
+        <itemPath>QTFileLib/QTRTPFile.cpp</itemPath>
+        <itemPath>QTFileLib/QTRTPFile.h</itemPath>
+        <itemPath>QTFileLib/QTTrack.cpp</itemPath>
+        <itemPath>QTFileLib/QTTrack.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="QTFileTools" displayName="QTFileTools" projectFiles="true">
+        <logicalFolder name="QTBroadcaster.tproj"
+                       displayName="QTBroadcaster.tproj"
+                       projectFiles="true">
+          <itemPath>QTFileTools/QTBroadcaster.tproj/QTBroadcaster.cpp</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTFileInfo.tproj"
+                       displayName="QTFileInfo.tproj"
+                       projectFiles="true">
+          <itemPath>QTFileTools/QTFileInfo.tproj/QTFileInfo.cpp</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTFileTest.tproj"
+                       displayName="QTFileTest.tproj"
+                       projectFiles="true">
+          <itemPath>QTFileTools/QTFileTest.tproj/QTFileTest.cpp</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTRTPFileTest.tproj"
+                       displayName="QTRTPFileTest.tproj"
+                       projectFiles="true">
+          <itemPath>QTFileTools/QTRTPFileTest.tproj/QTRTPFileTest.cpp</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTRTPGen.tproj"
+                       displayName="QTRTPGen.tproj"
+                       projectFiles="true">
+          <itemPath>QTFileTools/QTRTPGen.tproj/QTRTPGen.cpp</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSampleLister.tproj"
+                       displayName="QTSampleLister.tproj"
+                       projectFiles="true">
+          <itemPath>QTFileTools/QTSampleLister.tproj/QTSampleLister.cpp</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSDPGen.tproj"
+                       displayName="QTSDPGen.tproj"
+                       projectFiles="true">
+          <itemPath>QTFileTools/QTSDPGen.tproj/QTSDPGen.cpp</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTTrackInfo.tproj"
+                       displayName="QTTrackInfo.tproj"
+                       projectFiles="true">
+          <itemPath>QTFileTools/QTTrackInfo.tproj/QTTrackInfo.cpp</itemPath>
+        </logicalFolder>
+        <logicalFolder name="RTPFileGen.tproj"
+                       displayName="RTPFileGen.tproj"
+                       projectFiles="true">
+          <itemPath>QTFileTools/RTPFileGen.tproj/RTPFileDefs.h</itemPath>
+          <itemPath>QTFileTools/RTPFileGen.tproj/RTPFileGen.cpp</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="qtpasswd.tproj"
+                     displayName="qtpasswd.tproj"
+                     projectFiles="true">
+        <itemPath>qtpasswd.tproj/QTSSPasswd.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="RegistrySystemPathEditor"
+                     displayName="RegistrySystemPathEditor"
+                     projectFiles="true">
+        <itemPath>RegistrySystemPathEditor/PathEditor.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="RTCPUtilitiesLib"
+                     displayName="RTCPUtilitiesLib"
+                     projectFiles="true">
+        <itemPath>RTCPUtilitiesLib/IncomingRTCPSRPacket.h</itemPath>
+        <itemPath>RTCPUtilitiesLib/RTCPAckPacket.cpp</itemPath>
+        <itemPath>RTCPUtilitiesLib/RTCPAckPacket.h</itemPath>
+        <itemPath>RTCPUtilitiesLib/RTCPAPPPacket.cpp</itemPath>
+        <itemPath>RTCPUtilitiesLib/RTCPAPPPacket.h</itemPath>
+        <itemPath>RTCPUtilitiesLib/RTCPPacket.cpp</itemPath>
+        <itemPath>RTCPUtilitiesLib/RTCPPacket.h</itemPath>
+        <itemPath>RTCPUtilitiesLib/RTCPSRPacket.cpp</itemPath>
+        <itemPath>RTCPUtilitiesLib/RTCPSRPacket.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="RTPMetaInfoLib"
+                     displayName="RTPMetaInfoLib"
+                     projectFiles="true">
+        <itemPath>RTPMetaInfoLib/RTPMetaInfoPacket.cpp</itemPath>
+        <itemPath>RTPMetaInfoLib/RTPMetaInfoPacket.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="RTSPClientLib"
+                     displayName="RTSPClientLib"
+                     projectFiles="true">
+        <itemPath>RTSPClientLib/ClientSession.cpp</itemPath>
+        <itemPath>RTSPClientLib/ClientSession.h</itemPath>
+        <itemPath>RTSPClientLib/ClientSocket.cpp</itemPath>
+        <itemPath>RTSPClientLib/ClientSocket.h</itemPath>
+        <itemPath>RTSPClientLib/RTSPClient.cpp</itemPath>
+        <itemPath>RTSPClientLib/RTSPClient.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="SafeStdLib" displayName="SafeStdLib" projectFiles="true">
+        <itemPath>SafeStdLib/DynamicModuleStdLib.cpp</itemPath>
+        <itemPath>SafeStdLib/InternalStdLib.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="Server.tproj"
+                     displayName="Server.tproj"
+                     projectFiles="true">
+        <itemPath>Server.tproj/GenerateXMLPrefs.cpp</itemPath>
+        <itemPath>Server.tproj/GenerateXMLPrefs.h</itemPath>
+        <itemPath>Server.tproj/main.cpp</itemPath>
+        <itemPath>Server.tproj/QTSSCallbacks.cpp</itemPath>
+        <itemPath>Server.tproj/QTSSCallbacks.h</itemPath>
+        <itemPath>Server.tproj/QTSSDataConverter.cpp</itemPath>
+        <itemPath>Server.tproj/QTSSDataConverter.h</itemPath>
+        <itemPath>Server.tproj/QTSSDictionary.cpp</itemPath>
+        <itemPath>Server.tproj/QTSSDictionary.h</itemPath>
+        <itemPath>Server.tproj/QTSSErrorLogModule.cpp</itemPath>
+        <itemPath>Server.tproj/QTSSErrorLogModule.h</itemPath>
+        <itemPath>Server.tproj/QTSServer.cpp</itemPath>
+        <itemPath>Server.tproj/QTSServer.h</itemPath>
+        <itemPath>Server.tproj/QTSServerInterface.cpp</itemPath>
+        <itemPath>Server.tproj/QTSServerInterface.h</itemPath>
+        <itemPath>Server.tproj/QTSServerPrefs.cpp</itemPath>
+        <itemPath>Server.tproj/QTSServerPrefs.h</itemPath>
+        <itemPath>Server.tproj/QTSSExpirationDate.cpp</itemPath>
+        <itemPath>Server.tproj/QTSSExpirationDate.h</itemPath>
+        <itemPath>Server.tproj/QTSSFile.cpp</itemPath>
+        <itemPath>Server.tproj/QTSSFile.h</itemPath>
+        <itemPath>Server.tproj/QTSSMessages.cpp</itemPath>
+        <itemPath>Server.tproj/QTSSMessages.h</itemPath>
+        <itemPath>Server.tproj/QTSSModule.cpp</itemPath>
+        <itemPath>Server.tproj/QTSSModule.h</itemPath>
+        <itemPath>Server.tproj/QTSSPrefs.cpp</itemPath>
+        <itemPath>Server.tproj/QTSSPrefs.h</itemPath>
+        <itemPath>Server.tproj/QTSSSocket.cpp</itemPath>
+        <itemPath>Server.tproj/QTSSSocket.h</itemPath>
+        <itemPath>Server.tproj/QTSSStream.h</itemPath>
+        <itemPath>Server.tproj/QTSSUserProfile.cpp</itemPath>
+        <itemPath>Server.tproj/QTSSUserProfile.h</itemPath>
+        <itemPath>Server.tproj/RTCPTask.cpp</itemPath>
+        <itemPath>Server.tproj/RTCPTask.h</itemPath>
+        <itemPath>Server.tproj/RTPBandwidthTracker.cpp</itemPath>
+        <itemPath>Server.tproj/RTPBandwidthTracker.h</itemPath>
+        <itemPath>Server.tproj/RTPOverbufferWindow.cpp</itemPath>
+        <itemPath>Server.tproj/RTPOverbufferWindow.h</itemPath>
+        <itemPath>Server.tproj/RTPPacketResender.cpp</itemPath>
+        <itemPath>Server.tproj/RTPPacketResender.h</itemPath>
+        <itemPath>Server.tproj/RTPSession.cpp</itemPath>
+        <itemPath>Server.tproj/RTPSession.h</itemPath>
+        <itemPath>Server.tproj/RTPSessionInterface.cpp</itemPath>
+        <itemPath>Server.tproj/RTPSessionInterface.h</itemPath>
+        <itemPath>Server.tproj/RTPStream.cpp</itemPath>
+        <itemPath>Server.tproj/RTPStream.h</itemPath>
+        <itemPath>Server.tproj/RTSPProtocol.cpp</itemPath>
+        <itemPath>Server.tproj/RTSPProtocol.h</itemPath>
+        <itemPath>Server.tproj/RTSPRequest.cpp</itemPath>
+        <itemPath>Server.tproj/RTSPRequest.h</itemPath>
+        <itemPath>Server.tproj/RTSPRequestInterface.cpp</itemPath>
+        <itemPath>Server.tproj/RTSPRequestInterface.h</itemPath>
+        <itemPath>Server.tproj/RTSPRequestStream.cpp</itemPath>
+        <itemPath>Server.tproj/RTSPRequestStream.h</itemPath>
+        <itemPath>Server.tproj/RTSPResponseStream.cpp</itemPath>
+        <itemPath>Server.tproj/RTSPResponseStream.h</itemPath>
+        <itemPath>Server.tproj/RTSPSession.cpp</itemPath>
+        <itemPath>Server.tproj/RTSPSession.h</itemPath>
+        <itemPath>Server.tproj/RTSPSessionInterface.cpp</itemPath>
+        <itemPath>Server.tproj/RTSPSessionInterface.h</itemPath>
+        <itemPath>Server.tproj/RunServer.cpp</itemPath>
+        <itemPath>Server.tproj/RunServer.h</itemPath>
+        <itemPath>Server.tproj/win32main.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="StreamingProxy.tproj"
+                     displayName="StreamingProxy.tproj"
+                     projectFiles="true">
+        <itemPath>StreamingProxy.tproj/get_opt.c</itemPath>
+        <itemPath>StreamingProxy.tproj/get_opt.h</itemPath>
+        <itemPath>StreamingProxy.tproj/proxy.c</itemPath>
+        <itemPath>StreamingProxy.tproj/proxy.h</itemPath>
+        <itemPath>StreamingProxy.tproj/proxy_plat.h</itemPath>
+        <itemPath>StreamingProxy.tproj/proxy_unix.c</itemPath>
+        <itemPath>StreamingProxy.tproj/shared_udp.c</itemPath>
+        <itemPath>StreamingProxy.tproj/shared_udp.h</itemPath>
+        <itemPath>StreamingProxy.tproj/util.c</itemPath>
+        <itemPath>StreamingProxy.tproj/util.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="WebAdmin" displayName="WebAdmin" projectFiles="true">
+        <logicalFolder name="NetSSLeay" displayName="NetSSLeay" projectFiles="true">
+          <itemPath>WebAdmin/NetSSLeay/SSLeay.c</itemPath>
+        </logicalFolder>
+        <logicalFolder name="QTSSLinkApp" displayName="QTSSLinkApp" projectFiles="true">
+          <itemPath>WebAdmin/QTSSLinkApp/qtsslinkapp_main.m</itemPath>
+        </logicalFolder>
+        <logicalFolder name="StartupItems.bproj"
+                       displayName="StartupItems.bproj"
+                       projectFiles="true">
+          <itemPath>WebAdmin/StartupItems.bproj/dummy.c</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="WinNTSupport"
+                     displayName="WinNTSupport"
+                     projectFiles="true">
+        <itemPath>WinNTSupport/Win32header.h</itemPath>
+      </logicalFolder>
+      <itemPath>defaultPaths.h</itemPath>
+      <itemPath>PlatformHeader.h</itemPath>
+      <itemPath>revision.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false">
+      <itemPath>dss-Makefile.mk</itemPath>
+      <itemPath>Makefile.POSIX</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>dss-Makefile.mk</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>GNU</compilerSet>
+        <platform>4</platform>
+      </toolsSet>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>buildit</buildCommand>
+          <cleanCommand>clean</cleanCommand>
+          <executablePath></executablePath>
+        </makeTool>
+        <requiredProjects>
+        </requiredProjects>
+      </makefileType>
+      <item path="APICommonCode/QTAccessFile.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APICommonCode/QTAccessFile.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APICommonCode/QTSSMemoryDeleter.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APICommonCode/QTSSModuleUtils.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APICommonCode/QTSSModuleUtils.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APICommonCode/QTSSRollingLog.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APICommonCode/QTSSRollingLog.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APICommonCode/SDPSourceInfo.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APICommonCode/SDPSourceInfo.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APICommonCode/SourceInfo.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APICommonCode/SourceInfo.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/OSMemory_Modules/OSMemory_Modules.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSAccessLogModule/QTSSAccessLogModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSAccessLogModule/QTSSAccessLogModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSAccessModule/AccessChecker.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSAccessModule/AccessChecker.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSAccessModule/QTSSAccessModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSAccessModule/QTSSAccessModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSAdminModule/AdminElementNode.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSAdminModule/AdminElementNode.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSAdminModule/AdminQuery.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSAdminModule/AdminQuery.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSAdminModule/QTSSAdminModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSAdminModule/QTSSAdminModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSDemoAuthorizationModule.bproj/AccessCheck.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSDemoAuthorizationModule.bproj/AccessCheck.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSDemoAuthorizationModule.bproj/QTSSDemoModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSDemoAuthorizationModule.bproj/QTSSDemoModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSDemoSMILModule.bproj/QTSSDemoSMILModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSDemoSMILModule.bproj/QTSSDemoSMILModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSFileModule/QTSSFileModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSFileModule/QTSSFileModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSFilePrivsModule.bproj/QTSSFilePrivsModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSFilePrivsModule.bproj/QTSSFilePrivsModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSFlowControlModule/QTSSFlowControlModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSFlowControlModule/QTSSFlowControlModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSHomeDirectoryModule/DirectoryInfo.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSHomeDirectoryModule/DirectoryInfo.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSHomeDirectoryModule/QTSSHomeDirectoryModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSHomeDirectoryModule/QTSSHomeDirectoryModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSHttpFileModule/QTSSHttpFileModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSHttpFileModule/QTSSHttpFileModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSMP3StreamingModule/QTSSMP3StreamingModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSMP3StreamingModule/QTSSMP3StreamingModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSODAuthModule/AccessCheck.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSODAuthModule/AccessCheck.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSODAuthModule/QTSSODAuthModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSODAuthModule/QTSSODAuthModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSPOSIXFileSysModule/QTSSPosixFileSysModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSPOSIXFileSysModule/QTSSPosixFileSysModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSProxyModule/QTSSProxyModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSProxyModule/QTSSProxyModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSRTPFileModule/QTSSRTPFileModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSRTPFileModule/QTSSRTPFileModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSRTPFileModule/RTPFileSession.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSRTPFileModule/RTPFileSession.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSRawFileModule.bproj/QTSSRawFileModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSRawFileModule.bproj/QTSSRawFileModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSRefMovieModule/QTSSRefMovieModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSRefMovieModule/QTSSRefMovieModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/QTSSReflectorModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/QTSSReflectorModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/QTSSRelayModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/QTSSRelayModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/QTSSSplitterModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/QTSSSplitterModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/RCFSourceInfo.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/RCFSourceInfo.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/RTPSessionOutput.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/RTPSessionOutput.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/RTSPSourceInfo.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/RTSPSourceInfo.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/ReflectorOutput.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/ReflectorSession.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/ReflectorSession.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/ReflectorStream.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/ReflectorStream.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/RelayOutput.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/RelayOutput.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/RelaySDPSourceInfo.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/RelaySDPSourceInfo.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/RelaySession.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/RelaySession.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/SequenceNumberMap.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/SequenceNumberMap.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSSpamDefenseModule.bproj/QTSSSpamDefenseModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSSpamDefenseModule.bproj/QTSSSpamDefenseModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSSvrControlModule/QTSSvrControlModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSSvrControlModule/QTSSvrControlModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSSvrControlModule/SCRPITypes.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSSvrControlModule/ServerControlAPI.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSWebDebugModule/QTSSWebDebugModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSWebDebugModule/QTSSWebDebugModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSWebStatsModule/QTSSWebStatsModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSWebStatsModule/QTSSWebStatsModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIStubLib/QTSS.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIStubLib/QTSSRTSPProtocol.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIStubLib/QTSS_Private.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIStubLib/QTSS_Private.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="AtomicLib/atomic.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="AtomicLib/hmi.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="AtomicLib/timescale.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="AtomicLib/timestamp.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/ConfParser.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/ConfParser.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/DateTranslator.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/DateTranslator.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/DssStopwatch.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/EventContext.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/EventContext.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/FastCopyMacros.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/GetWord.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/GetWord.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/IdleTask.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/IdleTask.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/MakeDir.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/MakeDir.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/MyAssert.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/MyAssert.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OS.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OS.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSArrayObjectDeleter.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSBufferPool.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSBufferPool.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSCodeFragment.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSCodeFragment.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSCond.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSCond.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSFileSource.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSFileSource.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSHashTable.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSHeaders.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSHeap.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSHeap.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSMemory.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSMutex.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSMutex.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSMutexRW.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSMutexRW.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSQueue.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSQueue.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSRef.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSRef.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSThread.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/OSThread.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/PLDoubleLinkedList.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/PathDelimiter.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/QueryParamList.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/QueryParamList.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/ResizeableStringFormatter.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/ResizeableStringFormatter.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/SDPUtils.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/SDPUtils.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/SafeStdLib.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/Socket.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/Socket.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/SocketUtils.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/SocketUtils.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/StopWatch.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/StrPtrLen.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/StrPtrLen.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/StringFormatter.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/StringFormatter.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/StringParser.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/StringParser.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/StringTranslator.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/StringTranslator.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/TCPListenerSocket.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/TCPListenerSocket.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/TCPSocket.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/TCPSocket.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/Task.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/Task.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/TimeoutTask.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/TimeoutTask.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/Trim.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/Trim.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/UDPDemuxer.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/UDPDemuxer.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/UDPSocket.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/UDPSocket.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/UDPSocketPool.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/UDPSocketPool.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/UserAgentParser.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/UserAgentParser.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/atomic.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/atomic.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/base64.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/base64.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/daemon.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/daemon.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/ev.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/ev.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/getopt.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/getopt.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/md5.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/md5.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/md5digest.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/md5digest.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/mycondition.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/mycondition.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/mymutex.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/mymutex.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/tempcalls.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="CommonUtilitiesLib/win32ev.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="HTTPUtilitiesLib/HTTPProtocol.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="HTTPUtilitiesLib/HTTPProtocol.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="HTTPUtilitiesLib/HTTPRequest.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="HTTPUtilitiesLib/HTTPRequest.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="MP3Broadcaster/BroadcasterMain.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="MP3Broadcaster/MP3Broadcaster.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="MP3Broadcaster/MP3Broadcaster.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="MP3Broadcaster/MP3BroadcasterLog.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="MP3Broadcaster/MP3BroadcasterLog.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="MP3Broadcaster/MP3FileBroadcaster.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="MP3Broadcaster/MP3FileBroadcaster.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="MP3Broadcaster/MP3MetaInfoUpdater.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="MP3Broadcaster/MP3MetaInfoUpdater.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="OSMemoryLib/OSMemory.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PlatformHeader.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/BCasterTracker.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/BCasterTracker.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/BogusDefs.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/BroadcastLog.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/BroadcastLog.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/BroadcasterSession.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/BroadcasterSession.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/GetLocalIPAddressString.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/GetLocalIPAddressString.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/NoRepeat.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/NoRepeat.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/PLBroadcastDef.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/PLBroadcastDef.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/PickerFromFile.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/PickerFromFile.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/PlaylistBroadcaster.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/PlaylistPicker.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/PlaylistPicker.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/SimplePlayListElement.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/StSmartArrayPointer.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/TrackingElement.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/notes.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/playlist_QTRTPBroadcastFile.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/playlist_QTRTPBroadcastFile.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/playlist_SDPGen.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/playlist_SDPGen.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/playlist_SimpleParse.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/playlist_SimpleParse.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/playlist_array.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/playlist_broadcaster.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/playlist_broadcaster.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/playlist_elements.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/playlist_elements.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/playlist_lists.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/playlist_lists.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/playlist_parsers.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/playlist_parsers.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/playlist_timestamp.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/playlist_utils.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/playlist_utils.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PlaylistBroadcaster.tproj/tailor.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PrefsSourceLib/FilePrefsSource.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PrefsSourceLib/FilePrefsSource.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PrefsSourceLib/NetInfoPrefsSource.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PrefsSourceLib/NetInfoPrefsSource.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PrefsSourceLib/PrefsSource.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PrefsSourceLib/XMLParser.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PrefsSourceLib/XMLParser.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PrefsSourceLib/XMLPrefsParser.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="PrefsSourceLib/XMLPrefsParser.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="PrefsSourceLib/nilib2.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="PrefsSourceLib/nilib2.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_dref.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_dref.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_elst.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_elst.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_hinf.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_hinf.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_mdhd.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_mdhd.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_mvhd.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_mvhd.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_stco.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_stco.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_stsc.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_stsc.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_stsd.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_stsd.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_stss.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_stss.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_stsz.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_stsz.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_stts.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_stts.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_tkhd.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_tkhd.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_tref.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileLib/QTAtom_tref.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileLib/QTFile.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileLib/QTFile.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileLib/QTFile_FileControlBlock.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileLib/QTFile_FileControlBlock.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileLib/QTHintTrack.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileLib/QTHintTrack.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileLib/QTRTPFile.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileLib/QTRTPFile.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileLib/QTTrack.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileLib/QTTrack.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileTools/QTBroadcaster.tproj/QTBroadcaster.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileTools/QTFileInfo.tproj/QTFileInfo.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileTools/QTFileTest.tproj/QTFileTest.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileTools/QTRTPFileTest.tproj/QTRTPFileTest.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileTools/QTRTPGen.tproj/QTRTPGen.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileTools/QTSDPGen.tproj/QTSDPGen.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileTools/QTSampleLister.tproj/QTSampleLister.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileTools/QTTrackInfo.tproj/QTTrackInfo.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="QTFileTools/RTPFileGen.tproj/RTPFileDefs.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="QTFileTools/RTPFileGen.tproj/RTPFileGen.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="RTCPUtilitiesLib/IncomingRTCPSRPacket.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="RTCPUtilitiesLib/RTCPAPPPacket.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="RTCPUtilitiesLib/RTCPAPPPacket.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="RTCPUtilitiesLib/RTCPAckPacket.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="RTCPUtilitiesLib/RTCPAckPacket.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="RTCPUtilitiesLib/RTCPPacket.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="RTCPUtilitiesLib/RTCPPacket.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="RTCPUtilitiesLib/RTCPSRPacket.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="RTCPUtilitiesLib/RTCPSRPacket.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="RTPMetaInfoLib/RTPMetaInfoPacket.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="RTPMetaInfoLib/RTPMetaInfoPacket.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="RTSPClientLib/ClientSession.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="RTSPClientLib/ClientSession.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="RTSPClientLib/ClientSocket.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="RTSPClientLib/ClientSocket.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="RTSPClientLib/RTSPClient.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="RTSPClientLib/RTSPClient.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="RegistrySystemPathEditor/PathEditor.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="SafeStdLib/DynamicModuleStdLib.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="SafeStdLib/InternalStdLib.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/GenerateXMLPrefs.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/GenerateXMLPrefs.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSCallbacks.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSCallbacks.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSDataConverter.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSDataConverter.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSDictionary.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSDictionary.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSErrorLogModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSErrorLogModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSExpirationDate.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSExpirationDate.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSFile.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSFile.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSMessages.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSMessages.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSModule.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSPrefs.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSPrefs.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSSocket.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSSocket.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSStream.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSUserProfile.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/QTSSUserProfile.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/QTSServer.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/QTSServer.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/QTSServerInterface.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/QTSServerInterface.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/QTSServerPrefs.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/QTSServerPrefs.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/RTCPTask.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/RTCPTask.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/RTPBandwidthTracker.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/RTPBandwidthTracker.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/RTPOverbufferWindow.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/RTPOverbufferWindow.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/RTPPacketResender.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/RTPPacketResender.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/RTPSession.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/RTPSession.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/RTPSessionInterface.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/RTPSessionInterface.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/RTPStream.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/RTPStream.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/RTSPProtocol.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/RTSPProtocol.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/RTSPRequest.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/RTSPRequest.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/RTSPRequestInterface.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/RTSPRequestInterface.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/RTSPRequestStream.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/RTSPRequestStream.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/RTSPResponseStream.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/RTSPResponseStream.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/RTSPSession.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/RTSPSession.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/RTSPSessionInterface.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/RTSPSessionInterface.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/RunServer.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/RunServer.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Server.tproj/main.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="Server.tproj/win32main.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="StreamingProxy.tproj/get_opt.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="StreamingProxy.tproj/get_opt.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="StreamingProxy.tproj/proxy.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="StreamingProxy.tproj/proxy.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="StreamingProxy.tproj/proxy_plat.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="StreamingProxy.tproj/proxy_unix.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="StreamingProxy.tproj/shared_udp.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="StreamingProxy.tproj/shared_udp.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="StreamingProxy.tproj/util.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="StreamingProxy.tproj/util.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/NetSSLeay/SSLeay.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="WebAdmin/QTSSLinkApp/qtsslinkapp_main.m">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="WebAdmin/StartupItems.bproj/dummy.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="WinNTSupport/Win32header.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="broadcasterctl/BroadcasterAdminController.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="broadcasterctl/BroadcasterAdminController.m">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="broadcasterctl/BroadcasterRemoteAdmin.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="broadcasterctl/broadcasterctl_main.m">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="defaultPaths.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="qtpasswd.tproj/QTSSPasswd.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="revision.h">
+        <itemTool>3</itemTool>
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
