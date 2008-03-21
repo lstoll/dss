@@ -31,6 +31,9 @@ fi
 echo 'Setting the ownsership to qtss:qtss on /etc/streaming'
 chown -R -f qtss:qtss /etc/streaming/
 
+echo 'Creating /var/streaming/playlists'
+mkdir -p /var/streaming/playlists
+
 echo 'setting mode to 770 on /var/streaming/playlists'
 chmod 770 /var/streaming/playlists
 echo 'setting mode to 775 on /usr/local/movies'
