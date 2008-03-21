@@ -241,7 +241,7 @@ rm -f ./WinNTSupport/StreamingServer.suo
 
 echo "rm packaging dirs"
 rm -rf ./DarwinStreamingSrvr*
-rm -rf ./StreamingProxy--Linux
+rm -rf ./StreamingProxy-*
 
 rm ./.gdb_history
 
