@@ -4,8 +4,8 @@
 # if no config in place, start server
 
 # Add system user
-echo 'Adding qtss user'
-/usr/sbin/useradd -M qtss > /dev/null 2>&1
+echo 'Adding qtss user & group'
+/usr/sbin/useradd qtss > /dev/null 2>&1
 
 # if there is no qtuser file, move the dist version over, and update the admin user
 # to the default
@@ -28,18 +28,18 @@ if [ ! -f /etc/streaming/qtusers ]; then
 fi
 
 
-echo 'Setting the ownsership to qtss on /etc/streaming'
-chown -R -f qtss /etc/streaming/
+echo 'Setting the ownsership to qtss:qtss on /etc/streaming'
+chown -R -f qtss:qtss /etc/streaming/
 
 echo 'setting mode to 770 on /var/streaming/playlists'
 chmod 770 /var/streaming/playlists
 echo 'setting mode to 775 on /usr/local/movies'
 chmod 775 /usr/local/movies
 
-echo 'Setting the ownsership to qtss on /var/streaming'
-chown -R -f qtss /var/streaming/
-echo 'Setting the ownsership to qtss on /usr/local/movies'
-chown -R -f qtss /usr/local/movies/
+echo 'Setting the ownsership to qtss:qtss on /var/streaming'
+chown -R -f qtss:qtss /var/streaming/
+echo 'Setting the ownsership to qtss:qtss on /usr/local/movies'
+chown -R -f qtss:qtss /usr/local/movies/
 
 echo 'Setting the service to auto-start'
 /usr/sbin/update-rc.d streamingserver defaults
