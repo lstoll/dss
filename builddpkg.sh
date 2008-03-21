@@ -4,7 +4,7 @@
 
 PLAT=`uname`
 VER=`cat revision.h | grep "kVersionString \"" | cut -d \" -f 2`
-PACKAGING_DIR=$PACKAGING_DIR
+PACKAGING_DIR=DarwinStreamingSrvr$VER-$PLAT
 
 
 # Build the tarball first - this will handle getting everything compiled
