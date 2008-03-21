@@ -3,6 +3,11 @@
 # Debian post install package. Add user, set perms, copy default configs over
 # if no config in place, start server
 
+# if the server init script exists, call it to stop
+if [ -f /etc/init.d/streamingserver ]; then
+    /etc/init.d/streamingserver stop
+fi
+
 # Add system user
 echo 'Adding qtss user & group'
 /usr/sbin/useradd qtss > /dev/null 2>&1
