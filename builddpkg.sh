@@ -26,7 +26,7 @@ echo 'Architecture: i386' >> DarwinStreamingSrvr$VER-$PLAT/DEBIAN/control
 
 # Create the init.d dir in the dist dir, move script over.
 mkdir DarwinStreamingSrvr$VER-$PLAT/etc/init.d
-mv DarwinStreamingSrvr$VER-$PLAT/DEBIAN/control/streamingserver DarwinStreamingSrvr$VER-$PLAT/etc/init.d/
+mv DarwinStreamingSrvr$VER-$PLAT/DEBIAN/streamingserver DarwinStreamingSrvr$VER-$PLAT/etc/init.d/
 
 # Re-name all the config files to .dist
 for f in DarwinStreamingSrvr$VER-$PLAT/etc/streaming/*; do mv $f $f.dist; done
