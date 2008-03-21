@@ -237,5 +237,8 @@ rm -rf ./WinNTSupport/DarwinStreamingServer/
 rm -f ./WinNTSupport/StreamingServer.sln
 rm -f ./WinNTSupport/StreamingServer.suo
 
+echo "rm packaging dirs"
+rm -rf DarwinStreamingSrvr*
+
 rm ./.gdb_history
 
