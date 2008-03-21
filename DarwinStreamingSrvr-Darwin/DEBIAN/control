@@ -1,5 +1,6 @@
 Package: streamingserver
-Maintainer: Lincoln Stoll <lstoll@lstoll.net>
+Maintainer: Darwin Developers <darwin-development@public.lists.apple.com>
+Build-Depends: build-base
 Description: Darwin Streaming Server
  Darwin Streaming Server lets you stream digital video on the Internet
  using industry-standard Internet protocols RTP and RTSP. Using Darwin

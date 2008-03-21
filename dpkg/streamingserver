@@ -1,0 +1,52 @@
+#!/bin/sh
+#
+# chkconfig: 35 92 12
+# description: Quicktime Streaming Media Server
+#
+# Larry Underhill 05/20/02
+#
+# init script to start up the quicktime (Darwin) streaming server
+# tested on Redhat 7.2 linux (sorry, that's all I have)
+#
+# provided 'as is' -- sometimes, I can do less than clever things.
+#
+# you have been warned.
+
+case "$1" in
+  start)
+    if test -r /var/lock/streamingserver
+    then 
+        echo "Lockfile /var/lock/subsys/dssd exists. Server not started."
+    else 
+        echo "Starting Darwin Streaming Server: "
+        /usr/local/sbin/DarwinStreamingServer && touch /var/lock/streamingserver
+        echo "Starting DSS Admin Console: "
+        /usr/local/sbin/streamingadminserver.pl 
+        echo
+    fi
+    ;;
+    
+  stop)
+    echo "Stopping Darwin Streaming Server: "
+    [ -f /var/lock/streamingserver ] || exit 0
+    ps -ax | awk '{print $1" " $5}' | awk '/DarwinStreamingServer/ {print $1}' | xargs -r kill -9  
+    echo "Stopping DSS Admin Console: "
+    ps -ax | awk '/streamingadminserver.pl/ {print $1}' | xargs -r kill -9 
+    rm -f /var/lock/streamingserver
+    echo
+    ;;
+    
+  restart)
+    $0 stop
+    sleep 1
+    $0 start
+    ;;
+    
+  *)
+	
+  echo "Usage: $0 [start|stop|restart]"
+  exit 1
+
+esac
+
+exit 0
