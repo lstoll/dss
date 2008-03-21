@@ -20,7 +20,7 @@ if [ ! -f /etc/streaming/qtusers ]; then
 	
 	# Add the new admin username to /etc/streaming/qtgroups
 	# and delete the default admin username
-	echo admin: $username > /etc/streaming/qtgroups.tmp
+	echo admin: admin > /etc/streaming/qtgroups.tmp
 	mv /etc/streaming/qtgroups.tmp /etc/streaming/qtgroups
 	
 	# Remove the default admin username to /etc/streaming/qtusers
