@@ -224,6 +224,8 @@ rm -f ./APIModules/QTSSSpamDefenseModule.bproj/QTSSSpamDefenseModule
 rm -f ./APIModules/QTSSRawFileModule.bproj/QTSSRawFileModule
 rm -f ./APIModules/QTSSDemoAuthorizationModule.bproj/QTSSDemoAuthorizationModule
 rm -f ./APIModules/QTSSAccessModule.bproj/QTSSAccessModule
+rm -f ./APIModules/QTSSHomeDirectoryModule/QTSSHomeDirectoryModule
+rm -f ./APIModules/QTSSRefMovieModule/QTSSRefMovieModule
 rm -f ./result
 rm -rf ./StreamingServer.pbproject/StreamingServer.pbproj
 echo "rm Win modules"
