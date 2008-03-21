@@ -29,9 +29,9 @@ case "$1" in
   stop)
     echo "Stopping Darwin Streaming Server: "
     [ -f /var/lock/streamingserver ] || exit 0
-    ps -ax | awk '{print $1" " $5}' | awk '/DarwinStreamingServer/ {print $1}' | xargs -r kill -9  
+    ps ax | awk '{print $1" " $5}' | awk '/DarwinStreamingServer/ {print $1}' | xargs -r kill -9  
     echo "Stopping DSS Admin Console: "
-    ps -ax | awk '/streamingadminserver.pl/ {print $1}' | xargs -r kill -9 
+    ps ax | awk '/streamingadminserver.pl/ {print $1}' | xargs -r kill -9 
     rm -f /var/lock/streamingserver
     echo
     ;;
