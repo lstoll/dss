@@ -240,7 +240,8 @@ rm -f ./WinNTSupport/StreamingServer.sln
 rm -f ./WinNTSupport/StreamingServer.suo
 
 echo "rm packaging dirs"
-rm -rf DarwinStreamingSrvr*
+rm -rf ./DarwinStreamingSrvr*
+rm -rf ./StreamingProxy--Linux
 
 rm ./.gdb_history
 
