@@ -26,7 +26,7 @@ cp -r dpkg/* $PACKAGING_DIR/DEBIAN/
 
 echo '--- Appending version to control file'
 # Append the version number to the control file
-echo 'Version: '$VERSION >> $PACKAGING_DIR/DEBIAN/control
+echo 'Version: '$VER >> $PACKAGING_DIR/DEBIAN/control
 
 echo '--- creating the init.d dir, moving script from it to control dir'
 # Create the init.d dir in the dist dir, move script over.
