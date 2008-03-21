@@ -54,6 +54,9 @@ if [ -e StreamingLoadTool ]; then
             rm -f /usr/local/bin/StreamingLoadTool
     fi
 fi
-echo
+
+
+# Remove rc links
+update-rc.d -f streamingserver remove
 
 
