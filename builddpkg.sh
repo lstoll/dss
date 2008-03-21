@@ -7,7 +7,7 @@ VER=`cat revision.h | grep "kVersionString \"" | cut -d \" -f 2`
 
 
 # Build the tarball first - this will handle getting everything compiled
-./buildtarball
+./buildtarball $VER
 # Remove the tarball & clean the dist staging dir
 rm DarwinStreamingSrvr$VER-$PLAT.tar.gz
 rm -rf DarwinStreamingSrvr$VER-$PLAT
