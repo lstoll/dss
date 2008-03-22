@@ -33,8 +33,8 @@ if [ ! -f /etc/streaming/qtusers ]; then
 fi
 
 
-echo 'Setting the ownsership to qtss:qtss on /etc/streaming'
-chown -R -f qtss:qtss /etc/streaming/
+echo 'Setting the ownsership to qtss on /etc/streaming'
+chown -R -f qtss /etc/streaming/
 
 echo 'Creating /var/streaming/playlists'
 mkdir -p /var/streaming/playlists
@@ -44,12 +44,19 @@ chmod 770 /var/streaming/playlists
 echo 'setting mode to 775 on /usr/local/movies'
 chmod 775 /usr/local/movies
 
-echo 'Setting the ownsership to qtss:qtss on /var/streaming'
-chown -R -f qtss:qtss /var/streaming/
-echo 'Setting the ownsership to qtss:qtss on /usr/local/movies'
-chown -R -f qtss:qtss /usr/local/movies/
+echo 'Setting the ownsership to qtss on /var/streaming'
+chown -R -f qtss /var/streaming/
+echo 'Setting the ownsership to qtss on /usr/local/movies'
+chown -R -f qtss /usr/local/movies/
 
 echo 'Setting the service to auto-start'
 /usr/sbin/update-rc.d streamingserver defaults
 echo 'Starting the service'
 /etc/init.d/streamingserver start
+
+sleep 1
+
+# we need to do this after start - otherwise DSS creates the config as root,
+# then can't read it.
+echo 'Setting the ownsership to qtss:root on /etc/streaming/streamingserver.xml'
+chown -f qtss /etc/streaming/streamingserver.xml
