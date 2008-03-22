@@ -52,7 +52,11 @@ chown -R -f qtss /usr/local/movies/
 echo 'Setting the service to auto-start'
 /usr/sbin/update-rc.d streamingserver defaults
 
-if [ ! -f /etc/streaming/streamingserver.xml ]; then
+if [ -f /etc/streaming/streamingserver.xml ]; then
+    # We have a pre-configured instance, remove the config wizard trigger
+    echo 'Removing /var/streaming/AdminHtml/index.html to avoid setup wizard'
+    rm /var/streaming/AdminHtml/index.html
+else
     echo 'Creating default config file'
     /usr/local/sbin/DarwinStreamingServer -x
     echo 'Setting permissions /etc/streaming/streamingserver.xml'
