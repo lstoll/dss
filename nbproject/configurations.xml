@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="42">
   <logicalFolder name="root" displayName="root" projectFiles="true">
+    <logicalFolder name="f1"
+                   displayName="build/package scripts"
+                   projectFiles="true">
+      <itemPath>builddpkg.sh</itemPath>
+      <itemPath>Buildit</itemPath>
+      <itemPath>BuildOSXInstallerPkg</itemPath>
+      <itemPath>buildproxytarballx</itemPath>
+      <itemPath>buildtarball</itemPath>
+      <itemPath>clean</itemPath>
+      <itemPath>clean_dss_osx</itemPath>
+      <itemPath>DSS_MakeProxyRoot</itemPath>
+      <itemPath>DSS_MakeRoot</itemPath>
+      <itemPath>Install</itemPath>
+      <itemPath>uninstalldss4</itemPath>
+      <itemPath>uninstallqtss4</itemPath>
+    </logicalFolder>
+    <logicalFolder name="f2"
+                   displayName="debian package control"
+                   projectFiles="true">
+      <itemPath>dpkg/control</itemPath>
+      <itemPath>dpkg/postinst</itemPath>
+      <itemPath>dpkg/prerm</itemPath>
+      <itemPath>dpkg/streamingserver</itemPath>
+    </logicalFolder>
     <logicalFolder name="dss" displayName="dss" projectFiles="true">
       <logicalFolder name="APICommonCode"
                      displayName="APICommonCode"
@@ -644,6 +668,7 @@
                    projectFiles="false">
       <itemPath>dss-Makefile.mk</itemPath>
       <itemPath>Makefile.POSIX</itemPath>
+      <itemPath>README</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>dss-Makefile.mk</projectmakefile>
@@ -972,6 +997,12 @@
       <item path="AtomicLib/timestamp.h">
         <itemTool>3</itemTool>
       </item>
+      <item path="BuildOSXInstallerPkg">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Buildit">
+        <itemTool>3</itemTool>
+      </item>
       <item path="CommonUtilitiesLib/ConfParser.cpp">
         <itemTool>1</itemTool>
       </item>
@@ -1278,6 +1309,12 @@
       <item path="CommonUtilitiesLib/win32ev.cpp">
         <itemTool>1</itemTool>
       </item>
+      <item path="DSS_MakeProxyRoot">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="DSS_MakeRoot">
+        <itemTool>3</itemTool>
+      </item>
       <item path="HTTPUtilitiesLib/HTTPProtocol.cpp">
         <itemTool>1</itemTool>
       </item>
@@ -1288,6 +1325,9 @@
         <itemTool>1</itemTool>
       </item>
       <item path="HTTPUtilitiesLib/HTTPRequest.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Install">
         <itemTool>3</itemTool>
       </item>
       <item path="MP3Broadcaster/BroadcasterMain.cpp">
@@ -1926,13 +1966,46 @@
       <item path="broadcasterctl/broadcasterctl_main.m">
         <itemTool>0</itemTool>
       </item>
+      <item path="builddpkg.sh">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="buildproxytarballx">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="buildtarball">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="clean">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="clean_dss_osx">
+        <itemTool>3</itemTool>
+      </item>
       <item path="defaultPaths.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="dpkg/control">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="dpkg/postinst">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="dpkg/prerm">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="dpkg/streamingserver">
         <itemTool>3</itemTool>
       </item>
       <item path="qtpasswd.tproj/QTSSPasswd.cpp">
         <itemTool>1</itemTool>
       </item>
       <item path="revision.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="uninstalldss4">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="uninstallqtss4">
         <itemTool>3</itemTool>
       </item>
     </conf>
