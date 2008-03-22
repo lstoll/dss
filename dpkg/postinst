@@ -55,9 +55,10 @@ echo 'Setting the service to auto-start'
 if [ ! -f /etc/streaming/streamingserver.xml ]
     echo 'Creating default config file'
     /usr/local/sbin/DarwinStreamingServer -x
+    echo 'Setting permissions /etc/streaming/streamingserver.xml'
+    chmod 600 /etc/streaming/streamingserver.xml
+    chown qtss /etc/streaming/streamingserver.xml
     cp /etc/streaming/streamingserver.xml /etc/streaming/streamingserver.xml.dist
-    echo 'Setting the ownsership to qtss:root on /etc/streaming/streamingserver.xml'
-chown -f qtss /etc/streaming/streamingserver.xml
 fi
 
 
