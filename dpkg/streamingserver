@@ -16,7 +16,7 @@ case "$1" in
   start)
     if test -r /var/lock/streamingserver
     then 
-        echo "Lockfile /var/lock/subsys/dssd exists. Server not started."
+        echo "Lockfile /var/lock/streamingserver exists. Server not started."
     else 
         echo "Starting Darwin Streaming Server: "
         /usr/local/sbin/DarwinStreamingServer && touch /var/lock/streamingserver
