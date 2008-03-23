@@ -1,0 +1,7 @@
+# use glob syntax.
+syntax: glob
+nbproject/private
+
+# switch to regexp syntax.
+#syntax: regexp
+#^\.pc/
