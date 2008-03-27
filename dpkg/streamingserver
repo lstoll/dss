@@ -19,6 +19,8 @@ case "$1" in
         echo "Lockfile /var/lock/streamingserver exists. Server not started."
     else 
         echo "Starting Darwin Streaming Server: "
+        # Perms cleanup
+        chown -R -f qtss /var/streaming/
         /usr/local/sbin/DarwinStreamingServer && touch /var/lock/streamingserver
         echo "Starting DSS Admin Console: "
         /usr/local/sbin/streamingadminserver.pl 
