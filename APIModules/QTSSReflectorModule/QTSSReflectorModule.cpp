@@ -612,10 +612,7 @@ QTSS_Error ProcessRTPData(QTSS_IncomingData_Params* inParams)
 {
     if (!sBroadcastPushEnabled)
         return QTSS_NoErr;
-    
-    QTSSModuleUtils::LogErrorStr(  qtssWarningVerbosity, "tst - warning" );
-    QTSSModuleUtils::LogErrorStr(  qtssDebugVerbosity, "tst - debug" );
-    QTSSModuleUtils::LogErrorStr(  qtssMessageVerbosity, "tst - message" );
+        
     ::printf("printf - QTSSReflectorModule:ProcessRTPData inRTSPSession=%lu inClientSession=%lu\n",inParams->inRTSPSession, inParams->inClientSession);
     qtss_printf("QTSSReflectorModule:ProcessRTPData inRTSPSession=%lu inClientSession=%lu\n",inParams->inRTSPSession, inParams->inClientSession);
     ReflectorSession* theSession = NULL;
