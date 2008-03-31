@@ -674,7 +674,7 @@ QTSS_Error ProcessRTPData(QTSS_IncomingData_Params* inParams)
                     isRTCP = true;
                 }
                 theStream->PushPacket(rtpPacket,packetDataLen, isRTCP);
-                qtss_printf("QTSSReflectorModule.cpp:ProcessRTPData Send RTSP packet channel=%u to UDP localServerAddr=%lu serverReceivePort=%lu packetDataLen=%u \n", (UInt16) packetChannel, localServerAddr, serverReceivePort,packetDataLen);
+                //qtss_printf("QTSSReflectorModule.cpp:ProcessRTPData Send RTSP packet channel=%u to UDP localServerAddr=%lu serverReceivePort=%lu packetDataLen=%u \n", (UInt16) packetChannel, localServerAddr, serverReceivePort,packetDataLen);
             }
         }
     }
