@@ -613,7 +613,6 @@ QTSS_Error ProcessRTPData(QTSS_IncomingData_Params* inParams)
     if (!sBroadcastPushEnabled)
         return QTSS_NoErr;
         
-    ::printf("printf - QTSSReflectorModule:ProcessRTPData inRTSPSession=%lu inClientSession=%lu\n",inParams->inRTSPSession, inParams->inClientSession);
     qtss_printf("QTSSReflectorModule:ProcessRTPData inRTSPSession=%lu inClientSession=%lu\n",inParams->inRTSPSession, inParams->inClientSession);
     ReflectorSession* theSession = NULL;
     UInt32 theLen = sizeof(theSession);
