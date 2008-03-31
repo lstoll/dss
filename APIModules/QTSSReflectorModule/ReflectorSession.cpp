@@ -70,7 +70,7 @@ FileDeleter::FileDeleter(StrPtrLen* inSDPPath)
 
 FileDeleter::~FileDeleter()
 {
-    qtss_printf("FileDeleter::~FileDeleter delete = %s \n",fFilePath.Ptr);
+    //qtss_printf("FileDeleter::~FileDeleter delete = %s \n",fFilePath.Ptr);
     ::unlink(fFilePath.Ptr);  
     delete fFilePath.Ptr;
     fFilePath.Ptr = NULL;
@@ -128,7 +128,7 @@ ReflectorSession::~ReflectorSession()
         UInt32 refCount = fStreamArray[x]->GetRef()->GetRefCount();
         Bool16 unregisterNow = (refCount == 1) ? true : false;
         
-        qtss_printf("ReflectorSession::~ReflectorSession stream index=%lu refcount=%lu\n",x,refCount);
+        //qtss_printf("ReflectorSession::~ReflectorSession stream index=%lu refcount=%lu\n",x,refCount);
         //decrement the ref count
         
         if (refCount > 0) // Refcount may be 0 if there was some error setting up the stream
@@ -139,7 +139,7 @@ ReflectorSession::~ReflectorSession()
         {   // Delete this stream if the refcount has dropped to 0
             if (unregisterNow)
                 sStreamMap->UnRegister(fStreamArray[x]->GetRef()); // Refcount may be 0 if there was some error setting up the stream
-            qtss_printf("delete stream index=%lu refcount=%lu\n",x,refCount);
+            //qtss_printf("delete stream index=%lu refcount=%lu\n",x,refCount);
             delete fStreamArray[x];
             fStreamArray[x] = NULL;
         }   
@@ -223,7 +223,7 @@ QTSS_Error ReflectorSession::SetupReflectorSession(SourceInfo* inInfo, QTSS_Stan
                 
             // If the port was 0, update it to reflect what the actual RTP port is.
             fSourceInfo->GetStreamInfo(x)->fPort = fStreamArray[x]->GetStreamInfo()->fPort;
-            qtss_printf("ReflectorSession::SetupReflectorSession fSourceInfo->GetStreamInfo(x)->fPort= %u\n",fSourceInfo->GetStreamInfo(x)->fPort);
+            //qtss_printf("ReflectorSession::SetupReflectorSession fSourceInfo->GetStreamInfo(x)->fPort= %u\n",fSourceInfo->GetStreamInfo(x)->fPort);
             
             ReflectorStream::GenerateSourceID(fSourceInfo->GetStreamInfo(x), &theStreamID[0]);
 
@@ -235,7 +235,7 @@ QTSS_Error ReflectorSession::SetupReflectorSession(SourceInfo* inInfo, QTSS_Stan
             Assert(debug == fStreamArray[x]->GetRef());
 
             //UInt32 refCount = fStreamArray[x]->GetRef()->GetRefCount();
-            qtss_printf("stream index=%lu refcount=%lu\n",x,refCount);
+            //qtss_printf("stream index=%lu refcount=%lu\n",x,refCount);
         
         }
         else    
@@ -258,7 +258,7 @@ void ReflectorSession::AddBroadcasterClientSession(QTSS_StandardRTSP_Params* inP
     for (UInt32 x = 0; x < fSourceInfo->GetNumStreams(); x++)
     {
         if (fStreamArray[x] != NULL)
-        {   qtss_printf("AddBroadcasterSession=%lu\n",inParams->inClientSession);
+        {   //qtss_printf("AddBroadcasterSession=%lu\n",inParams->inClientSession);
             ((ReflectorSocket*)fStreamArray[x]->GetSocketPair()->GetSocketA())->AddBroadcasterSession(inParams->inClientSession);
             ((ReflectorSocket*)fStreamArray[x]->GetSocketPair()->GetSocketB())->AddBroadcasterSession(inParams->inClientSession);
         }

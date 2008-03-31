@@ -683,7 +683,7 @@ Bool16 RTPSessionOutput::PacketShouldBeThinned(QTSS_RTPStreamObject inStream, St
     if (*curQualityLevel > 0 && ((*lastChangeTime + 30000) < timeNow) ) // 30 seconds between reductions
     {   *curQualityLevel -= 1; // reduce quality value.  If we quality doesn't change then we may have hit some steady state which we can't get out of without thinning or increasing the quality
         *lastChangeTime =timeNow; 
-        qtss_printf("RTPSessionOutput set quality to %lu\n",*curQualityLevel);
+        //qtss_printf("RTPSessionOutput set quality to %lu\n",*curQualityLevel);
     }
 
     //Check to see if we need to drop to audio only

@@ -224,7 +224,7 @@ ReflectorStream::~ReflectorStream()
         sSocketPool.ReleaseUDPSocketPair(fSockets);
     }
         
-        qtss_printf("Deleting stream %x\n", this);
+        //qtss_printf("Deleting stream %x\n", this);
 
     //delete every client Bucket
     for (UInt32 y = 0; y < fNumBuckets; y++)
@@ -490,10 +490,10 @@ void ReflectorStream::PushPacket(char *packet, UInt32 packetLen, Bool16 isRTCP)
     {   
         ReflectorPacket* thePacket = NULL;
         if (isRTCP)
-        {   qtss_printf("ReflectorStream::PushPacket RTCP packetlen = %lu\n",packetLen);
+        {   //qtss_printf("ReflectorStream::PushPacket RTCP packetlen = %lu\n",packetLen);
             thePacket = ((ReflectorSocket*)fSockets->GetSocketB())->GetPacket();
             if (thePacket == NULL)
-            {   qtss_printf("ReflectorStream::PushPacket RTCP GetPacket() is NULL\n");
+            {   //qtss_printf("ReflectorStream::PushPacket RTCP GetPacket() is NULL\n");
                 return;
             }
             
@@ -503,10 +503,10 @@ void ReflectorStream::PushPacket(char *packet, UInt32 packetLen, Bool16 isRTCP)
             ((ReflectorSocket*)fSockets->GetSocketB())->Signal(Task::kIdleEvent);
         }
         else
-        {   qtss_printf("ReflectorStream::PushPacket RTP packetlen = %lu\n",packetLen);
+        {   //qtss_printf("ReflectorStream::PushPacket RTP packetlen = %lu\n",packetLen);
             thePacket =  ((ReflectorSocket*)fSockets->GetSocketA())->GetPacket();
             if (thePacket == NULL)
-            {   qtss_printf("ReflectorStream::PushPacket GetPacket() is NULL\n");
+            {   //qtss_printf("ReflectorStream::PushPacket GetPacket() is NULL\n");
                 return;
             }
     
@@ -1092,7 +1092,7 @@ OSQueueElem*    ReflectorSender::SendPacketsToOutput(ReflectorOutput* theOutput,
             else
                 theOutput->fLastIntervalMilliSec *= 2; // scale upwards over time
 
-            qtss_printf ( "Blocked ReflectorSender::SendPacketsToOutput timeToSendPacket=%qd fLastIntervalMilliSec=%qd fNextTimeToRun=%qd \n", timeToSendPacket, theOutput->fLastIntervalMilliSec, fNextTimeToRun);
+            //qtss_printf ( "Blocked ReflectorSender::SendPacketsToOutput timeToSendPacket=%qd fLastIntervalMilliSec=%qd fNextTimeToRun=%qd \n", timeToSendPacket, theOutput->fLastIntervalMilliSec, fNextTimeToRun);
            
            break;
         }
@@ -1324,7 +1324,7 @@ void ReflectorSocket::FilterInvalidSSRCs(ReflectorPacket* thePacket,Bool16 isRTC
         if (0 == fValidSSRC)
         {   fValidSSRC = thePacket->GetSSRC(isRTCP); // SSRC of 0 is allowed
             fLastValidSSRCTime = currentTime;
-            qtss_printf("socket=%lu FIRST PACKET fValidSSRC=%lu \n", (long unsigned) this,fValidSSRC);
+            //qtss_printf("socket=%lu FIRST PACKET fValidSSRC=%lu \n", (long unsigned) this,fValidSSRC);
             break;
         }
     
@@ -1333,18 +1333,18 @@ void ReflectorSocket::FilterInvalidSSRCs(ReflectorPacket* thePacket,Bool16 isRTC
         {   
             if (packetSSRC == fValidSSRC)
             {   fLastValidSSRCTime = currentTime;
-                qtss_printf("socket=%lu good packet\n", (long unsigned) this );
+                //qtss_printf("socket=%lu good packet\n", (long unsigned) this );
                 break;
             }
             
-            qtss_printf("socket=%lu bad packet packetSSRC= %lu fValidSSRC=%lu \n", (long unsigned) this,packetSSRC,fValidSSRC);
+            //qtss_printf("socket=%lu bad packet packetSSRC= %lu fValidSSRC=%lu \n", (long unsigned) this,packetSSRC,fValidSSRC);
             thePacket->fPacketPtr.Len = 0; // ignore this packet wrong SSRC
         }
         
         // this executes whenever an invalid SSRC is found -- maybe the original stream ended and a new one is now active
         if ( (fLastValidSSRCTime + fTimeoutSecs) < currentTime) // fValidSSRC timed out --no packets with this SSRC seen for awhile
         {   fValidSSRC = 0; // reset the valid SSRC with the next packet's SSRC
-            qtss_printf("RESET fValidSSRC\n");
+            //qtss_printf("RESET fValidSSRC\n");
         }
 
     }while (false);
@@ -1375,7 +1375,7 @@ Bool16 ReflectorSocket::ProcessPacket(const SInt64& inMilliseconds,ReflectorPack
             fFreeQueue.EnQueue(&thePacket->fQueueElem);
             this->RequestEvent(EV_RE);
             done = true;
-            qtss_printf("ReflectorSocket::ProcessPacket no more packets on this socket!\n");
+            //qtss_printf("ReflectorSocket::ProcessPacket no more packets on this socket!\n");
             break;//no more packets on this socket!
         }
         
@@ -1411,7 +1411,7 @@ Bool16 ReflectorSocket::ProcessPacket(const SInt64& inMilliseconds,ReflectorPack
         if (theSender == NULL)
         {   
             //UInt16* theSeqNumberP = (UInt16*)thePacket->fPacketPtr.Ptr;
-            qtss_printf("ReflectorSocket::ProcessPacket no sender found for packet! sequence number=%d\n",ntohs(theSeqNumberP[1]));
+            //qtss_printf("ReflectorSocket::ProcessPacket no sender found for packet! sequence number=%d\n",ntohs(theSeqNumberP[1]));
             fFreeQueue.EnQueue(&thePacket->fQueueElem); // don't process the packet
             done = true;
             break;
