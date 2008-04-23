@@ -381,14 +381,11 @@ QTSS_Error ReflectorStream::BindSockets(QTSS_StandardRTSP_Params* inParams, UInt
     // specified by the source info, we can use that to demultiplex separate broadcasts on
     // the same port. If the src IP addr is 0, we cannot do this and must dedicate 1 port per
     // broadcast
-
-	// changing INADDR_ANY to fStreamInfo.fDestIPAddr to deal with NATs (need to track this change though)
-	// change submitted by denis@berlin.ccc.de
 	Bool16 isMulticastDest = (SocketUtils::IsMulticastIPAddr(fStreamInfo.fDestIPAddr));
 	if (isMulticastDest) {
     	fSockets = sSocketPool.GetUDPSocketPair(INADDR_ANY, fStreamInfo.fPort, fStreamInfo.fSrcIPAddr, 0);
 	} else {
-		fSockets = sSocketPool.GetUDPSocketPair(fStreamInfo.fDestIPAddr, fStreamInfo.fPort, fStreamInfo.fSrcIPAddr, 0);
+		fSockets = sSocketPool.GetUDPSocketPair(INADDR_ANY, fStreamInfo.fPort, fStreamInfo.fSrcIPAddr, 0);
 	} 
 
     if ((fSockets == NULL) && fStreamInfo.fSetupToReceive)
