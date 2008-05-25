@@ -41,14 +41,14 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS} 
-	cd . && buildit
+	cd . && ./Buildit
 
 # Subprojects
 .build-subprojects:
 
 # Clean Targets
 .clean-conf:
-	cd . && clean
+	cd . && ./clean
 
 # Subprojects
 .clean-subprojects:

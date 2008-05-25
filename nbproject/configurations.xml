@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="42">
+<configurationDescriptor version="45">
   <logicalFolder name="root" displayName="root" projectFiles="true">
     <logicalFolder name="f1"
                    displayName="build/package scripts"
@@ -14,6 +14,8 @@
       <itemPath>DSS_MakeProxyRoot</itemPath>
       <itemPath>DSS_MakeRoot</itemPath>
       <itemPath>Install</itemPath>
+      <itemPath>Jamfile</itemPath>
+      <itemPath>Makefile.POSIX</itemPath>
       <itemPath>uninstalldss4</itemPath>
       <itemPath>uninstallqtss4</itemPath>
     </logicalFolder>
@@ -76,6 +78,7 @@
                        projectFiles="true">
           <itemPath>APIModules/QTSSDemoAuthorizationModule.bproj/AccessCheck.cpp</itemPath>
           <itemPath>APIModules/QTSSDemoAuthorizationModule.bproj/AccessCheck.h</itemPath>
+          <itemPath>APIModules/QTSSDemoAuthorizationModule.bproj/Makefile.POSIX</itemPath>
           <itemPath>APIModules/QTSSDemoAuthorizationModule.bproj/QTSSDemoModule.cpp</itemPath>
           <itemPath>APIModules/QTSSDemoAuthorizationModule.bproj/QTSSDemoModule.h</itemPath>
         </logicalFolder>
@@ -108,6 +111,7 @@
                        projectFiles="true">
           <itemPath>APIModules/QTSSHomeDirectoryModule/DirectoryInfo.cpp</itemPath>
           <itemPath>APIModules/QTSSHomeDirectoryModule/DirectoryInfo.h</itemPath>
+          <itemPath>APIModules/QTSSHomeDirectoryModule/Makefile.POSIX</itemPath>
           <itemPath>APIModules/QTSSHomeDirectoryModule/QTSSHomeDirectoryModule.cpp</itemPath>
           <itemPath>APIModules/QTSSHomeDirectoryModule/QTSSHomeDirectoryModule.h</itemPath>
         </logicalFolder>
@@ -146,6 +150,7 @@
         <logicalFolder name="QTSSRawFileModule.bproj"
                        displayName="QTSSRawFileModule.bproj"
                        projectFiles="true">
+          <itemPath>APIModules/QTSSRawFileModule.bproj/Makefile.POSIX</itemPath>
           <itemPath>APIModules/QTSSRawFileModule.bproj/QTSSRawFileModule.cpp</itemPath>
           <itemPath>APIModules/QTSSRawFileModule.bproj/QTSSRawFileModule.h</itemPath>
         </logicalFolder>
@@ -177,10 +182,13 @@
           <itemPath>APIModules/QTSSReflectorModule/RTSPSourceInfo.h</itemPath>
           <itemPath>APIModules/QTSSReflectorModule/SequenceNumberMap.cpp</itemPath>
           <itemPath>APIModules/QTSSReflectorModule/SequenceNumberMap.h</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/ServerSDPSourceInfo.cpp</itemPath>
+          <itemPath>APIModules/QTSSReflectorModule/ServerSDPSourceInfo.h</itemPath>
         </logicalFolder>
         <logicalFolder name="QTSSRefMovieModule"
                        displayName="QTSSRefMovieModule"
                        projectFiles="true">
+          <itemPath>APIModules/QTSSRefMovieModule/Makefile.POSIX</itemPath>
           <itemPath>APIModules/QTSSRefMovieModule/QTSSRefMovieModule.cpp</itemPath>
           <itemPath>APIModules/QTSSRefMovieModule/QTSSRefMovieModule.h</itemPath>
         </logicalFolder>
@@ -195,6 +203,7 @@
         <logicalFolder name="QTSSSpamDefenseModule.bproj"
                        displayName="QTSSSpamDefenseModule.bproj"
                        projectFiles="true">
+          <itemPath>APIModules/QTSSSpamDefenseModule.bproj/Makefile.POSIX</itemPath>
           <itemPath>APIModules/QTSSSpamDefenseModule.bproj/QTSSSpamDefenseModule.cpp</itemPath>
           <itemPath>APIModules/QTSSSpamDefenseModule.bproj/QTSSSpamDefenseModule.h</itemPath>
         </logicalFolder>
@@ -671,19 +680,33 @@
       <itemPath>README</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceEncoding>UTF-8</sourceEncoding>
   <projectmakefile>dss-Makefile.mk</projectmakefile>
   <confs>
     <conf name="Default" type="0">
       <toolsSet>
-        <compilerSet>GNU</compilerSet>
+        <compilerSet>GNU|GNU</compilerSet>
         <platform>4</platform>
       </toolsSet>
       <makefileType>
         <makeTool>
           <buildCommandWorkingDir>.</buildCommandWorkingDir>
-          <buildCommand>buildit</buildCommand>
-          <cleanCommand>clean</cleanCommand>
+          <buildCommand>./Buildit</buildCommand>
+          <cleanCommand>./clean</cleanCommand>
           <executablePath></executablePath>
+          <cCompilerTool>
+            <includeDirectories>
+              <directoryPath>APICommonCode</directoryPath>
+            </includeDirectories>
+          </cCompilerTool>
+          <ccCompilerTool>
+            <includeDirectories>
+              <directoryPath>APICommonCode</directoryPath>
+              <directoryPath>CommonUtilitiesLib</directoryPath>
+              <directoryPath>APIStubLib</directoryPath>
+              <directoryPath>PrefsSourceLib</directoryPath>
+            </includeDirectories>
+          </ccCompilerTool>
         </makeTool>
         <requiredProjects>
         </requiredProjects>
@@ -766,6 +789,9 @@
       <item path="APIModules/QTSSDemoAuthorizationModule.bproj/AccessCheck.h">
         <itemTool>3</itemTool>
       </item>
+      <item path="APIModules/QTSSDemoAuthorizationModule.bproj/Makefile.POSIX">
+        <itemTool>3</itemTool>
+      </item>
       <item path="APIModules/QTSSDemoAuthorizationModule.bproj/QTSSDemoModule.cpp">
         <itemTool>1</itemTool>
       </item>
@@ -800,6 +826,9 @@
         <itemTool>1</itemTool>
       </item>
       <item path="APIModules/QTSSHomeDirectoryModule/DirectoryInfo.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSHomeDirectoryModule/Makefile.POSIX">
         <itemTool>3</itemTool>
       </item>
       <item path="APIModules/QTSSHomeDirectoryModule/QTSSHomeDirectoryModule.cpp">
@@ -856,10 +885,16 @@
       <item path="APIModules/QTSSRTPFileModule/RTPFileSession.h">
         <itemTool>3</itemTool>
       </item>
+      <item path="APIModules/QTSSRawFileModule.bproj/Makefile.POSIX">
+        <itemTool>3</itemTool>
+      </item>
       <item path="APIModules/QTSSRawFileModule.bproj/QTSSRawFileModule.cpp">
         <itemTool>1</itemTool>
       </item>
       <item path="APIModules/QTSSRawFileModule.bproj/QTSSRawFileModule.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSRefMovieModule/Makefile.POSIX">
         <itemTool>3</itemTool>
       </item>
       <item path="APIModules/QTSSRefMovieModule/QTSSRefMovieModule.cpp">
@@ -941,6 +976,15 @@
         <itemTool>1</itemTool>
       </item>
       <item path="APIModules/QTSSReflectorModule/SequenceNumberMap.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/ServerSDPSourceInfo.cpp">
+        <itemTool>1</itemTool>
+      </item>
+      <item path="APIModules/QTSSReflectorModule/ServerSDPSourceInfo.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIModules/QTSSSpamDefenseModule.bproj/Makefile.POSIX">
         <itemTool>3</itemTool>
       </item>
       <item path="APIModules/QTSSSpamDefenseModule.bproj/QTSSSpamDefenseModule.cpp">
@@ -1330,6 +1374,9 @@
       <item path="Install">
         <itemTool>3</itemTool>
       </item>
+      <item path="Jamfile">
+        <itemTool>3</itemTool>
+      </item>
       <item path="MP3Broadcaster/BroadcasterMain.cpp">
         <itemTool>1</itemTool>
       </item>
@@ -1355,6 +1402,9 @@
         <itemTool>1</itemTool>
       </item>
       <item path="MP3Broadcaster/MP3MetaInfoUpdater.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="Makefile.POSIX">
         <itemTool>3</itemTool>
       </item>
       <item path="OSMemoryLib/OSMemory.cpp">
