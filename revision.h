@@ -27,8 +27,8 @@
 */
 
 // use no http/rtsp tspecial chars in kVersionString and kBuildString defines
-#define kVersionString "5.5.5"
-#define kBuildString "489.16"
+#define kVersionString "5.5.6b1"
+#define kBuildString "490" // was 489.16 - manually updating.
 
 // Use kCommentString for seed or other release info 
 // Do not use '(' or ')' in the kCommentString
