@@ -63,7 +63,7 @@ case $PLAT in
 		CPLUS=gcc-3.4
 		CCOMP=gcc-3.4
 		LINKER='gcc-3.4'
- 		MAKE=make
+ 		MAKE='make -j8 '
  		
 		COMPILER_FLAGS="-D_REENTRANT -D__USE_POSIX -D__linux__ -pipe"
         INCLUDE_FLAG="-include"
