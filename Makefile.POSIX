@@ -117,6 +117,7 @@ CPPFILES = 	Server.tproj/QTSSExpirationDate.cpp\
 			APIModules/QTSSReflectorModule/RelaySDPSourceInfo.cpp \
 			APIModules/QTSSReflectorModule/RTPSessionOutput.cpp \
 			APIModules/QTSSReflectorModule/SequenceNumberMap.cpp \
+                        APIModules/QTSSReflectorModule/ServerSDPSourceInfo.cpp \
 			APIModules/QTSSWebDebugModule/QTSSWebDebugModule.cpp \
 			APIModules/QTSSWebStatsModule/QTSSWebStatsModule.cpp \
 			APIModules/QTSSPOSIXFileSysModule/QTSSPosixFileSysModule.cpp \

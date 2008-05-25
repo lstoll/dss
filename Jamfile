@@ -229,6 +229,7 @@ CPPFILES =
 
 	APIModules/QTSSReflectorModule/RCFSourceInfo.cpp
 	APIModules/QTSSReflectorModule/RelaySDPSourceInfo.cpp
+        APIModules/QTSSReflectorModule/ServerSDPSourceInfo.cpp
 	APIModules/QTSSReflectorModule/RTSPSourceInfo.cpp
 	
 # QTSS WEB DEBUG MODULE
