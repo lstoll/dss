@@ -245,3 +245,5 @@ rm -rf ./StreamingProxy-*
 
 rm ./.gdb_history
 
+# always want to indicate success, otherwise the fact that some files above dont exist can cause breakage.
+exit 0
