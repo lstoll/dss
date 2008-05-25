@@ -55,6 +55,7 @@
 
 //SourceInfo objects
 #include "SDPSourceInfo.h"
+#include "ServerSDPSourceInfo.h"
 
 #include "SDPUtils.h"
 
@@ -1279,7 +1280,7 @@ Bool16 InfoPortsOK(QTSS_StandardRTSP_Params* inParams, SDPSourceInfo* theInfo, S
 }
 
 ReflectorSession* FindOrCreateSession(StrPtrLen* inPath, QTSS_StandardRTSP_Params* inParams, StrPtrLen* inData, Bool16 isPush, Bool16 *foundSessionPtr)
-{   
+{
     // This function assumes that inPath is NULL terminated
     // Ok, look for a reflector session matching this full path as the ID
     OSMutexLocker locker(sSessionMap->GetMutex());
@@ -1308,8 +1309,8 @@ ReflectorSession* FindOrCreateSession(StrPtrLen* inPath, QTSS_StandardRTSP_Param
         if (theFileData.Len <= 0)
             return NULL;
             
-        SDPSourceInfo* theInfo = NEW SDPSourceInfo(theFileData.Ptr, theFileData.Len); // will make a copy
-            
+        ServerSDPSourceInfo* theInfo = NEW ServerSDPSourceInfo(theFileData.Ptr, theFileData.Len); // will make a copy
+        
         if (!theInfo->IsReflectable())
         {   delete theInfo;
             return NULL;
@@ -1442,7 +1443,7 @@ ReflectorSession* FindOrCreateSession(StrPtrLen* inPath, QTSS_StandardRTSP_Param
         if (theFileData.Len <= 0)
             return NULL;
             
-        SDPSourceInfo* theInfo = NEW SDPSourceInfo(theFileData.Ptr, theFileData.Len); // will make a copy
+        ServerSDPSourceInfo* theInfo = NEW ServerSDPSourceInfo(theFileData.Ptr, theFileData.Len); // will make a copy
             
         if (!theInfo->IsReflectable())
         {   delete theInfo;
