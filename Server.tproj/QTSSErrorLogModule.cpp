@@ -265,7 +265,11 @@ QTSS_Error LogError(QTSS_RoleParamPtr inParamBlock)
     
                 sDupErrorStringCount = 0;
             }
-            ::strlcpy(sLastErrorString, inParamBlock->errorParams.inBuffer, sizeof(sLastErrorString));
+#if __MacOSX__
+            strlcpy(sLastErrorString, inParamBlock->errorParams.inBuffer, sizeof(sLastErrorString));
+#else
+            strncpy(sLastErrorString, inParamBlock->errorParams.inBuffer, sizeof(sLastErrorString) -1);
+#endif
         
         }
 

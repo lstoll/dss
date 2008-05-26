@@ -70,7 +70,9 @@
 #include "QTSSAdminModule.h"
 #include "QTSSAccessModule.h"
 #include "QTSSMP3StreamingModule.h"
+#if __MacOSX__
 #include "QTSSDSAuthModule.h"
+#endif
 #if MEMORY_DEBUGGING
 #include "QTSSWebDebugModule.h"
 #endif
@@ -85,7 +87,7 @@
 #include "RTCPTask.h"
 #include "QTSSFile.h"
 
-#include "RTPStream3GPP.h"
+#include "RTPStream3gpp.h"
 #include "RTSPRequest3GPP.h"
 
 // CLASS DEFINITIONS
@@ -680,9 +682,11 @@ void    QTSServer::LoadCompiledInModules()
     (void)AddModule(theWebDebug);
 #endif
 
+#if __MacOSX__
     QTSSModule* theQTSSDSAuthModule = new QTSSModule("QTSSDSAuthModule");
     (void)theQTSSDSAuthModule->SetupModule(&sCallbacks, &QTSSDSAuthModule_Main);
     (void)AddModule(theQTSSDSAuthModule); 
+#endif
 
     QTSSModule* theQTACCESSmodule = new QTSSModule("QTSSAccessModule");
     (void)theQTACCESSmodule->SetupModule(&sCallbacks, &QTSSAccessModule_Main);

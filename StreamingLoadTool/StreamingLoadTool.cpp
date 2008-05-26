@@ -743,7 +743,7 @@ int main(int argc, char *argv[])
             
             bitsReceived += .5;
             
- 			printf("%5lu %6lu %8lu %6lu %6lu %6lu %9.0fk\n",
+ 			printf("%5"_U32BITARG_" %6"_U32BITARG_" %8"_U32BITARG_" %6"_U32BITARG_" %6"_U32BITARG_" %6"_U32BITARG_" %9.0fk\n",
 				ClientSession:: GetActiveConnections (),
 				ClientSession:: GetPlayingConnections (),
 				ClientSession:: GetConnectionAttempts (),
@@ -811,7 +811,7 @@ int main(int argc, char *argv[])
 	if (sLog != NULL)
 		::fclose(sLog);
 		
-	printf("%5lu %6lu %8lu %6lu %6lu %6lu %9.0fk\n",
+	printf("%5"_U32BITARG_" %6"_U32BITARG_" %8"_U32BITARG_" %6"_U32BITARG_" %6"_U32BITARG_" %6"_U32BITARG_" %9.0fk\n",
 		ClientSession:: GetActiveConnections (),
 		ClientSession:: GetPlayingConnections (),
 		ClientSession:: GetConnectionAttempts (),
