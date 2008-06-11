@@ -96,8 +96,8 @@ OSCodeFragment::OSCodeFragment(const char* inPath)
     
 #else
     fFragmentP = dlopen(inPath, RTLD_NOW | RTLD_GLOBAL);
-// uncommented this:
-    fprintf (stderr, "%s\n", dlerror());
+	if (dlerror() != NULL)
+    	fprintf (stderr, "%s\n", dlerror());
 
 #endif
 }
@@ -156,6 +156,6 @@ void*   OSCodeFragment::GetSymbol(const char* inSymbolName)
    			dlerror(), fFragmentP, inSymbolName);
    	}
    	return symhndl;
-   	//return dlsym(fFragmentP, inSymbolName);
+   	// was: return dlsym(fFragmentP, inSymbolName);
 #endif  
 }
