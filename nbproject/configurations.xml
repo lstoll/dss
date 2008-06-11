@@ -662,6 +662,61 @@
                        projectFiles="true">
           <itemPath>WebAdmin/StartupItems.bproj/dummy.c</itemPath>
         </logicalFolder>
+        <logicalFolder name="f1" displayName="WebAdminHtml" projectFiles="true">
+          <itemPath>WebAdmin/WebAdminHtml/access_log.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/adminprotocol-lib.pl</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/broadcaster_lib.pl</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/broadcaster_settings.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/cgi-lib.pl</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/change_broadcast_password.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/change_mp3_password.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/change_password.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/change_password_redirect.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/confirm.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/connected.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/error_log.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/format.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/frameset.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/general_settings.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/index.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/listbox.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/listbox2.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/log_settings.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/login.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/MapUTF.pl</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/nav.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/parse_xml.cgi</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/password-utils.pl</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/playlist-lib.pl</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/playlist_detail.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/playlist_error_log.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/playlists.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/ports.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/relay.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/relay_details.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/relay_details_default.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/relay_status.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/relay_targets.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/relayxmlparser.pl</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/restart_broadcaster.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/setup_assistant.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/setup_assistant2.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/setup_assistant3.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/setup_assistant4.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/setup_assistant5.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/start_broadcaster.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/start_server.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/startplaylists.pl</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/tag_formats.pl</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/tag_types.pl</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/tag_vals.pl</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/template.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/template_blank.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/top.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/users.html</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/view_broadcast.cgi</itemPath>
+          <itemPath>WebAdmin/WebAdminHtml/welcome.html</itemPath>
+        </logicalFolder>
       </logicalFolder>
       <logicalFolder name="WinNTSupport"
                      displayName="WinNTSupport"
@@ -2000,6 +2055,165 @@
       </item>
       <item path="WebAdmin/StartupItems.bproj/dummy.c">
         <itemTool>0</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/MapUTF.pl">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/access_log.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/adminprotocol-lib.pl">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/broadcaster_lib.pl">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/broadcaster_settings.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/cgi-lib.pl">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/change_broadcast_password.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/change_mp3_password.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/change_password.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/change_password_redirect.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/confirm.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/connected.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/error_log.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/format.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/frameset.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/general_settings.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/index.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/listbox.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/listbox2.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/log_settings.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/login.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/nav.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/parse_xml.cgi">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/password-utils.pl">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/playlist-lib.pl">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/playlist_detail.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/playlist_error_log.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/playlists.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/ports.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/relay.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/relay_details.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/relay_details_default.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/relay_status.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/relay_targets.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/relayxmlparser.pl">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/restart_broadcaster.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/setup_assistant.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/setup_assistant2.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/setup_assistant3.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/setup_assistant4.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/setup_assistant5.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/start_broadcaster.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/start_server.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/startplaylists.pl">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/tag_formats.pl">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/tag_types.pl">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/tag_vals.pl">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/template.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/template_blank.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/top.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/users.html">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/view_broadcast.cgi">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="WebAdmin/WebAdminHtml/welcome.html">
+        <itemTool>3</itemTool>
       </item>
       <item path="WinNTSupport/Win32header.h">
         <itemTool>3</itemTool>
