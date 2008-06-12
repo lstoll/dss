@@ -25,9 +25,9 @@ case $PLAT in
 	Linux.i586 | \
 	Linux.i686)
 		echo "Configuring for a Linux x86 platform"
-		CPLUS='egcs'
-		CCOMP=egcs
-		LINKER='egcs'
+		CPLUS=g++
+		CCOMP=gcc
+		LINKER='gpp'
 		MACHDEFINES=-D__linux__
 		LIB="ar -r "
 		if [ -f /usr/include/socketbits.h ]; then
@@ -44,7 +44,7 @@ case $PLAT in
 		MACHDEFINES="-D__FreeBSD__ -fhandle-exceptions"
 		LIB="ar -r "
 		;;
-	buildplay
+	#buildplay
 #	SunOS.sun4m)
 	SunOS.*)
 		echo "Configuring for a Solaris platform"
