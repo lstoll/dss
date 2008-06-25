@@ -31,6 +31,7 @@
 #ifndef _RTCPNADUPACKETFMT_H_
 #define _RTCPNADUPACKETFMT_H_
 
+#include <byteswap.h>
 #include "StrPtrLen.h"
 #include "arpa/inet.h"
 #include "OSHeaders.h"
@@ -89,9 +90,9 @@ class RTCPNADUPacketFmt
             //fill in the header
             NADUHeader &header = *reinterpret_cast<NADUHeader *>(fBuf.Ptr);
             ::memset(&header, 0, sizeof(header));
-            header.naduHeader = htons(0x80CC); //(RTP_VERSION << 14) + RTCP_APP; 
-  			header.name = htonl(FOUR_CHARS_TO_INT('P', 'S', 'S', '0'));
-            header.length = htons(GetPacketLen() / 4 - 1);
+            header.naduHeader = bswap_16(0x80CC); //(RTP_VERSION << 14) + RTCP_APP; 
+  			header.name = bswap_32(FOUR_CHARS_TO_INT('P', 'S', 'S', '0'));
+            header.length = bswap_16(GetPacketLen() / 4 - 1);
         }
 		
 		//units are in milliseconds and in bytes; use a playoutDelay of kUInt32_Max if the buffer is empty
@@ -102,22 +103,22 @@ class RTCPNADUPacketFmt
             ::memset(&nadu, 0, sizeof(NADUBlock));
 			
 			fNumNADUBlocks++;
-			reinterpret_cast<NADUHeader *>(fBuf.Ptr)->length = htons(GetPacketLen() / 4 - 1);
+			reinterpret_cast<NADUHeader *>(fBuf.Ptr)->length = bswap_16(GetPacketLen() / 4 - 1);
 
-			nadu.SSRC = htonl(SSRC);
-			nadu.NSN = htons(static_cast<UInt16>(nextSeqNum));
-			nadu.NUN = htons(nextUnitNum & 0x1F);
+			nadu.SSRC = bswap_32(SSRC);
+			nadu.NSN = bswap_16(static_cast<UInt16>(nextSeqNum));
+			nadu.NUN = bswap_16(nextUnitNum & 0x1F);
 
 			//Use reserved value of 0xffff for undefined
 			playoutDelay = MIN(0xffff, playoutDelay);
-			nadu.delay = htons(static_cast<UInt16>(playoutDelay));
+			nadu.delay = bswap_16(static_cast<UInt16>(playoutDelay));
 
 			//the free buffer space is reported in 64 bytes blocks, and maximum value is 0xffff
 			freeBufferSpace = MIN(0xffff, freeBufferSpace / 64);
-			nadu.FBS = htons(static_cast<UInt16>(freeBufferSpace));
+			nadu.FBS = bswap_16(static_cast<UInt16>(freeBufferSpace));
 		}
 
-		void		SetSSRC(UInt32 SSRC)										{ reinterpret_cast<NADUHeader *>(fBuf.Ptr)->SSRC = htonl(SSRC); }
+		void		SetSSRC(UInt32 SSRC)										{ reinterpret_cast<NADUHeader *>(fBuf.Ptr)->SSRC = bswap_32(SSRC); }
 
         //The length of packet written out
         UInt32      GetPacketLen()                                              { return sizeof(NADUHeader) + sizeof(NADUBlock) * fNumNADUBlocks; }

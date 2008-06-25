@@ -31,6 +31,7 @@
 // -------------------------------------
 // Includes
 //
+#include <byteswap.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "SafeStdLib.h"
@@ -141,7 +142,7 @@ Bool16 QTAtom_stsd::Initialize(void)
             //
             // Skip over this mini-atom.
             memcpy(&tempInt32, pSampleDescriptionTable, 4);
-            pSampleDescriptionTable += ntohl(tempInt32);
+            pSampleDescriptionTable += bswap_32(tempInt32);
             if (pSampleDescriptionTable > maxSampleDescriptionPtr)
             {   return false;
             }
@@ -171,7 +172,7 @@ Bool16 QTAtom_stsd::FindSampleDescription(OSType DataFormat, char ** Buffer, UIn
         //
         // Get this entry's data format.
         memcpy(&tempInt32, fTable[CurDesc] + stsdDescPos_DataFormat, 4);
-        tempInt32 = ntohl(tempInt32);
+        tempInt32 = bswap_32(tempInt32);
 
         //
         // Skip this entry if it does not match.
@@ -183,7 +184,7 @@ Bool16 QTAtom_stsd::FindSampleDescription(OSType DataFormat, char ** Buffer, UIn
         *Buffer = fTable[CurDesc];
 
         memcpy(&tempInt32, fTable[CurDesc] + stsdDescPos_Size, 4);
-        *Length = ntohl(tempInt32);
+        *Length = bswap_32(tempInt32);
 
         return true;
     }
@@ -207,7 +208,7 @@ UInt16 QTAtom_stsd::SampleDescriptionToDataReference(UInt32 SampleDescriptionID)
     //
     // Find and return the given sample's data reference index.
     memcpy(&tempInt16, fTable[SampleDescriptionID - 1] + stsdDescPos_Index, 2);
-    return ntohs(tempInt16);
+    return bswap_16(tempInt16);
 }
 
 

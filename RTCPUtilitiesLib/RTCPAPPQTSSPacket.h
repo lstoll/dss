@@ -34,6 +34,7 @@
 #ifndef _RTCPAPPQTSSPACKET_H_
 #define _RTCPAPPQTSSPACKET_H_
 
+#include <byteswap.h>
 #include "RTCPAPPPacket.h"
 #include "StrPtrLen.h"
 
@@ -143,21 +144,21 @@ private:
 
 inline UInt32 RTCPCompressedQTSSPacket::GetQTSSReportSourceID()
 {
-    return (UInt32) ntohl( ((UInt32*)this->GetPacketBuffer())[kQTSSReportSourceIDOffset] ) ;
+    return (UInt32) bswap_32( ((UInt32*)this->GetPacketBuffer())[kQTSSReportSourceIDOffset] ) ;
 }
 
 
 inline UInt16 RTCPCompressedQTSSPacket::GetQTSSPacketVersion()
 {   
     UInt32 field = ((UInt32*)this->GetPacketBuffer())[kQTSSPacketVersionOffset];
-    UInt16 vers = (UInt16)   ( ( ntohl(field) & kQTSSPacketVersionMask) >> kQTSSPacketVersionShift );
+    UInt16 vers = (UInt16)   ( ( bswap_32(field) & kQTSSPacketVersionMask) >> kQTSSPacketVersionShift );
     return vers;
 }
 
 inline UInt16 RTCPCompressedQTSSPacket::GetQTSSPacketLength()
 {  
     UInt32  field = ((UInt32*)this->GetPacketBuffer())[kQTSSPacketLengthOffset];
-    return (UInt16) ( (UInt32)  ntohl(field)  & kQTSSPacketLengthMask );
+    return (UInt16) ( (UInt32)  bswap_32(field)  & kQTSSPacketLengthMask );
 }
 
 /*

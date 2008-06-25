@@ -22,6 +22,7 @@
  * @APPLE_LICENSE_HEADER_END@
  *
  */
+#include <byteswap.h>
 #include "playlist_utils.h"
 #include "playlist_SDPGen.h"
 #include "playlist_broadcaster.h"
@@ -162,7 +163,7 @@ char *SDPGen::Process(  char *sdpFileName,
         //    c=IN IP4 (destinatin ip address)
         {   
             char  sdpLine[255];
-            if (SocketUtils::IsMulticastIPAddr(ntohl(inet_addr(ipAddress))))
+            if (SocketUtils::IsMulticastIPAddr(bswap_32(inet_addr(ipAddress))))
                 qtss_sprintf(sdpLine, "c=IN IP4 %s/%s\r\n", ipAddress,ttl);
             else
                  qtss_sprintf(sdpLine, "c=IN IP4 %s\r\n", ipAddress);

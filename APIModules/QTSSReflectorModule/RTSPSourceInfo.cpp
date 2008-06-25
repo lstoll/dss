@@ -31,6 +31,7 @@
 
 */
 
+#include <byteswap.h>
 #include "RTSPSourceInfo.h"
 #include "StringParser.h"
 #include "SDPSourceInfo.h"
@@ -384,7 +385,7 @@ char*   RTSPSourceInfo::GetAnnounceSDP(UInt32 ipAddr, UInt32* newSDPLen)
                     StrPtrLen temp(buff);
                 
                     struct in_addr theIPAddr;
-                    theIPAddr.s_addr = htonl(ipAddr);
+                    theIPAddr.s_addr = bswap_32(ipAddr);
                     SocketUtils::ConvertAddrToString(theIPAddr, &temp);
                    
                     qtss_sprintf(ipStr, "c=IN IP4 %s", buff);

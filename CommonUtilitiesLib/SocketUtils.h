@@ -34,6 +34,7 @@
 #define __SOCKETUTILS_H__
 
 #ifndef __Win32__
+#include <byteswap.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <net/if.h>

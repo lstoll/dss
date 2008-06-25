@@ -31,6 +31,7 @@
 // -------------------------------------
 // Includes
 //
+#include <byteswap.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "SafeStdLib.h"
@@ -345,23 +346,23 @@ char * QTAtom_dref::ResolveAlias(char * const AliasData, UInt32 /* AliasDataLeng
     for( int loopCount = kMaxMark - 1; loopCount >= 0; loopCount--) {
         //
         // Break out of the loop if this is a match/the end of the alias.
-        if( ((short)ntohs(AliasVarInfo->what) == kAbsPath) || ((short)ntohs(AliasVarInfo->what) == kEndMark) )
+        if( ((short)bswap_16(AliasVarInfo->what) == kAbsPath) || ((short)bswap_16(AliasVarInfo->what) == kEndMark) )
             break;
         
         //
         // Otherwise we need to move to the next data unit.
-        AliasVarInfo = (varInfo *)((char *)AliasVarInfo + ((ntohs(AliasVarInfo->len) + 1) & ~1) + 4 /* header size */);
+        AliasVarInfo = (varInfo *)((char *)AliasVarInfo + ((bswap_16(AliasVarInfo->len) + 1) & ~1) + 4 /* header size */);
     }
 
 
     //
     // Now that we have the path, we need to strip off the absolute portions
     // of it so that we can get at it from our current (relative) root.
-    AliasVarInfo->data[ntohs(AliasVarInfo->len)] = '\0';
+    AliasVarInfo->data[bswap_16(AliasVarInfo->len)] = '\0';
     
     pathStart = path = AliasVarInfo->data;
-    path += ntohs(AliasVarInfo->len);
-    int i = ntohs(Alias->nlvlTo);
+    path += bswap_16(AliasVarInfo->len);
+    int i = bswap_16(Alias->nlvlTo);
     pathLength = -1;
     while( i && (path > pathStart) ) {
         if( *path-- == ':' )

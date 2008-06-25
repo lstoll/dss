@@ -33,6 +33,7 @@
 
 */
 
+#include <byteswap.h>
 #include <string.h>
 
 #include "RTCPSRPacket.h"
@@ -47,11 +48,11 @@ RTCPSRPacket::RTCPSRPacket()
     
     //write the SR & SDES headers
     UInt32* theSRWriter = (UInt32*)&fSenderReportBuffer;
-    *theSRWriter = htonl(0x80c80006);
+    *theSRWriter = bswap_32(0x80c80006);
     theSRWriter += 7; //number of UInt32s in an SR.
     
     //SDES length is the length of the CName, plus 2 32bit words, plus the 32bit word for the SSRC
-    *theSRWriter = htonl(0x81ca0000 + (cNameLen >> 2) + 1);
+    *theSRWriter = bswap_32(0x81ca0000 + (cNameLen >> 2) + 1);
     ::memcpy(&fSenderReportBuffer[kSenderReportSizeInBytes], theTempCName, cNameLen);
     fSenderReportSize = kSenderReportSizeInBytes + cNameLen;
 
@@ -72,16 +73,16 @@ struct qtss_rtcp_struct
     //
     // Write the SERVER INFO APP packet
     UInt32* theAckInfoWriter = (UInt32*)&fSenderReportBuffer[fSenderReportSize];
-    *theAckInfoWriter = htonl(0x81cc0006);
+    *theAckInfoWriter = bswap_32(0x81cc0006);
     theAckInfoWriter += 2;
-    *(theAckInfoWriter++) = htonl(FOUR_CHARS_TO_INT('q', 't', 's', 'i')); // Ack Info APP name
+    *(theAckInfoWriter++) = bswap_32(FOUR_CHARS_TO_INT('q', 't', 's', 'i')); // Ack Info APP name
     theAckInfoWriter++; // leave space for the ssrc (again)
-    *(theAckInfoWriter++) = htonl(2); // 2 UInt32s for the 'at' field
-    *(theAckInfoWriter++) = htonl(FOUR_CHARS_TO_INT( 'a', 't', 0, 4 ));
+    *(theAckInfoWriter++) = bswap_32(2); // 2 UInt32s for the 'at' field
+    *(theAckInfoWriter++) = bswap_32(FOUR_CHARS_TO_INT( 'a', 't', 0, 4 ));
     fSenderReportWithServerInfoSize = (char*)(theAckInfoWriter+1) - fSenderReportBuffer;    
     
     UInt32* theByeWriter = (UInt32*)&fSenderReportBuffer[fSenderReportWithServerInfoSize];
-    *theByeWriter = htonl(0x81cb0001);
+    *theByeWriter = bswap_32(0x81cb0001);
 }
 
 UInt32 RTCPSRPacket::GetACName(char* ioCNameBuffer)

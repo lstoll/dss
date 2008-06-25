@@ -31,6 +31,7 @@
 
 */
 
+#include <byteswap.h>
 #include "ReflectorStream.h"
 #include "QTSSModuleUtils.h"
 #include "OSMemory.h"
@@ -162,31 +163,31 @@ ReflectorStream::ReflectorStream(SourceInfo::StreamInfo* inInfo)
     
     //write the RR (just header + ssrc)
     UInt32* theRRWriter = (UInt32*)&fReceiverReportBuffer[0];
-    *theRRWriter = htonl(0x80c90001);
+    *theRRWriter = bswap_32(0x80c90001);
     theRRWriter++;
-    *theRRWriter = htonl(theSsrc);
+    *theRRWriter = bswap_32(theSsrc);
     theRRWriter++;
 
     //SDES length is the length of the CName, plus 2 32bit words, minus 1
-    *theRRWriter = htonl(0x81ca0000 + (cNameLen >> 2) + 1);
+    *theRRWriter = bswap_32(0x81ca0000 + (cNameLen >> 2) + 1);
     theRRWriter++;
-    *theRRWriter = htonl(theSsrc);
+    *theRRWriter = bswap_32(theSsrc);
     theRRWriter++;
     ::memcpy(theRRWriter, theTempCName, cNameLen);
     theRRWriter += cNameLen >> 2;
     
     //APP packet format, QTSS specific stuff
-    *theRRWriter = htonl(0x80cc0008);
+    *theRRWriter = bswap_32(0x80cc0008);
     theRRWriter++;
-    *theRRWriter = htonl(theSsrc);
+    *theRRWriter = bswap_32(theSsrc);
     theRRWriter++;
-    *theRRWriter = htonl(FOUR_CHARS_TO_INT('Q','T','S','S'));
+    *theRRWriter = bswap_32(FOUR_CHARS_TO_INT('Q','T','S','S'));
     theRRWriter++;
-    *theRRWriter = htonl(0);
+    *theRRWriter = bswap_32(0);
     theRRWriter++;
-    *theRRWriter = htonl(0x00000004);
+    *theRRWriter = bswap_32(0x00000004);
     theRRWriter++;
-    *theRRWriter = htonl(0x6579000c);
+    *theRRWriter = bswap_32(0x6579000c);
     theRRWriter++;
     
     fEyeLocation = theRRWriter;
@@ -475,11 +476,11 @@ void ReflectorStream::SendReceiverReport()
     
     UInt32 theEyeCount = this->GetEyeCount();    
     UInt32* theEyeWriter = fEyeLocation;
-    *theEyeWriter = htonl(theEyeCount) & 0x7fffffff;//no idea why we do this!
+    *theEyeWriter = bswap_32(theEyeCount) & 0x7fffffff;//no idea why we do this!
     theEyeWriter++;
-    *theEyeWriter = htonl(theEyeCount) & 0x7fffffff;
+    *theEyeWriter = bswap_32(theEyeCount) & 0x7fffffff;
     theEyeWriter++;
-    *theEyeWriter = htonl(0) & 0x7fffffff;
+    *theEyeWriter = bswap_32(0) & 0x7fffffff;
     
     //send the packet to the multicast RTCP addr & port for this stream
     (void)fSockets->GetSocketB()->SendTo(fDestRTCPAddr, fDestRTCPPort, fReceiverReportBuffer, fReceiverReportSize);
@@ -708,7 +709,7 @@ static UInt16 DGetPacketSeqNumber(StrPtrLen* inPacket)
     
     //The RTP seq number is the second short of the packet
     UInt16* seqNumPtr = (UInt16*)inPacket->Ptr;
-    return ntohs(seqNumPtr[1]);
+    return bswap_16(seqNumPtr[1]);
 }
 
 
@@ -1461,7 +1462,7 @@ Bool16 ReflectorSocket::ProcessPacket(const SInt64& inMilliseconds,ReflectorPack
         if (theSender == NULL)
         {   
             //UInt16* theSeqNumberP = (UInt16*)thePacket->fPacketPtr.Ptr;
-            //qtss_printf("ReflectorSocket::ProcessPacket no sender found for packet! sequence number=%d\n",ntohs(theSeqNumberP[1]));
+            //qtss_printf("ReflectorSocket::ProcessPacket no sender found for packet! sequence number=%d\n",bswap_16(theSeqNumberP[1]));
             fFreeQueue.EnQueue(&thePacket->fQueueElem); // don't process the packet
             done = true;
             break;

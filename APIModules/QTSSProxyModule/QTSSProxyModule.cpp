@@ -36,6 +36,7 @@
 #ifndef __Win32__
 //
 // For gethostbyname
+#include <byteswap.h>
 #include <netdb.h>
 #endif
 
@@ -357,7 +358,7 @@ QTSS_Error ProcessRTSPRequest(QTSS_StandardRTSP_Params* inParams)
         
         UInt32 theIPAddr = 0;
         if (theHostent != NULL)
-            theIPAddr = ntohl(*(UInt32*)(theHostent->h_addr_list[0]));
+            theIPAddr = bswap_32(*(UInt32*)(theHostent->h_addr_list[0]));
         else
             theIPAddr = SocketUtils::ConvertStringToAddr(theDNSName);
             

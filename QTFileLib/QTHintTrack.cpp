@@ -47,6 +47,7 @@
 // -------------------------------------
 // Includes
 //
+#include <byteswap.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "SafeStdLib.h"
@@ -236,7 +237,7 @@ QTTrack::ErrorCode QTHintTrack::Initialize(void)
         return errInvalidQuickTimeFile;
 
     ::memcpy(&fMaxPacketSize, sampleDescription + 20, 4);
-    fMaxPacketSize = ntohl(fMaxPacketSize);
+    fMaxPacketSize = bswap_32(fMaxPacketSize);
     
     for( pSampleDescription = (sampleDescription + 24);
          pSampleDescription < (sampleDescription + sampleDescriptionLength);
@@ -248,27 +249,27 @@ QTTrack::ErrorCode QTHintTrack::Initialize(void)
         //
         // Get the entry length and data type of this entry.
         ::memcpy( &entryLength, pSampleDescription + 0, 4);
-        entryLength = ntohl(entryLength);
+        entryLength = bswap_32(entryLength);
         
         ::memcpy( &dataType, pSampleDescription + 4, 4);
-        dataType = ntohl(dataType);
+        dataType = bswap_32(dataType);
         
         //
         // Process this data type.
         switch( dataType ) {
             case FOUR_CHARS_TO_INT('t', 'i', 'm', 's'): // tims RTP timescale
                 ::memcpy(&fRTPTimescale, pSampleDescription + 8, 4);
-                fRTPTimescale = ntohl(fRTPTimescale);
+                fRTPTimescale = bswap_32(fRTPTimescale);
             break;
             
             case FOUR_CHARS_TO_INT('t', 's', 'r', 'o'): // tsro Timestamp random offset
                 ::memcpy(&fTimestampRandomOffset, pSampleDescription + 8, 4);
-                fTimestampRandomOffset = ntohl(fTimestampRandomOffset);
+                fTimestampRandomOffset = bswap_32(fTimestampRandomOffset);
             break;
             
             case FOUR_CHARS_TO_INT('s', 'n', 'r', 'o'): // snro Sequence number random offset
                 ::memcpy(&fSequenceNumberRandomOffset, pSampleDescription + 8, 2);
-                fSequenceNumberRandomOffset = ntohs(fSequenceNumberRandomOffset);
+                fSequenceNumberRandomOffset = bswap_16(fSequenceNumberRandomOffset);
             break;
         }
         
@@ -431,17 +432,17 @@ void QTHintTrack::GetSamplePacketHeaderVars( char *samplePacketPtr,char *maxBuff
     // need to acquire the header info on every pass
     
     MOVE_WORD( hdrData.hintFlags, samplePacketPtr + 8);
-    hdrData.hintFlags = ntohs( hdrData.hintFlags );
+    hdrData.hintFlags = bswap_16( hdrData.hintFlags );
 
     MOVE_WORD( hdrData.dataEntryCount, samplePacketPtr + 10);
-    hdrData.dataEntryCount = ntohs(hdrData.dataEntryCount);
+    hdrData.dataEntryCount = bswap_16(hdrData.dataEntryCount);
     
     hdrData.tlvTimestampOffset = 0;
     
     Bool16 tlvOK = false; // reset tlvSize to 0 if the size value or the tlv flag is invalid
     if( hdrData.hintFlags & 0x4 ) do // Extra Information TLV is present
     {
-        hdrData.tlvSize = ntohl( *(UInt32*) (samplePacketPtr + 12) );
+        hdrData.tlvSize = bswap_32( *(UInt32*) (samplePacketPtr + 12) );
         char* tlvParser = samplePacketPtr + 16; // start of tlv data
         char* tlvEnd = tlvParser + hdrData.tlvSize;// 1 past the end of tlv data
         
@@ -459,9 +460,9 @@ void QTHintTrack::GetSamplePacketHeaderVars( char *samplePacketPtr,char *maxBuff
         // if there is a TLV, parse out the 1 field we currently know about, the 'rtpo' field
         while (tlvParser + 12 < tlvEnd) // test for the minimum tlv size (size+type+smallest data size)
         {           
-            UInt32  fieldSize   = ntohl( *(UInt32*) tlvParser );
-            UInt32  theType     = ntohl( *(UInt32*) (tlvParser + 4) );
-            UInt32  theData     = ntohl( *(UInt32*) (tlvParser + 8) ); //data can't be smaller 4 and we only know about rtpo data
+            UInt32  fieldSize   = bswap_32( *(UInt32*) tlvParser );
+            UInt32  theType     = bswap_32( *(UInt32*) (tlvParser + 4) );
+            UInt32  theData     = bswap_32( *(UInt32*) (tlvParser + 8) ); //data can't be smaller 4 and we only know about rtpo data
 
             if (theType == FOUR_CHARS_TO_INT( 'r', 't', 'p', 'o' )) //'rtpo'
             {
@@ -479,11 +480,11 @@ void QTHintTrack::GetSamplePacketHeaderVars( char *samplePacketPtr,char *maxBuff
     }   
 
     MOVE_LONG_WORD( hdrData.relativePacketTransmissionTime, samplePacketPtr );  
-    hdrData.relativePacketTransmissionTime = ntohl(hdrData.relativePacketTransmissionTime);
+    hdrData.relativePacketTransmissionTime = bswap_32(hdrData.relativePacketTransmissionTime);
     
     MOVE_WORD( hdrData.rtpHeaderBits, samplePacketPtr + 4);
     MOVE_WORD( hdrData.rtpSequenceNumber, samplePacketPtr + 6);
-    hdrData.rtpSequenceNumber = ntohs(hdrData.rtpSequenceNumber);       
+    hdrData.rtpSequenceNumber = bswap_16(hdrData.rtpSequenceNumber);       
 
 }
 
@@ -671,7 +672,7 @@ QTTrack::ErrorCode QTHintTrack::GetNumPackets(UInt32 sampleNumber, UInt16 * numP
     MOVE_WORD( entryCount, buf );
     //::memcpy(&entryCount, buf, 2);
     
-    *numPackets = ntohs(entryCount);
+    *numPackets = bswap_16(entryCount);
 
     return errNoError;
 }
@@ -729,21 +730,21 @@ QTTrack::ErrorCode QTHintTrack::GetSampleData( QTHintTrack_HintTrackControlBlock
     trackRefIndex = (SInt8)*(pBuf + 1);
 
     MOVE_WORD( readLength, pBuf + 2);
-    cacheHintSampleLen = hintMaxRead = readLength = ntohs(readLength);
+    cacheHintSampleLen = hintMaxRead = readLength = bswap_16(readLength);
     
     MOVE_LONG_WORD( mediaSampleNumber, pBuf + 4);
-    mediaSampleNumber = ntohl(mediaSampleNumber);
+    mediaSampleNumber = bswap_32(mediaSampleNumber);
 
     MOVE_LONG_WORD( readOffset, pBuf + 8);
-    readOffset = ntohl(readOffset);
+    readOffset = bswap_32(readOffset);
     
     MOVE_WORD( bytesPerCompressionBlock, pBuf + 12);
-    bytesPerCompressionBlock = ntohs(bytesPerCompressionBlock);
+    bytesPerCompressionBlock = bswap_16(bytesPerCompressionBlock);
     if( bytesPerCompressionBlock == 0 )
         bytesPerCompressionBlock = 1;
     
     MOVE_WORD( samplesPerCompressionBlock, pBuf + 14);
-    samplesPerCompressionBlock = ntohs(samplesPerCompressionBlock);
+    samplesPerCompressionBlock = bswap_16(samplesPerCompressionBlock);
     if( samplesPerCompressionBlock == 0 )
         samplesPerCompressionBlock = 1;
 
@@ -1192,7 +1193,7 @@ QTTrack::ErrorCode QTHintTrack::GetPacket(UInt32 sampleNumber, UInt16 packetNumb
         return errInvalidQuickTimeFile;
     
     MOVE_WORD( entryCount, (char *)buf + 0);
-    entryCount = ntohs(entryCount);
+    entryCount = bswap_16(entryCount);
     if( (packetNumber-1) > entryCount )
         return errInvalidQuickTimeFile;
             
@@ -1257,24 +1258,24 @@ QTTrack::ErrorCode QTHintTrack::GetPacket(UInt32 sampleNumber, UInt16 packetNumb
 
     //
     // Add in the RTP header.
-    tempInt16 = hdrData.rtpHeaderBits | ntohs(0x8000) /* v2 RTP header */;
+    tempInt16 = hdrData.rtpHeaderBits | bswap_16(0x8000) /* v2 RTP header */;
     COPY_WORD(pPacketOutBuf, &tempInt16);
     
     //TEMP_PRINT_ONE( "QTHintTrack::GetPacket rtpHeaderBits %li.\n", (SInt32)rtpHeaderBits );
     pPacketOutBuf += 2;
 
-    tempInt16 = htons(hdrData.rtpSequenceNumber);
+    tempInt16 = bswap_16(hdrData.rtpSequenceNumber);
     COPY_WORD(pPacketOutBuf, &tempInt16);
     pPacketOutBuf += 2;
 
     tempInt32 = rtpTimestamp;
     tempInt32 += hdrData.tlvTimestampOffset; // rtpo tlv offset
 
-    tempInt32 = htonl(tempInt32);
+    tempInt32 = bswap_32(tempInt32);
     COPY_LONG_WORD(pPacketOutBuf, &tempInt32);
     pPacketOutBuf += 4;
 
-    tempInt32 = htonl(ssrc);
+    tempInt32 = bswap_32(ssrc);
     COPY_LONG_WORD(pPacketOutBuf, &tempInt32);
     pPacketOutBuf += 4;
     
@@ -1321,7 +1322,7 @@ QTTrack::ErrorCode QTHintTrack::GetPacket(UInt32 sampleNumber, UInt16 packetNumb
                 else
                     theFrameType = RTPMetaInfoPacket::kPFrameType;
 
-                theFrameType = htons(theFrameType);
+                theFrameType = bswap_16(theFrameType);
                 this->WriteMetaInfoField(RTPMetaInfoPacket::kFrameTypeField, htcb->fRTPMetaInfoFieldArray[fieldCount], &theFrameType, sizeof(theFrameType), &pPacketOutBuf);
                 break;
             }
@@ -1333,7 +1334,7 @@ QTTrack::ErrorCode QTHintTrack::GetPacket(UInt32 sampleNumber, UInt16 packetNumb
             }
             case RTPMetaInfoPacket::kSeqNumField:
             {
-                tempInt16 = htons(hdrData.rtpSequenceNumber);
+                tempInt16 = bswap_16(hdrData.rtpSequenceNumber);
                 this->WriteMetaInfoField(RTPMetaInfoPacket::kSeqNumField, htcb->fRTPMetaInfoFieldArray[fieldCount], &tempInt16, sizeof(tempInt16), &pPacketOutBuf);
                 break;
             }
@@ -1365,7 +1366,7 @@ QTTrack::ErrorCode QTHintTrack::GetPacket(UInt32 sampleNumber, UInt16 packetNumb
         {
             // Sample Mode
             MOVE_WORD( tempInt16, pSampleBuffer + 2);
-            tempInt16 = ntohs(tempInt16);
+            tempInt16 = bswap_16(tempInt16);
 
             DEEP_DEBUG_PRINT (( "QTHintTrack::GetPacket - ....Sample entry found (size=%u)\n", tempInt16 ) );
             packetSize += tempInt16;
@@ -1402,7 +1403,7 @@ QTTrack::ErrorCode QTHintTrack::GetPacket(UInt32 sampleNumber, UInt16 packetNumb
             
             // Sample Description Data Mode
             MOVE_WORD( tempInt16, pSampleBuffer + 2);
-            tempInt16 = ntohs(tempInt16);
+            tempInt16 = bswap_16(tempInt16);
 
             DEEP_DEBUG_PRINT(("QTHintTrack::GetPacket - ....Sample Description entry found (size=%u)\n", tempInt16));
             packetSize += tempInt16;
@@ -1451,7 +1452,7 @@ QTTrack::ErrorCode QTHintTrack::GetPacket(UInt32 sampleNumber, UInt16 packetNumb
         else
         {
             // If we do have md, make sure to put the right length in the right place
-            thePacketDataLen = htons(thePacketDataLen);
+            thePacketDataLen = bswap_16(thePacketDataLen);
             COPY_WORD(endOfMetaInfo - 2, &thePacketDataLen);
         }
     }
@@ -1469,10 +1470,10 @@ void QTHintTrack::WriteMetaInfoField(   RTPMetaInfoPacket::FieldIndex inFieldInd
     {
         //
         // Write an uncompressed field
-        RTPMetaInfoPacket::FieldName theName = htons(RTPMetaInfoPacket::GetFieldNameForIndex(inFieldIndex));
+        RTPMetaInfoPacket::FieldName theName = bswap_16(RTPMetaInfoPacket::GetFieldNameForIndex(inFieldIndex));
         COPY_WORD(*ioBuffer, &theName);
         (*ioBuffer)+=2;
-        UInt16 theLen = htons((UInt16)inFieldLen);
+        UInt16 theLen = bswap_16((UInt16)inFieldLen);
         COPY_WORD(*ioBuffer, &theLen);
         (*ioBuffer)+=2;
     }

@@ -31,6 +31,8 @@
 // -------------------------------------
 // Includes
 //
+#include <byteswap.h>
+#include <byteswap.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "SafeStdLib.h"
@@ -604,7 +606,7 @@ char * QTRTPFile::GetSDPFile(int * sdpFileLength)
         // Verify that this is an SDP atom.
         fFile->Read(globalSDPTOCEntry->AtomDataPos, (char *)&tempAtomType, 4);
         
-        if ( ntohl(tempAtomType) == FOUR_CHARS_TO_INT('s', 'd', 'p', ' ') ) 
+        if ( bswap_32(tempAtomType) == FOUR_CHARS_TO_INT('s', 'd', 'p', ' ') ) 
         {
             haveGlobalSDPAtom = true;
             fSDPFileLength += (UInt32) (globalSDPTOCEntry->AtomDataLength - 4);
@@ -1178,7 +1180,7 @@ UInt32 QTRTPFile::GetSeekTimestamp(UInt32 trackID)
 	if (trackEntry->CurPacket) //  we have the packet
     {
 		timeStampP = (UInt32 *)((char *)trackEntry->CurPacket + 4);
-		rtpTimestamp = ntohl(*timeStampP);
+		rtpTimestamp = bswap_32(*timeStampP);
     }
     else
     {
@@ -1244,7 +1246,7 @@ UInt16 QTRTPFile::GetNextTrackSequenceNumber(UInt32 trackID)
     // Read the sequence number right out of the packet.
     ::memcpy(&rtpSequenceNumber, (char *)trackEntry->CurPacket + 2, 2);
 
-    return ntohs(rtpSequenceNumber);
+    return bswap_16(rtpSequenceNumber);
 }
 
 Float64 QTRTPFile::GetNextPacket(char ** outPacket, int * outPacketLength)
@@ -1297,7 +1299,7 @@ Float64 QTRTPFile::GetNextPacket(char ** outPacket, int * outPacketLength)
     
     //
     // Remember the sequence number of this packet.
-    firstPacket->LastSequenceNumber = ntohs(*(UInt16 *)((char *)firstPacket->CurPacket + 2));
+    firstPacket->LastSequenceNumber = bswap_16(*(UInt16 *)((char *)firstPacket->CurPacket + 2));
     firstPacket->LastSequenceNumber -= (UInt16) (firstPacket->BaseSequenceNumberRandomOffset + firstPacket->FileSequenceNumberRandomOffset + firstPacket->SequenceNumberAdditive);
 
     //
@@ -1533,10 +1535,10 @@ Bool16 QTRTPFile::PrefetchNextPacket(RTPTrackListEntry * trackEntry, Bool16 doSe
     pTimestamp = (UInt32 *)((char *)trackEntry->CurPacket + 4);
     
     if( doSeek || (trackEntry->QualityLevel > kAllPackets) )
-        trackEntry->SequenceNumberAdditive += (trackEntry->LastSequenceNumber + 1) - ntohs(*pSequenceNumber);
+        trackEntry->SequenceNumberAdditive += (trackEntry->LastSequenceNumber + 1) - bswap_16(*pSequenceNumber);
     
-    *pSequenceNumber = htons( (SInt16)  (((SInt32) ntohs(*pSequenceNumber)) + trackEntry->BaseSequenceNumberRandomOffset + trackEntry->FileSequenceNumberRandomOffset + trackEntry->SequenceNumberAdditive));
-    *pTimestamp = htonl(ntohl(*pTimestamp) + trackEntry->BaseTimestampRandomOffset + trackEntry->FileTimestampRandomOffset);
+    *pSequenceNumber = bswap_16( (SInt16)  (((SInt32) bswap_16(*pSequenceNumber)) + trackEntry->BaseSequenceNumberRandomOffset + trackEntry->FileSequenceNumberRandomOffset + trackEntry->SequenceNumberAdditive));
+    *pTimestamp = bswap_32(bswap_32(*pTimestamp) + trackEntry->BaseTimestampRandomOffset + trackEntry->FileTimestampRandomOffset);
     
     //
     // Return the packet.

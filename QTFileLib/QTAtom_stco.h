@@ -33,6 +33,7 @@
 //
 // Includes
 #ifndef __Win32__
+#include <byteswap.h>
 #include <netinet/in.h>
 #endif
 #include "QTFile.h"
@@ -63,7 +64,7 @@ public:
                             if (Offset && ChunkNumber && (ChunkNumber<=fNumEntries)) 
                             {
                                 if (4 == fOffSetSize)
-                                    *Offset = (UInt64) ntohl( ( (UInt32 *) fTable)[ChunkNumber-1]);
+                                    *Offset = (UInt64) bswap_32( ( (UInt32 *) fTable)[ChunkNumber-1]);
                                 else
                                     *Offset = (UInt64) QTAtom::NTOH64( ( (UInt64 *) fTable)[ChunkNumber-1]);
                                         

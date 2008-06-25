@@ -31,6 +31,7 @@
     
 */
 
+#include <byteswap.h>
 #include "BroadcasterSession.h"
 #include "OSMemory.h"
 #include "StrPtrLen.h"
@@ -835,10 +836,10 @@ void    BroadcasterSession::ProcessMediaPacket( char* inPacket, UInt32 inLength,
         return;
     
     UInt16* theSeqNumP = (UInt16*)inPacket;
-    UInt16 theSeqNum = ntohs(theSeqNumP[1]);
+    UInt16 theSeqNum = bswap_16(theSeqNumP[1]);
     
 //  UInt32* theSsrcP = (UInt32*)inPacket;
-//  UInt32 theSSRC = ntohl(theSsrcP[2]);
+//  UInt32 theSSRC = bswap_32(theSsrcP[2]);
     
     for (UInt32 x = 0; x < fSDPParser.GetNumStreams(); x++)
     {
@@ -940,11 +941,11 @@ void BroadcasterSession::AckPackets(UInt32 inTrackIndex, UInt16 inCurSeqNum, Boo
     UInt32  *theWriter = (UInt32*)theRRBuffer;
 
     // APP PACKET - QoS info
-    *(theWriter++) = htonl(0x80CC0000); 
-    //*(ia++) = htonl(trk[i].TrackSSRC);
-    *(theWriter++) = htonl(0);
-    *(theWriter++) = htonl('ack ');
-    *(theWriter++) = htonl(0);
+    *(theWriter++) = bswap_32(0x80CC0000); 
+    //*(ia++) = bswap_32(trk[i].TrackSSRC);
+    *(theWriter++) = bswap_32(0);
+    *(theWriter++) = bswap_32('ack ');
+    *(theWriter++) = bswap_32(0);
     
     SInt16 theSeqNumDifference = inCurSeqNum - fStats[inTrackIndex].fHighestSeqNum;
     
@@ -959,7 +960,7 @@ void BroadcasterSession::AckPackets(UInt32 inTrackIndex, UInt16 inCurSeqNum, Boo
         
     if (theSeqNumDifference > 0)
     {
-        *(theWriter++) = htonl(fStats[inTrackIndex].fLastAckedSeqNum + 1);
+        *(theWriter++) = bswap_32(fStats[inTrackIndex].fLastAckedSeqNum + 1);
 #if BROADCAST_SESSION_DEBUG
         qtss_printf("TrackID: %d Acking: %d\n", fSDPParser.GetStreamInfo(inTrackIndex)->fTrackID, fStats[inTrackIndex].fLastAckedSeqNum + 1);
 #endif
@@ -997,20 +998,20 @@ void BroadcasterSession::AckPackets(UInt32 inTrackIndex, UInt16 inCurSeqNum, Boo
             }
             
             // We have 1 completed mask. Add it to the packet
-            *(theWriter++) = htonl(mask);
+            *(theWriter++) = bswap_32(mask);
         }
         fStats[inTrackIndex].fLastAckedSeqNum = inCurSeqNum;
     }
     else
     {
         // Just ack cur seq num, this is an out of order packet
-        *(theWriter++) = htonl(inCurSeqNum);
+        *(theWriter++) = bswap_32(inCurSeqNum);
     }
 
     //
     // Set the packet length
     UInt16* lenP = (UInt16*)theRRBuffer;
-    lenP[1] = htons((theWriter - theWriterStart) - 1); //length in octets - 1
+    lenP[1] = bswap_16((theWriter - theWriterStart) - 1); //length in octets - 1
     
     // Send the packet
     Assert(fStats[inTrackIndex].fDestRTCPPort != 0);
@@ -1037,11 +1038,11 @@ void BroadcasterSession::SendReceiverReport()
     UInt32  *theWriter = (UInt32*)theRRBuffer;
 
     // RECEIVER REPORT
-    *(theWriter++) = htonl(0x81c90007);     // 1 src RR packet
-    //*(theWriter++) = htonl(trk[i].rcvrSSRC);
-    *(theWriter++) = htonl(0);
-    //*(theWriter++) = htonl(trk[i].TrackSSRC);
-    *(theWriter++) = htonl(0);
+    *(theWriter++) = bswap_32(0x81c90007);     // 1 src RR packet
+    //*(theWriter++) = bswap_32(trk[i].rcvrSSRC);
+    *(theWriter++) = bswap_32(0);
+    //*(theWriter++) = bswap_32(trk[i].TrackSSRC);
+    *(theWriter++) = bswap_32(0);
     //if (trk[i].rtp_num_received > 0)
     //  t = ((float)trk[i].rtp_num_lost / (float)trk[i].rtp_num_received) * 256;
     //else
@@ -1049,28 +1050,28 @@ void BroadcasterSession::SendReceiverReport()
     //temp = t;
     //temp = (temp & 0xff) << 24;
     //temp |= (trk[i].rtp_num_received & 0x00ffffff);
-    *(theWriter++) = htonl(0);
+    *(theWriter++) = bswap_32(0);
     //temp = (trk[i].seq_num_cycles & 0xffff0000) | (trk[i].last_seq_num & 0x0000ffff);
     //*(ia++) = toBigEndian_ulong(temp);
-    *(theWriter++) = htonl(0);
+    *(theWriter++) = bswap_32(0);
     *(theWriter++) = 0;                         // don't do jitter yet.
     *(theWriter++) = 0;                         // don't do last SR timestamp
     *(theWriter++) = 0;                         // don't do delay since last SR
 
     // APP PACKET - QoS info
-    *(theWriter++) = htonl(0x80CC000C); 
-    //*(ia++) = htonl(trk[i].TrackSSRC);
-    *(theWriter++) = htonl(0);
+    *(theWriter++) = bswap_32(0x80CC000C); 
+    //*(ia++) = bswap_32(trk[i].TrackSSRC);
+    *(theWriter++) = bswap_32(0);
 // this QTSS changes after beta to 'qtss'
-    *(theWriter++) = htonl('QTSS');
+    *(theWriter++) = bswap_32('QTSS');
     //*(ia++) = toBigEndian_ulong(trk[i].rcvrSSRC);
-    *(theWriter++) = htonl(0);
-    *(theWriter++) = htonl(8);          // eight 4-byte quants below
+    *(theWriter++) = bswap_32(0);
+    *(theWriter++) = bswap_32(8);          // eight 4-byte quants below
 #define RR 0x72720004
 #define PR 0x70720004
 #define PD 0x70640002
 #define PL 0x706C0004
-    *(theWriter++) = htonl(RR);
+    *(theWriter++) = bswap_32(RR);
     //unsigned int now, secs;
     //now = microseconds();
     //secs = now - trk[i].last_rtcp_packet_sent_us / USEC_PER_SEC;
@@ -1078,16 +1079,16 @@ void BroadcasterSession::SendReceiverReport()
     //  temp = trk[i].bytes_received_since_last_rtcp / secs;
     //else
     //  temp = 0;
-    //*(ia++) = htonl(temp);
-    *(theWriter++) = htonl(0);
-    *(theWriter++) = htonl(PR);
-    //*(ia++) = htonl(trk[i].rtp_num_received);
-    *(theWriter++) = htonl(0);
-    *(theWriter++) = htonl(PL);
-    //*(ia++) = htonl(trk[i].rtp_num_lost);
-    *(theWriter++) = htonl(0);
-    *(theWriter++) = htonl(PD);
-    *(theWriter++) = htonl(0);      // should be a short, but we need to pad to a long for the entire RTCP app packet
+    //*(ia++) = bswap_32(temp);
+    *(theWriter++) = bswap_32(0);
+    *(theWriter++) = bswap_32(PR);
+    //*(ia++) = bswap_32(trk[i].rtp_num_received);
+    *(theWriter++) = bswap_32(0);
+    *(theWriter++) = bswap_32(PL);
+    //*(ia++) = bswap_32(trk[i].rtp_num_lost);
+    *(theWriter++) = bswap_32(0);
+    *(theWriter++) = bswap_32(PD);
+    *(theWriter++) = bswap_32(0);      // should be a short, but we need to pad to a long for the entire RTCP app packet
 
 #if BROADCAST_SESSION_DEBUG
     qtss_printf("Sending receiver reports.\n");

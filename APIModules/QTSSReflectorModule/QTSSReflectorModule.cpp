@@ -31,6 +31,7 @@
     
 */
 
+#include <byteswap.h>
 #include "QTSSReflectorModule.h"
 #include "QTSSModuleUtils.h"
 #include "ReflectorSession.h"
@@ -655,7 +656,7 @@ QTSS_Error ProcessRTPData(QTSS_IncomingData_Params* inParams)
 
     UInt16  packetDataLen;
     memcpy(&packetDataLen,&packetData[2],2);
-    packetDataLen = ntohs(packetDataLen);
+    packetDataLen = bswap_16(packetDataLen);
     
     char*   rtpPacket = &packetData[4];
     

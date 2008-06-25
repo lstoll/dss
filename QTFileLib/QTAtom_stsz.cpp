@@ -31,6 +31,7 @@
 // -------------------------------------
 // Includes
 //
+#include <byteswap.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "SafeStdLib.h"
@@ -164,7 +165,7 @@ Bool16 QTAtom_stsz::SampleRangeSize(UInt32 firstSampleNumber, UInt32 lastSampleN
             {   *sizePtr = 0;
                 
                 for (UInt32 sampleNumber = firstSampleNumber; sampleNumber <= lastSampleNumber; sampleNumber++ ) 
-                    *sizePtr += ntohl(fTable[sampleNumber-1]);
+                    *sizePtr += bswap_32(fTable[sampleNumber-1]);
                 
             }
             result =  true; 

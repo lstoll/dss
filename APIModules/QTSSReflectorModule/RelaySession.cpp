@@ -32,6 +32,7 @@
 */
 
 
+#include <byteswap.h>
 #include "RelaySession.h"
 #include "QTSSModuleUtils.h"
 #include "SocketUtils.h"
@@ -189,14 +190,14 @@ QTSS_Error RelaySession::SetupRelaySession(SourceInfo* inInfo)
     StrPtrLen theIPAddr(theIPAddrBuf, 20);
     
     struct in_addr theSrcAddr;      // source ip address
-    theSrcAddr.s_addr = htonl(inInfo->GetStreamInfo(0)->fSrcIPAddr);
+    theSrcAddr.s_addr = bswap_32(inInfo->GetStreamInfo(0)->fSrcIPAddr);
     SocketUtils::ConvertAddrToString(theSrcAddr, &theIPAddr);   
     
     theErr = QTSS_SetValue (fRelaySessionObject, sSourceIPAddr, 0, (void*)theIPAddr.Ptr, theIPAddr.Len);
     Assert(theErr == QTSS_NoErr);
     
     struct in_addr theDestAddr;     // dest (of source) ip address
-    theDestAddr.s_addr = htonl(inInfo->GetStreamInfo(0)->fDestIPAddr);
+    theDestAddr.s_addr = bswap_32(inInfo->GetStreamInfo(0)->fDestIPAddr);
     SocketUtils::ConvertAddrToString(theDestAddr, &theIPAddr);
     
     theErr = QTSS_SetValue (fRelaySessionObject, sSourceInIPAddr, 0, (void*)theIPAddr.Ptr, theIPAddr.Len);

@@ -45,6 +45,7 @@
 
 
 
+#include <byteswap.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "SafeStdLib.h"
@@ -419,7 +420,7 @@ Bool16 AnnounceBroadcast(PLBroadcastDef *broadcastParms,QTFileBroadcaster   *fil
 
 	// if the address is a multicast address then we can't announce the broadcast.
     
-    if(SocketUtils::IsMulticastIPAddr(ntohl(inet_addr(broadcastParms->mDestAddress)))) {
+    if(SocketUtils::IsMulticastIPAddr(bswap_32(inet_addr(broadcastParms->mDestAddress)))) {
         sAnnounceBroadcast = false;
         return true;
     }
@@ -2082,7 +2083,7 @@ static void RegisterEventHandlers()
 
 struct sigaction act;
     
-#if defined(sun) || defined(i386) || defined(__MacOSX__) || defined(__powerpc__) || defined (__sgi_cc__) || defined(__osf__) || defined(__hpux__)
+#if defined(sun) || defined(i386) || defined(__MacOSX__) || defined(__powerpc__) || defined (__sgi_cc__) || defined(__osf__) || defined(__hpux__) || defined(__linux__)
 	sigemptyset(&act.sa_mask);
 	act.sa_flags = 0;
     act.sa_handler = (void(*)(int))&SignalEventHandler;

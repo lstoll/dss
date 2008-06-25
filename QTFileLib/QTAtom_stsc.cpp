@@ -30,6 +30,7 @@
 // -------------------------------------
 // Includes
 //
+#include <byteswap.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "SafeStdLib.h"
@@ -255,7 +256,7 @@ Bool16 QTAtom_stsc::GetChunkFirstLastSample(UInt32 chunkNumber, UInt32 *firstSam
     if (fNumEntries == 1)
     {   
         memcpy(&samplesPerChunk, fSampleToChunkTable + (STCB->fCurEntry_GetChunkFirstLastSample * 12) + 4, 4);
-        samplesPerChunk = ntohl(samplesPerChunk);
+        samplesPerChunk = bswap_32(samplesPerChunk);
     
         prevSamplesPerChunk = ((chunkNumber -1 ) * samplesPerChunk);
         totalSamples = chunkNumber * samplesPerChunk;
@@ -268,9 +269,9 @@ Bool16 QTAtom_stsc::GetChunkFirstLastSample(UInt32 chunkNumber, UInt32 *firstSam
         prevFirstChunk = thisFirstChunk;
 
         memcpy(&thisFirstChunk, fSampleToChunkTable + (STCB->fCurEntry_GetChunkFirstLastSample * 12) + 0, 4);
-        thisFirstChunk = ntohl(thisFirstChunk);
+        thisFirstChunk = bswap_32(thisFirstChunk);
         memcpy(&samplesPerChunk, fSampleToChunkTable + (STCB->fCurEntry_GetChunkFirstLastSample * 12) + 4, 4);
-        samplesPerChunk = ntohl(samplesPerChunk);
+        samplesPerChunk = bswap_32(samplesPerChunk);
         
         if (prevSamplesPerChunk == 0)  
             prevSamplesPerChunk = samplesPerChunk;
@@ -347,11 +348,11 @@ UInt32 QTAtom_stsc::GetChunkFirstSample(UInt32 chunkNumber)
         prevFirstChunk = thisFirstChunk;
 
         memcpy(&thisFirstChunk, fSampleToChunkTable + (STCB->fCurEntry * 12) + 0, 4);
-        thisFirstChunk = ntohl(thisFirstChunk);
+        thisFirstChunk = bswap_32(thisFirstChunk);
         memcpy(&samplesPerChunk, fSampleToChunkTable + (STCB->fCurEntry * 12) + 4, 4);
-        samplesPerChunk = ntohl(samplesPerChunk);
+        samplesPerChunk = bswap_32(samplesPerChunk);
         memcpy(&sampleDescription, fSampleToChunkTable + (STCB->fCurEntry * 12) + 8, 4);
-        sampleDescription = ntohl(sampleDescription);
+        sampleDescription = bswap_32(sampleDescription);
         
         thisChunk = thisFirstChunk;
         numChunks = thisFirstChunk - prevFirstChunk;
@@ -488,11 +489,11 @@ Bool16 QTAtom_stsc::SampleToChunkInfo(UInt32 SampleNumber,  UInt32 *samplesPerCh
         //
         // Copy this entry's fields.
         memcpy(&FirstChunk, fSampleToChunkTable + (STCB->fCurEntry_SampleToChunkInfo * 12) + 0, 4);
-        FirstChunk = ntohl(FirstChunk);
+        FirstChunk = bswap_32(FirstChunk);
         memcpy(&SamplesPerChunk, fSampleToChunkTable + (STCB->fCurEntry_SampleToChunkInfo * 12) + 4, 4);
-        SamplesPerChunk = ntohl(SamplesPerChunk);
+        SamplesPerChunk = bswap_32(SamplesPerChunk);
         memcpy(&SampleDescription, fSampleToChunkTable + (STCB->fCurEntry_SampleToChunkInfo * 12) + 8, 4);
-        SampleDescription = ntohl(SampleDescription);
+        SampleDescription = bswap_32(SampleDescription);
         
         //
         // Check to see if the sample was actually in the last chunk and
@@ -605,11 +606,11 @@ void QTAtom_stsc::DumpTable(void)
         //
         // Copy this entry's fields.
         memcpy(&FirstChunk, fSampleToChunkTable + (CurEntry * 12) + 0, 4);
-        FirstChunk = ntohl(FirstChunk);
+        FirstChunk = bswap_32(FirstChunk);
         memcpy(&SamplesPerChunk, fSampleToChunkTable + (CurEntry * 12) + 4, 4);
-        SamplesPerChunk = ntohl(SamplesPerChunk);
+        SamplesPerChunk = bswap_32(SamplesPerChunk);
         memcpy(&SampleDescription, fSampleToChunkTable + (CurEntry * 12) + 8, 4);
-        SampleDescription = ntohl(SampleDescription);
+        SampleDescription = bswap_32(SampleDescription);
         
         //
         // Print out a listing.

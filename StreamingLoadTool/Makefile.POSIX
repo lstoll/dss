@@ -61,6 +61,7 @@ install: StreamingLoadTool
 
 clean:
 	rm -f $(CFILES:.c=.o) $(CPPFILES:.cpp=.o)
+	rm -f StreamingLoadTool
 
 .SUFFIXES: .cpp .c .o
 

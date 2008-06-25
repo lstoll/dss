@@ -32,6 +32,7 @@
 */
 
 
+#include <byteswap.h>
 #include "RTSPRequestStream.h"
 #include "StringParser.h"
 #include "OSMemory.h"
@@ -163,7 +164,7 @@ QTSS_Error RTSPRequestStream::ReadRequest()
             if (fRequest.Len < 4)
                 continue;
             UInt16* dataLenP = (UInt16*)fRequest.Ptr;
-            UInt32 interleavedPacketLen = ntohs(dataLenP[1]) + 4;
+            UInt32 interleavedPacketLen = bswap_16(dataLenP[1]) + 4;
             if (interleavedPacketLen > fRequest.Len)
                 continue;
                 

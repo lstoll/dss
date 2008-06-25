@@ -31,6 +31,8 @@
 */
 
 
+#include <byteswap.h>
+#include <byteswap.h>
 #include "RTPSessionOutput.h"
 #include "ReflectorStream.h"
 
@@ -442,18 +444,18 @@ QTSS_Error  RTPSessionOutput::RewriteRTCP(QTSS_RTPStreamObject *theStreamPtr, St
     //printf("rtptime offset time =%f in scale =%"_U32BITARG_"\n", rtpTimeFromStart, rtpTimeFromStartInScale );
 
     theReport += 2; // point to the rtp time stamp of "now" synched and scaled in stream time
-    *theReport = htonl(baseTimeStamp + rtpTimeFromStartInScale); 
+    *theReport = bswap_32(baseTimeStamp + rtpTimeFromStartInScale); 
     
     theLen = sizeof(UInt32);                   
     UInt32 packetCount = 0;
     (void) QTSS_GetValue(*theStreamPtr, sStreamPacketCountAttr, 0, &packetCount,&theLen);
     theReport += 1; // point to the rtp packets sent
-    *theReport = htonl(ntohl(*theReport) * 2); 
+    *theReport = bswap_32(bswap_32(*theReport) * 2); 
         
     UInt32 byteCount = 0;
     (void) QTSS_GetValue(*theStreamPtr, sStreamByteCountAttr, 0, &byteCount,&theLen);
     theReport += 1; // point to the rtp payload bytes sent
-    *theReport = htonl(ntohl(*theReport) * 2); 
+    *theReport = bswap_32(bswap_32(*theReport) * 2); 
         
     return QTSS_NoErr;
 }
@@ -667,7 +669,7 @@ UInt16 RTPSessionOutput::GetPacketSeqNumber(StrPtrLen* inPacket)
     
     //The RTP seq number is the second short of the packet
     UInt16* seqNumPtr = (UInt16*)inPacket->Ptr;
-    return ntohs(seqNumPtr[1]);
+    return bswap_16(seqNumPtr[1]);
 }
 
 void RTPSessionOutput::SetPacketSeqNumber(StrPtrLen* inPacket, UInt16 inSeqNumber)
@@ -677,7 +679,7 @@ void RTPSessionOutput::SetPacketSeqNumber(StrPtrLen* inPacket, UInt16 inSeqNumbe
 
     //The RTP seq number is the second short of the packet
     UInt16* seqNumPtr = (UInt16*)inPacket->Ptr;
-    seqNumPtr[1] = htons(inSeqNumber);
+    seqNumPtr[1] = bswap_16(inSeqNumber);
 }
 
 // this routine is not used

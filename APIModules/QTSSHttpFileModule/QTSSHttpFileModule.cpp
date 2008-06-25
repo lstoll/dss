@@ -30,6 +30,7 @@
 
 
 #ifndef __Win32__
+#include <byteswap.h>
 #include <unistd.h>
 #include <dirent.h>
 #endif
@@ -1068,7 +1069,7 @@ void* MakeMoov(void* rmda, UInt32 rmdaLen, UInt32* moovLen)
        if( rmra == NULL )
          return NULL;
 
-       rmraLen = htonl(rmraLen);
+       rmraLen = bswap_32(rmraLen);
 
        ::memcpy(&rmra[0], &rmraLen, 4);
        ::memcpy(&rmra[1], "rmra", 4);
@@ -1076,20 +1077,20 @@ void* MakeMoov(void* rmda, UInt32 rmdaLen, UInt32* moovLen)
 
        // Make the MOOV
 
-       *moovLen = ntohl(rmraLen) + 8;
+       *moovLen = bswap_32(rmraLen) + 8;
        moov = NEW UInt32[*moovLen];
        if( moov == NULL )
          return NULL;
 
-       *moovLen = htonl(*moovLen);
+       *moovLen = bswap_32(*moovLen);
 
        ::memcpy(&moov[0], moovLen, 4);
        ::memcpy(&moov[1], "moov", 4);
-       ::memcpy((char *)moov + 8, rmra, ntohl(rmraLen));
+       ::memcpy((char *)moov + 8, rmra, bswap_32(rmraLen));
 
        delete rmra;
 
-       *moovLen = ntohl(*moovLen);
+       *moovLen = bswap_32(*moovLen);
 
        // moov needs to be deleted by the calling function
        return moov;
@@ -1099,8 +1100,8 @@ void* MakeRmda(char* url, UInt32 rate, UInt32* rmdaLen)
 {
       UInt32 *rdrf, rdrfLen, *rmdr, rmdrLen, *rmda, zero, size;
 
-      zero = htonl(0); // Okay, this is silly ???
-      rate = htonl(rate);
+      zero = bswap_32(0); // Okay, this is silly ???
+      rate = bswap_32(rate);
 
       // Make the RDRF
       size = ::strlen(url) + 1;
@@ -1109,8 +1110,8 @@ void* MakeRmda(char* url, UInt32 rate, UInt32* rmdaLen)
       if( rdrf == NULL )
          return NULL;
 
-      rdrfLen = htonl(rdrfLen);
-      size = htonl(size);
+      rdrfLen = bswap_32(rdrfLen);
+      size = bswap_32(size);
 
       ::memcpy(&rdrf[0], &rdrfLen, 4);
       ::memcpy(&rdrf[1], "rdrf", 4);
@@ -1125,7 +1126,7 @@ void* MakeRmda(char* url, UInt32 rate, UInt32* rmdaLen)
       if( rmdr == NULL )
          return NULL;
 
-      rmdrLen = htonl(rmdrLen);
+      rmdrLen = bswap_32(rmdrLen);
       
       ::memcpy(&rmdr[0], &rmdrLen, 4);
       ::memcpy(&rmdr[1], "rmdr", 4);
@@ -1134,22 +1135,22 @@ void* MakeRmda(char* url, UInt32 rate, UInt32* rmdaLen)
 
       // Make the RMDA
 
-      *rmdaLen = ntohl(rdrfLen) + ntohl(rmdrLen) + 8;
+      *rmdaLen = bswap_32(rdrfLen) + bswap_32(rmdrLen) + 8;
       rmda = NEW UInt32[*rmdaLen];
       if( rmda == NULL )
          return NULL;
 
-      *rmdaLen = htonl(*rmdaLen);
+      *rmdaLen = bswap_32(*rmdaLen);
 
       ::memcpy(&rmda[0], rmdaLen, 4);
       ::memcpy(&rmda[1], "rmda", 4);
-      ::memcpy((char *)rmda + 8, rmdr, ntohl(rmdrLen));
-      ::memcpy((char *)rmda + 8 + ntohl(rmdrLen), rdrf, ntohl(rdrfLen));
+      ::memcpy((char *)rmda + 8, rmdr, bswap_32(rmdrLen));
+      ::memcpy((char *)rmda + 8 + bswap_32(rmdrLen), rdrf, bswap_32(rdrfLen));
 
       delete rdrf;
       delete rmdr;
 
-      *rmdaLen = ntohl(*rmdaLen);
+      *rmdaLen = bswap_32(*rmdaLen);
 
       // rmda needs to be deleted by the calling function
       return rmda;

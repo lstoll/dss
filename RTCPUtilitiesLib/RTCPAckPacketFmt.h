@@ -31,6 +31,7 @@
 #ifndef _RTCPACKPACKETFMT_H_
 #define _RTCPACKPACKETFMT_H_
 
+#include <byteswap.h>
 #include <stdlib.h>
 #include <arpa/inet.h>
 #include "StrPtrLen.h"
@@ -85,15 +86,15 @@ class RTCPAckPacketFmt
             //fill in the header
             RTCPAckHeader &header = *reinterpret_cast<RTCPAckHeader *>(fBuf.Ptr);
             ::memset(&header, 0, sizeof(header));    
-            header.ackheader = htons(0x80CC); //(RTP_VERSION << 14) + RTCP_APP; 
-			header.length = htons(GetPacketLen() / 4 - 1);
-            header.name = htonl(FOUR_CHARS_TO_INT('q', 't', 'a', 'k'));
+            header.ackheader = bswap_16(0x80CC); //(RTP_VERSION << 14) + RTCP_APP; 
+			header.length = bswap_16(GetPacketLen() / 4 - 1);
+            header.name = bswap_32(FOUR_CHARS_TO_INT('q', 't', 'a', 'k'));
         }
 		
 		void		SetSSRC(UInt32 SSRC)
         {
             RTCPAckHeader &header = *reinterpret_cast<RTCPAckHeader *>(fBuf.Ptr);
-            header.SSRC = htonl(SSRC);
+            header.SSRC = bswap_32(SSRC);
         }
 
         //Can handle duplicates
@@ -103,8 +104,8 @@ class RTCPAckPacketFmt
             ::qsort(AckList.begin(), AckList.size(), sizeof(UInt32), UInt32Compare);
 
             RTCPAckHeader &header = *reinterpret_cast<RTCPAckHeader *>(fBuf.Ptr);
-			header.SSRC1 = htonl(serverSSRC);
-            header.seqNum = htons(static_cast<UInt16>(AckList.front()));
+			header.SSRC1 = bswap_32(serverSSRC);
+            header.seqNum = bswap_16(static_cast<UInt16>(AckList.front()));
 
             fBitMaskSize = 0;
             if (AckList.front() == AckList.back())          //no mask is needed
@@ -114,7 +115,7 @@ class RTCPAckPacketFmt
 			UInt32 slotsInMaskNeeded = AckList.back() - AckList.front();
 			fBitMaskSize = slotsInMaskNeeded % 32 == 0 ? (slotsInMaskNeeded / 32) * 4 : (slotsInMaskNeeded / 32 + 1) * 4;
 			
-			header.length = htons(GetPacketLen() / 4 - 1);
+			header.length = bswap_16(GetPacketLen() / 4 - 1);
             Assert(fBuf.Len >= GetPacketLen());
 
             UInt32 *mask = reinterpret_cast<UInt32 *>(fBuf.Ptr + sizeof(RTCPAckHeader));
@@ -135,7 +136,7 @@ class RTCPAckPacketFmt
 			
 			//restore big-endianess of the mask
 			for(UInt32 i = 0; i < fBitMaskSize / 4; ++i)
-				mask[i] = htonl(mask[i]);
+				mask[i] = bswap_32(mask[i]);
         }
 
         //The length of packet written out

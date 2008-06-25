@@ -31,6 +31,7 @@
 */
 
 #ifndef __Win32__
+#include <byteswap.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -1261,7 +1262,7 @@ OS_Error RTSPClient::PutMediaPacket(UInt32 inTrackID, Bool16 isRTCP, char* inDat
             header[0] = '$';
             header[1] = (UInt8)x;
             UInt16* theLenP = (UInt16*)header;
-            theLenP[1] = htons(inLen);
+            theLenP[1] = bswap_16(inLen);
                     
             //
             // Build the iovec
@@ -1301,7 +1302,7 @@ OS_Error RTSPClient::SendInterleavedWrite(UInt8 channel, UInt16 len, char*data,B
     {   *getNext = true; // handle a new packet
         fSendBuffer[0] = '$';
         fSendBuffer[1] = channel;
-        UInt16 netlen = htons(len);
+        UInt16 netlen = bswap_16(len);
         memcpy(&fSendBuffer[2],&netlen,2);
         memcpy(&fSendBuffer[4],data,len);
         
@@ -1397,7 +1398,7 @@ OS_Error    RTSPClient::GetMediaPacket(UInt32* outTrackID, Bool16* outIsRTCP, ch
         // The previous call to this function returned a packet successfully. We've been holding
         // onto that packet data until now... Now we can blow it away.
         UInt16* thePacketLenP = (UInt16*)fPacketBuffer;
-        UInt16 thePacketLen = ntohs(thePacketLenP[1]);
+        UInt16 thePacketLen = bswap_16(thePacketLenP[1]);
         
         Assert(fPacketBuffer[0] == '$');
 
@@ -1442,7 +1443,7 @@ OS_Error    RTSPClient::GetMediaPacket(UInt32* outTrackID, Bool16* outIsRTCP, ch
     {
         Assert(fPacketBuffer[0] == '$');
         UInt16* thePacketLenP = (UInt16*)fPacketBuffer;
-        UInt16 thePacketLen = ntohs(thePacketLenP[1]);
+        UInt16 thePacketLen = bswap_16(thePacketLenP[1]);
         UInt8  channelIndex = fPacketBuffer[1];
         if (fPacketBufferOffset >= (thePacketLen + kPacketHeaderLen))
         {
@@ -1929,7 +1930,7 @@ int main(int argc, char * argv[])
     Socket::Initialize();
     SocketUtils::Initialize();
 
-    UInt32 ipAddr = (UInt32)ntohl(::inet_addr("17.221.41.111"));
+    UInt32 ipAddr = (UInt32)bswap_32(::inet_addr("17.221.41.111"));
     UInt16 port = 554;
     StrPtrLen theURL("rtsp://17.221.41.111/mystery.mov");
 

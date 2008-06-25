@@ -23,6 +23,7 @@
  *
  */
 
+#include <byteswap.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "SafeStdLib.h"
@@ -204,7 +205,7 @@ int main(int argc, char *argv[]) {
         UInt32 value = RTPFile->GetLastPacketTrack()->Cookie2;
 
         in_port_t cookievalue = value;
-        sin.sin_port = htons( cookievalue  );
+        sin.sin_port = bswap_16( cookievalue  );
         sin.sin_addr.s_addr = inet_addr(IPAddress);
         sendto(s, Packet, PacketLength, 0, (struct sockaddr *)&sin, sizeof(struct sockaddr));
     }

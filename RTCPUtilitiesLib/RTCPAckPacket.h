@@ -34,6 +34,7 @@
 #ifndef _RTCPACKPACKET_H_
 #define _RTCPACKPACKET_H_
 
+#include <byteswap.h>
 #include "OSHeaders.h"
 #include "RTCPAPPPacket.h"
 #include <stdlib.h>
@@ -116,12 +117,12 @@ Bool16 RTCPAckPacket::IsNthBitEnabled(UInt32 inBitNumber)
 
 UInt16 RTCPAckPacket::GetAckSeqNum()
 {
-    return (UInt16) (ntohl(*(UInt32*)&fRTCPAckBuffer[kAckSeqNumOffset]));
+    return (UInt16) (bswap_32(*(UInt32*)&fRTCPAckBuffer[kAckSeqNumOffset]));
 }
 
 inline UInt16 RTCPAckPacket::GetPacketLength()
 {
-    return (UInt16) ( ntohl(*(UInt32*)fRTCPAckBuffer) & kPacketLengthMask);
+    return (UInt16) ( bswap_32(*(UInt32*)fRTCPAckBuffer) & kPacketLengthMask);
 }
 
 

@@ -34,6 +34,7 @@
 #ifndef _RTCPAPPPACKET_H_
 #define _RTCPAPPPACKET_H_
 
+#include <byteswap.h>
 #include "RTCPPacket.h"
 #include "StrPtrLen.h"
 #include "ResizeableStringFormatter.h"
@@ -93,13 +94,13 @@ inline FourCharCode RTCPAPPPacket::GetAppPacketName(char *outName, UInt32 len)
              outName[0] = 0;
    }
 
-   return ntohl(packetName);
+   return bswap_32(packetName);
 }
 
 
 inline UInt32 RTCPAPPPacket::GetAppPacketSSRC()
 {
-    return (UInt32) ntohl(*(UInt32*)&(GetPacketBuffer()[kAppSSRCOffset]) ) ;
+    return (UInt32) bswap_32(*(UInt32*)&(GetPacketBuffer()[kAppSSRCOffset]) ) ;
 }
 
 

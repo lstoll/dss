@@ -33,6 +33,7 @@
 
 
 
+#include <byteswap.h>
 #include <stdlib.h>
 #include <arpa/inet.h>
 #include "SafeStdLib.h"
@@ -768,12 +769,12 @@ void RTPStream::UDPMonitorWrite(void* thePacketData, UInt32 inLen,  Bool16 isRTC
     struct sockaddr_in sin;
     memset(&sin, 0, sizeof(struct sockaddr_in));
     sin.sin_family = AF_INET;
-    sin.sin_addr.s_addr = htonl(fMonitorAddr);
+    sin.sin_addr.s_addr = bswap_32(fMonitorAddr);
     
     if (fPayloadType == qtssVideoPayloadType)
-        sin.sin_port = (in_port_t) htons(fMonitorVideoDestPort+RTCPportOffset);
+        sin.sin_port = (in_port_t) bswap_16(fMonitorVideoDestPort+RTCPportOffset);
     else if (fPayloadType == qtssAudioPayloadType)
-        sin.sin_port = (in_port_t) htons(fMonitorAudioDestPort+RTCPportOffset);
+        sin.sin_port = (in_port_t) bswap_16(fMonitorAudioDestPort+RTCPportOffset);
     
     if (sin.sin_port != 0)
     {
@@ -782,7 +783,7 @@ void RTPStream::UDPMonitorWrite(void* thePacketData, UInt32 inLen,  Bool16 isRTC
         {   if (result < 0)
                 qtss_printf("RTCP Monitor Socket sendto failed\n");
             else if (0)
-                qtss_printf("RTCP Monitor Socket sendto port=%hu, packetLen=%"_U32BITARG_"\n", ntohs(sin.sin_port), inLen);
+                qtss_printf("RTCP Monitor Socket sendto port=%hu, packetLen=%"_U32BITARG_"\n", bswap_16(sin.sin_port), inLen);
         }
     }
 
@@ -1211,7 +1212,7 @@ QTSS_Error  RTPStream::Write(void* inBuffer, UInt32 inLen, UInt32* outLenWritten
                 this->PrintPacketPrefEnabled( (char*) thePacket->packetData, inLen, (SInt32) RTPStream::rtp);
 
             UInt16* theSeqNumP = (UInt16*)thePacket->packetData;
-            UInt16 theSeqNum = ntohs(theSeqNumP[1]);
+            UInt16 theSeqNum = bswap_16(theSeqNumP[1]);
 			
 			//Add the packet sequence number and the timestamp to the list of mappings if doing 3GPP-rate-adaptation.
 			fStream3GPP->AddSeqNumTimeMapping(theSeqNum, thePacket->packetTransmitTime);
@@ -1263,7 +1264,7 @@ QTSS_Error  RTPStream::Write(void* inBuffer, UInt32 inLen, UInt32* outLenWritten
         if (err != QTSS_NoErr)
             fResender.logprintf("Flow controlled: %qd Overbuffer window: %d. Cur time %qd\n", theCurrentPacketDelay, fSession->GetOverbufferWindow()->AvailableSpaceInWindow(), theTime);
         else
-            fResender.logprintf("Sent packet: %d. Overbuffer window: %d Transmit time %qd. Cur time %qd\n", ntohs(theSeqNum[1]), fSession->GetOverbufferWindow()->AvailableSpaceInWindow(), thePacket->packetTransmitTime, theTime);
+            fResender.logprintf("Sent packet: %d. Overbuffer window: %d Transmit time %qd. Cur time %qd\n", bswap_16(theSeqNum[1]), fSession->GetOverbufferWindow()->AvailableSpaceInWindow(), thePacket->packetTransmitTime, theTime);
 #endif
         //if (err != QTSS_NoErr)
         //  qtss_printf("flow controlled\n");
@@ -1283,7 +1284,7 @@ QTSS_Error  RTPStream::Write(void* inBuffer, UInt32 inLen, UInt32* outLenWritten
 
             // Record the RTP timestamp for RTCPs
             UInt32* timeStampP = (UInt32*)(thePacket->packetData);
-            fLastRTPTimestamp = ntohl(timeStampP[1]);
+            fLastRTPTimestamp = bswap_32(timeStampP[1]);
             
             //stream statistics
             fPacketCount++;
@@ -1786,9 +1787,9 @@ char* RTPStream::GetStreamTypeStr()
 void RTPStream::PrintRTP(char* packetBuff, UInt32 inLen)
 {
   
-    UInt16 sequence = ntohs( ((UInt16*)packetBuff)[1]);
-    UInt32 timestamp = ntohl( ((UInt32*)packetBuff)[1]);
-    UInt32 ssrc = ntohl( ((UInt32*)packetBuff)[2]);
+    UInt16 sequence = bswap_16( ((UInt16*)packetBuff)[1]);
+    UInt32 timestamp = bswap_32( ((UInt32*)packetBuff)[1]);
+    UInt32 ssrc = bswap_32( ((UInt32*)packetBuff)[2]);
     
      
        
@@ -1819,7 +1820,7 @@ void RTPStream::PrintRTCPSenderReport(char* packetBuff, UInt32 inLen)
      UInt32* theReport = (UInt32*)packetBuff;
     
     theReport++;
-    UInt32 ssrc = htonl(*theReport);
+    UInt32 ssrc = bswap_32(*theReport);
     
     theReport++;
     SInt64 ntp = 0;
@@ -1828,7 +1829,7 @@ void RTPStream::PrintRTCPSenderReport(char* packetBuff, UInt32 inLen)
     time_t theTime = OS::Time1900Fixed64Secs_To_UnixTimeSecs(ntp);
                     
     theReport += 2;
-    UInt32 timestamp = ntohl(*theReport);
+    UInt32 timestamp = bswap_32(*theReport);
     Float32 theTimeInSecs = 0.0;
 
     if (fFirstTimeStamp == 0)
@@ -1838,10 +1839,10 @@ void RTPStream::PrintRTCPSenderReport(char* packetBuff, UInt32 inLen)
         theTimeInSecs = (Float32) (timestamp - fFirstTimeStamp) /  (Float32) fTimescale;
     
     theReport++;        
-    UInt32 packetcount = ntohl(*theReport);
+    UInt32 packetcount = bswap_32(*theReport);
     
     theReport++;
-    UInt32 bytecount = ntohl(*theReport);          
+    UInt32 bytecount = bswap_32(*theReport);          
     
     StrPtrLen   *payloadStr = this->GetValue(qtssRTPStrPayloadName);
     if (payloadStr && payloadStr->Len > 0)

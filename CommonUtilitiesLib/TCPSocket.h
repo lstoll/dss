@@ -35,6 +35,7 @@
 #ifndef __TCPSOCKET_H__
 #define __TCPSOCKET_H__
 
+#include <byteswap.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "SafeStdLib.h"
@@ -81,8 +82,8 @@ class TCPSocket : public Socket
         //ACCESSORS:
         //Returns NULL if not currently available.
         
-        UInt32      GetRemoteAddr() { return ntohl(fRemoteAddr.sin_addr.s_addr); }
-        UInt16      GetRemotePort() { return ntohs(fRemoteAddr.sin_port); }
+        UInt32      GetRemoteAddr() { return bswap_32(fRemoteAddr.sin_addr.s_addr); }
+        UInt16      GetRemotePort() { return bswap_16(fRemoteAddr.sin_port); }
         //This function is NOT thread safe!
         StrPtrLen*  GetRemoteAddrStr();
 

@@ -31,6 +31,7 @@
 #ifndef _RTCPRRPACKET_H_
 #define _RTCPRRPACKET_H_
 
+#include <byteswap.h>
 #include "StrPtrLen.h"
 #include "arpa/inet.h"
 #include "OSHeaders.h"
@@ -92,11 +93,11 @@ class RTCPRRPacket
             //fill in the header
             RTCPRRHeader &header = *reinterpret_cast<RTCPRRHeader *>(fBuf.Ptr);
             ::memset(&header, 0, sizeof(header));
-            header.rrheader = htons(0x80C9); //(RTP_VERSION << 14) + RTCP_RR;
-            header.length = htons(GetPacketLen() / 4 - 1);
+            header.rrheader = bswap_16(0x80C9); //(RTP_VERSION << 14) + RTCP_RR;
+            header.length = bswap_16(GetPacketLen() / 4 - 1);
         }
 		
-		void	SetSSRC(UInt32 SSRC)											{ reinterpret_cast<RTCPRRHeader *>(fBuf.Ptr)->SSRC = htonl(SSRC); }
+		void	SetSSRC(UInt32 SSRC)											{ reinterpret_cast<RTCPRRHeader *>(fBuf.Ptr)->SSRC = bswap_32(SSRC); }
 		
 		
 		void SetCount(UInt16 count) 
@@ -105,10 +106,10 @@ class RTCPRRPacket
 		  {   return;
 		  }
 		  
-		  UInt16 newVal = ntohs(*reinterpret_cast<UInt16 *>(fBuf.Ptr));
+		  UInt16 newVal = bswap_16(*reinterpret_cast<UInt16 *>(fBuf.Ptr));
 		  count <<= 8;
 		  newVal |= count;
-		  *reinterpret_cast<UInt16 *>(fBuf.Ptr) =  htons(newVal);
+		  *reinterpret_cast<UInt16 *>(fBuf.Ptr) =  bswap_16(newVal);
 		  
 		}
 		
@@ -122,22 +123,22 @@ class RTCPRRPacket
 			RTCPReportBlock &reportBlock = *reinterpret_cast<RTCPReportBlock *>(fBuf.Ptr + GetPacketLen());
 			::memset(&reportBlock, 0, sizeof(RTCPReportBlock));
 
-			reportBlock.ssrc = htonl(SSRC);
+			reportBlock.ssrc = bswap_32(SSRC);
 			reportBlock.fraction = fractionLost;
-			reportBlock.last_seq = htonl(highestSeqNum);
-			reportBlock.lsr = htonl(lsr);
-			reportBlock.dlsr = htonl(dlsr);
+			reportBlock.last_seq = bswap_32(highestSeqNum);
+			reportBlock.lsr = bswap_32(lsr);
+			reportBlock.dlsr = bswap_32(dlsr);
 			
 			//since the cumulative packets lost is a 24 bit signed integer, its clamped between 0x7fffff and 0x800000)
 			if(cumLostPackets > 0x7fffff)
-				reportBlock.lost = htonl(0x7fffff);
+				reportBlock.lost = bswap_32(0x7fffff);
 			else if (cumLostPackets < static_cast<SInt32>(0xff800000))
-				reportBlock.lost = htonl(0x800000);
+				reportBlock.lost = bswap_32(0x800000);
 			else
-				reportBlock.lost = htonl(cumLostPackets);
+				reportBlock.lost = bswap_32(cumLostPackets);
 				
 			SetCount(++fNumReportBlocks);
-			reinterpret_cast<RTCPRRHeader *>(fBuf.Ptr)->length = htons(GetPacketLen() / 4 - 1);
+			reinterpret_cast<RTCPRRHeader *>(fBuf.Ptr)->length = bswap_16(GetPacketLen() / 4 - 1);
 		}
 
         //The length of packet written out

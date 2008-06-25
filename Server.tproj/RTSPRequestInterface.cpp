@@ -35,6 +35,7 @@
 
 //INCLUDES:
 #ifndef __Win32__
+#include <byteswap.h>
 #include <sys/types.h>
 #include <sys/uio.h>
 #endif
@@ -443,7 +444,7 @@ void RTSPRequestInterface::AppendTransportHeader(StrPtrLen* serverPortA,
         
         UInt32 ssrcVal = 0;
         ::sscanf(theCString, "%"_U32BITARG_"", &ssrcVal);
-        ssrcVal = htonl(ssrcVal);
+        ssrcVal = bswap_32(ssrcVal);
         
         StrPtrLen hexSSRC(QTSSDataConverter::ValueToString( &ssrcVal, sizeof(ssrcVal), qtssAttrDataTypeUnknown));
         OSCharArrayDeleter hexStrDeleter(hexSSRC.Ptr);

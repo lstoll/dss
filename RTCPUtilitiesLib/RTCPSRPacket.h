@@ -35,6 +35,7 @@
 #ifndef __RTCP_SR_PACKET__
 #define __RTCP_SR_PACKET__
 
+#include <byteswap.h>
 #include "OSHeaders.h"
 #include "OS.h"
 #include "MyAssert.h"
@@ -109,25 +110,25 @@ class RTCPSRPacket
 inline void RTCPSRPacket::SetSSRC(UInt32 inSSRC)
 {
     // Set SSRC in SR
-    ((UInt32*)&fSenderReportBuffer)[1] = htonl(inSSRC);
+    ((UInt32*)&fSenderReportBuffer)[1] = bswap_32(inSSRC);
     
     // Set SSRC in SDES
-    ((UInt32*)&fSenderReportBuffer)[8] = htonl(inSSRC);
+    ((UInt32*)&fSenderReportBuffer)[8] = bswap_32(inSSRC);
     
     // Set SSRC in SERVER INFO
     Assert((fSenderReportSize & 3) == 0);
-    ((UInt32*)&fSenderReportBuffer)[(fSenderReportSize >> 2) + 1] = htonl(inSSRC);
+    ((UInt32*)&fSenderReportBuffer)[(fSenderReportSize >> 2) + 1] = bswap_32(inSSRC);
 
     // Set SSRC in BYE
     Assert((fSenderReportWithServerInfoSize & 3) == 0);
-    ((UInt32*)&fSenderReportBuffer)[(fSenderReportWithServerInfoSize >> 2) + 1] = htonl(inSSRC);
+    ((UInt32*)&fSenderReportBuffer)[(fSenderReportWithServerInfoSize >> 2) + 1] = bswap_32(inSSRC);
 }
 
 inline void RTCPSRPacket::SetClientSSRC(UInt32 inClientSSRC)
 {
     //
     // Set Client SSRC in SERVER INFO
-    ((UInt32*)&fSenderReportBuffer)[(fSenderReportSize >> 2) + 3] = htonl(inClientSSRC);    
+    ((UInt32*)&fSenderReportBuffer)[(fSenderReportSize >> 2) + 3] = bswap_32(inClientSSRC);    
 }
 
 inline void RTCPSRPacket::SetNTPTimestamp(SInt64 inNTPTimestamp)
@@ -142,22 +143,22 @@ inline void RTCPSRPacket::SetNTPTimestamp(SInt64 inNTPTimestamp)
 
 inline void RTCPSRPacket::SetRTPTimestamp(UInt32 inRTPTimestamp)
 {
-    ((UInt32*)&fSenderReportBuffer)[4] = htonl(inRTPTimestamp);
+    ((UInt32*)&fSenderReportBuffer)[4] = bswap_32(inRTPTimestamp);
 }
 
 inline void RTCPSRPacket::SetPacketCount(UInt32 inPacketCount)
 {
-    ((UInt32*)&fSenderReportBuffer)[5] = htonl(inPacketCount);
+    ((UInt32*)&fSenderReportBuffer)[5] = bswap_32(inPacketCount);
 }
 
 inline void RTCPSRPacket::SetByteCount(UInt32 inByteCount)
 {
-    ((UInt32*)&fSenderReportBuffer)[6] = htonl(inByteCount);
+    ((UInt32*)&fSenderReportBuffer)[6] = bswap_32(inByteCount);
 }   
 
 inline void RTCPSRPacket::SetAckTimeout(UInt32 inAckTimeoutInMsec)
 {
-    ((UInt32*)&fSenderReportBuffer)[(fSenderReportWithServerInfoSize >> 2) - 1] = htonl(inAckTimeoutInMsec);
+    ((UInt32*)&fSenderReportBuffer)[(fSenderReportWithServerInfoSize >> 2) - 1] = bswap_32(inAckTimeoutInMsec);
 }
 
 #endif //__RTCP_SR_PACKET__

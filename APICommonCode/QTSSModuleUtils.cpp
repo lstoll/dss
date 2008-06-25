@@ -29,6 +29,7 @@
                     
 */
 
+#include <byteswap.h>
 #include "QTSSModuleUtils.h"
 #include "QTSS_Private.h"
 
@@ -282,7 +283,7 @@ QTSS_Error  QTSSModuleUtils::AppendRTPMetaInfoHeader(   QTSS_RTSPRequestObject i
         RTPMetaInfoPacket::FieldName* theFieldName = (RTPMetaInfoPacket::FieldName*)theHeader.Ptr;
         ::memcpy (&fieldNameValue, theFieldName, sizeof(UInt16));
 
-        RTPMetaInfoPacket::FieldIndex theFieldIndex = RTPMetaInfoPacket::GetFieldIndexForName(ntohs(fieldNameValue));
+        RTPMetaInfoPacket::FieldIndex theFieldIndex = RTPMetaInfoPacket::GetFieldIndexForName(bswap_16(fieldNameValue));
         
         //
         // This field is not supported (not in the field ID array), so

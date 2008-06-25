@@ -32,6 +32,7 @@
     
 */
 
+#include <byteswap.h>
 #include <string.h>
 
 #ifndef __Win32__
@@ -123,7 +124,7 @@ void SocketUtils::Initialize(Bool16 lookupDNSName)
             char* theAddrStr = ::inet_ntoa(sockaddr->sin_addr);
 
             //store the IP addr
-            sIPAddrInfoArray[addrArrayIndex].fIPAddr = ntohl(sockaddr->sin_addr.s_addr);
+            sIPAddrInfoArray[addrArrayIndex].fIPAddr = bswap_32(sockaddr->sin_addr.s_addr);
 
             //store the IP addr as a string
             sIPAddrInfoArray[addrArrayIndex].fIPAddrStr.Len = ::strlen(theAddrStr);
@@ -281,7 +282,7 @@ void SocketUtils::Initialize(Bool16 lookupDNSName)
         char* theAddrStr = ::inet_ntoa(theAddr->sin_addr);
 
         //store the IP addr
-        sIPAddrInfoArray[currentIndex].fIPAddr = ntohl(theAddr->sin_addr.s_addr);
+        sIPAddrInfoArray[currentIndex].fIPAddr = bswap_32(theAddr->sin_addr.s_addr);
         
         //store the IP addr as a string
         sIPAddrInfoArray[currentIndex].fIPAddrStr.Len = ::strlen(theAddrStr);
@@ -438,7 +439,7 @@ void SocketUtils::Initialize(Bool16 lookupDNSName)
 			char* theAddrStr = ::inet_ntoa(sin.sin_addr);
  
 			//store the IP addr
-			sIPAddrInfoArray[currentIndex].fIPAddr = ntohl(sin.sin_addr.s_addr);
+			sIPAddrInfoArray[currentIndex].fIPAddr = bswap_32(sin.sin_addr.s_addr);
  	    
 			//store the IP addr as a string
 			sIPAddrInfoArray[currentIndex].fIPAddrStr.Len = ::strlen(theAddrStr);
@@ -483,7 +484,7 @@ void SocketUtils::Initialize(Bool16 lookupDNSName)
             char* theAddrStr = ::inet_ntoa(addrPtr->sin_addr);
 
             //store the IP addr
-            sIPAddrInfoArray[currentIndex].fIPAddr = ntohl(addrPtr->sin_addr.s_addr);
+            sIPAddrInfoArray[currentIndex].fIPAddr = bswap_32(addrPtr->sin_addr.s_addr);
             
             //store the IP addr as a string
             sIPAddrInfoArray[currentIndex].fIPAddrStr.Len = ::strlen(theAddrStr);
@@ -600,6 +601,6 @@ UInt32 SocketUtils::ConvertStringToAddr(const char* inAddrStr)
     if (inAddrStr == NULL)
         return 0;
         
-    return ntohl(::inet_addr(inAddrStr));
+    return bswap_32(::inet_addr(inAddrStr));
 }
 

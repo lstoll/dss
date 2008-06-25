@@ -28,6 +28,7 @@
     8.2.99 - rt updated ShowSettings() to display user names for fields instead of C++ member names.
 */
 
+#include <byteswap.h>
 #include "PLBroadcastDef.h"
 #include "MyAssert.h"
 #include "SocketUtils.h"
@@ -473,7 +474,7 @@ void PLBroadcastDef::ValidateSettings()
         struct hostent* theHostent = ::gethostbyname(mDestAddress);     
         if (theHostent != NULL)
         {
-            inAddr = ntohl(*(UInt32*)(theHostent->h_addr_list[0]));
+            inAddr = bswap_32(*(UInt32*)(theHostent->h_addr_list[0]));
             
             struct in_addr inAddrStruct;
             char buffer[50];

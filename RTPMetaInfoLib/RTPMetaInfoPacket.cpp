@@ -27,6 +27,7 @@
 //   Some defs for RTP-Meta-Info payloads.
 
 
+#include <byteswap.h>
 #include "RTPMetaInfoPacket.h"
 #include "MyAssert.h"
 #include "StringParser.h"
@@ -93,8 +94,8 @@ void RTPMetaInfoPacket::ConstructFieldIDArrayFromHeader(StrPtrLen* inHeader, Fie
         //
         // Extract the Field Name and convert it to a Field Index
         ::memcpy (&fieldNameValue, theFieldP.Ptr, sizeof(UInt16));
-        FieldIndex theIndex = RTPMetaInfoPacket::GetFieldIndexForName(ntohs(fieldNameValue));
-//      FieldIndex theIndex = RTPMetaInfoPacket::GetFieldIndexForName(ntohs(*(UInt16*)theFieldP.Ptr));
+        FieldIndex theIndex = RTPMetaInfoPacket::GetFieldIndexForName(bswap_16(fieldNameValue));
+//      FieldIndex theIndex = RTPMetaInfoPacket::GetFieldIndexForName(bswap_16(*(UInt16*)theFieldP.Ptr));
 
         //
         // Get the Field ID if there is one.
@@ -153,10 +154,10 @@ Bool16 RTPMetaInfoPacket::ParsePacket(UInt8* inPacketBuffer, UInt32 inPacketLen,
                 break;
 
             ::memcpy(&uInt16Val, theFieldP, sizeof(uInt16Val));
-            theFieldIndex = this->GetFieldIndexForName(ntohs(uInt16Val));
+            theFieldIndex = this->GetFieldIndexForName(bswap_16(uInt16Val));
             
             ::memcpy(&uInt16Val, theFieldP + 2, sizeof(uInt16Val));
-            theFieldLen = ntohs(uInt16Val);
+            theFieldLen = bswap_16(uInt16Val);
             theFieldP += 4;
         }
         
@@ -188,7 +189,7 @@ Bool16 RTPMetaInfoPacket::ParsePacket(UInt8* inPacketBuffer, UInt32 inPacketLen,
             }
             case kFrameTypeField:
             {
-                fFrameType = ntohs(*((FrameTypeField*)theFieldP));
+                fFrameType = bswap_16(*((FrameTypeField*)theFieldP));
                 break;
             }
             case kPacketNumField:
@@ -201,7 +202,7 @@ Bool16 RTPMetaInfoPacket::ParsePacket(UInt8* inPacketBuffer, UInt32 inPacketLen,
             {
                 
                 ::memcpy(&uInt16Val, theFieldP, sizeof(uInt16Val));
-                fSeqNum = ntohs(uInt16Val);
+                fSeqNum = bswap_16(uInt16Val);
                 break;
             }
             case kMediaDataField:

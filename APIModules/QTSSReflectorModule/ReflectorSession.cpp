@@ -32,6 +32,7 @@
 */
 
 
+#include <byteswap.h>
 #include "ReflectorSession.h"
 #include "RTCPPacket.h"
 #include "SocketUtils.h"
@@ -283,7 +284,7 @@ void    ReflectorSession::FormatHTML(StrPtrLen* inURL)
         char theIPAddrBuf[20];
         StrPtrLen theIPAddr(theIPAddrBuf, 20);
         struct in_addr theAddr;
-        theAddr.s_addr = htonl(fSourceInfo->GetStreamInfo(0)->fSrcIPAddr);
+        theAddr.s_addr = bswap_32(fSourceInfo->GetStreamInfo(0)->fSrcIPAddr);
         SocketUtils::ConvertAddrToString(theAddr, &theIPAddr);
         fFormatter.Put(theIPAddr);
     }

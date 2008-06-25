@@ -33,6 +33,7 @@
 //
 // Includes
 #ifndef __Win32__
+#include <byteswap.h>
 #include <netinet/in.h>
 #endif
 
@@ -62,7 +63,7 @@ public:
     inline  Bool16      TrackReferenceToTrackID(UInt32 TrackReference, UInt32 * TrackID = NULL) \
                             {   if(TrackReference < fNumEntries) { \
                                     if( TrackID != NULL ) \
-                                        *TrackID = ntohl(fTable[TrackReference]); \
+                                        *TrackID = bswap_32(fTable[TrackReference]); \
                                     return true; \
                                 } else \
                                     return false; \

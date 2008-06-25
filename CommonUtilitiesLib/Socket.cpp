@@ -31,6 +31,7 @@
     
 */
 
+#include <byteswap.h>
 #include <string.h>
 
 #ifndef __Win32__
@@ -186,8 +187,8 @@ OS_Error Socket::Bind(UInt32 addr, UInt16 port, UInt16 test)
     socklen_t len = sizeof(fLocalAddr);
     ::memset(&fLocalAddr, 0, sizeof(fLocalAddr));
     fLocalAddr.sin_family = AF_INET;
-    fLocalAddr.sin_port = htons(port);
-    fLocalAddr.sin_addr.s_addr = htonl(addr);
+    fLocalAddr.sin_port = bswap_16(port);
+    fLocalAddr.sin_addr.s_addr = bswap_32(addr);
     
     int err;
     
@@ -229,7 +230,7 @@ StrPtrLen*  Socket::GetLocalAddrStr()
     {
         for (UInt32 x = 0; x < SocketUtils::GetNumIPAddrs(); x++)
         {
-            if (SocketUtils::GetIPAddr(x) == ntohl(fLocalAddr.sin_addr.s_addr))
+            if (SocketUtils::GetIPAddr(x) == bswap_32(fLocalAddr.sin_addr.s_addr))
             {
                 fLocalAddrStrPtr = SocketUtils::GetIPAddrStr(x);
                 break;
@@ -244,7 +245,7 @@ StrPtrLen*  Socket::GetLocalAddrStr()
         fLocalAddrBuffer[0]=0;
         fLocalAddrStrPtr = &fLocalAddrStr;
         struct in_addr theAddr;
-        theAddr.s_addr =ntohl(fLocalAddr.sin_addr.s_addr);
+        theAddr.s_addr =bswap_32(fLocalAddr.sin_addr.s_addr);
         SocketUtils::ConvertAddrToString(theAddr, &fLocalAddrStr);
 
         printf("Socket::GetLocalAddrStr Search IPs failed, numIPs=%d\n",SocketUtils::GetNumIPAddrs());
@@ -270,7 +271,7 @@ StrPtrLen*  Socket::GetLocalDNSStr()
     {
         for (UInt32 x = 0; x < SocketUtils::GetNumIPAddrs(); x++)
         {
-            if (SocketUtils::GetIPAddr(x) == ntohl(fLocalAddr.sin_addr.s_addr))
+            if (SocketUtils::GetIPAddr(x) == bswap_32(fLocalAddr.sin_addr.s_addr))
             {
                 fLocalDNSStrPtr = SocketUtils::GetDNSNameStr(x);
                 break;
@@ -290,7 +291,7 @@ StrPtrLen*  Socket::GetLocalPortStr()
 {
     if (fPortStr.Len == kPortBufSizeInBytes)
     {
-        int temp = ntohs(fLocalAddr.sin_port);
+        int temp = bswap_16(fLocalAddr.sin_port);
         qtss_sprintf(fPortBuffer, "%d", temp);
         fPortStr.Len = ::strlen(fPortBuffer);
     }

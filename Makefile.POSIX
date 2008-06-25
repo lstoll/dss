@@ -151,6 +151,7 @@ install: DarwinStreamingServer
 
 clean:
 	rm -f $(CFILES:.c=.o) $(CPPFILES:.cpp=.o)
+	rm -f DarwinStreamingServer
 
 .SUFFIXES: .cpp .c .o
 

@@ -30,6 +30,7 @@
 #ifndef _RTPPACKET_H_
 #define _RTPPACKET_H_
 
+#include <byteswap.h>
 #include "arpa/inet.h"
 #include "OSHeaders.h"
 #include "StrPtrLen.h"
@@ -74,19 +75,19 @@ class RTPPacket
         :   fPacket(reinterpret_cast<RTPHeader *>(inPacket)), fLen(inLen)
         {}
 
-		UInt8		GetPayloadType() const									{ return ntohs(fPacket->rtpheader) & 0x007F; }
-		UInt8		GetCSRCCount() const									{ return (ntohs(fPacket->rtpheader) & 0x0F00 ) >> 8; }
+		UInt8		GetPayloadType() const									{ return bswap_16(fPacket->rtpheader) & 0x007F; }
+		UInt8		GetCSRCCount() const									{ return (bswap_16(fPacket->rtpheader) & 0x0F00 ) >> 8; }
 
         //The following get functions will convert from network byte order to host byte order.
         //Conversely the set functions will convert from host byte order to network byte order.
-        UInt16		GetSeqNum() const                                       { return ntohs(fPacket->seq); }
-        void		SetSeqNum(UInt16 seqNum)                                { fPacket->seq = htons(seqNum); }
+        UInt16		GetSeqNum() const                                       { return bswap_16(fPacket->seq); }
+        void		SetSeqNum(UInt16 seqNum)                                { fPacket->seq = bswap_16(seqNum); }
 
-        UInt32		GetTimeStamp() const                                    { return ntohl(fPacket->ts); }
-        void		SetTimeStamp(UInt32 timeStamp)                          { fPacket->ts = htonl(timeStamp); }
+        UInt32		GetTimeStamp() const                                    { return bswap_32(fPacket->ts); }
+        void		SetTimeStamp(UInt32 timeStamp)                          { fPacket->ts = bswap_32(timeStamp); }
 
-        UInt32		GetSSRC() const                                         { return ntohl(fPacket->ssrc); }
-        void		SetSSRC(UInt32 SSRC)                                    { fPacket->ssrc = htonl(SSRC); }
+        UInt32		GetSSRC() const                                         { return bswap_32(fPacket->ssrc); }
+        void		SetSSRC(UInt32 SSRC)                                    { fPacket->ssrc = bswap_32(SSRC); }
 		
 		//Includes the variable CSRC portion
 		UInt32		GetHeaderLen() const									{ return sizeof(RTPHeader) + GetCSRCCount() * 4; }
@@ -99,7 +100,7 @@ class RTPPacket
 			Assert(sizeof(RTPHeader) == 12);
             if (fLen < sizeof(RTPHeader))
                 return false; 
-            if ( ( ntohs(fPacket->rtpheader) >> 14)  != RTP_VERSION )
+            if ( ( bswap_16(fPacket->rtpheader) >> 14)  != RTP_VERSION )
                 return false;
 			if (GetHeaderLen() > fLen)
 				return false;

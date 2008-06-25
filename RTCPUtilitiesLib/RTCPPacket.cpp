@@ -30,6 +30,7 @@
 */
 
 
+#include <byteswap.h>
 #include "RTCPPacket.h"
 #include "RTCPAckPacket.h"
 #include "OS.h"
@@ -44,7 +45,7 @@ Bool16 RTCPPacket::ParsePacket(UInt8* inPacketBuffer, UInt32 inPacketLen)
         return false;
         
     fReceiverPacketBuffer = inPacketBuffer;
-    if (RTCP_PACKET_DEBUG) qtss_printf("RTCPPacket::ParsePacket first 4 bytes of packet=%x \n", ntohl( *(UInt32 *)inPacketBuffer));
+    if (RTCP_PACKET_DEBUG) qtss_printf("RTCPPacket::ParsePacket first 4 bytes of packet=%x \n", bswap_32( *(UInt32 *)inPacketBuffer));
     
     //the length of this packet can be no less than the advertised length (which is
     //in 32-bit words, so we must multiply) plus the size of the header (4 bytes)

@@ -32,6 +32,7 @@
 */
 
 #ifndef __Win32__
+#include <byteswap.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 
@@ -74,8 +75,8 @@ UDPSocket::SendTo(UInt32 inRemoteAddr, UInt16 inRemotePort, void* inBuffer, UInt
     
     struct sockaddr_in  theRemoteAddr;
     theRemoteAddr.sin_family = AF_INET;
-    theRemoteAddr.sin_port = htons(inRemotePort);
-    theRemoteAddr.sin_addr.s_addr = htonl(inRemoteAddr);
+    theRemoteAddr.sin_port = bswap_16(inRemotePort);
+    theRemoteAddr.sin_addr.s_addr = bswap_32(inRemoteAddr);
 
 #ifdef __sgi__
 	int theErr = ::sendto(fFileDesc, inBuffer, inLength, 0, (sockaddr*)&theRemoteAddr, sizeof(theRemoteAddr));
@@ -112,8 +113,8 @@ OS_Error UDPSocket::RecvFrom(UInt32* outRemoteAddr, UInt16* outRemotePort,
     if (theRecvLen == -1)
         return (OS_Error)OSThread::GetErrno();
     
-    *outRemoteAddr = ntohl(fMsgAddr.sin_addr.s_addr);
-    *outRemotePort = ntohs(fMsgAddr.sin_port);
+    *outRemoteAddr = bswap_32(fMsgAddr.sin_addr.s_addr);
+    *outRemotePort = bswap_16(fMsgAddr.sin_port);
     Assert(theRecvLen >= 0);
     *outRecvLen = (UInt32)theRecvLen;
     return OS_NoErr;        
@@ -125,10 +126,10 @@ OS_Error UDPSocket::JoinMulticast(UInt32 inRemoteAddr)
         UInt32 localAddr = fLocalAddr.sin_addr.s_addr; // Already in network byte order
 
 #if __solaris__
-    if( localAddr == htonl(INADDR_ANY) )
-         localAddr = htonl(SocketUtils::GetIPAddr(0));
+    if( localAddr == bswap_32(INADDR_ANY) )
+         localAddr = bswap_32(SocketUtils::GetIPAddr(0));
 #endif
-    theMulti.imr_multiaddr.s_addr = htonl(inRemoteAddr);
+    theMulti.imr_multiaddr.s_addr = bswap_32(inRemoteAddr);
     theMulti.imr_interface.s_addr = localAddr;
     int err = setsockopt(fFileDesc, IPPROTO_IP, IP_ADD_MEMBERSHIP, (char*)&theMulti, sizeof(theMulti));
     //AssertV(err == 0, OSThread::GetErrno());
@@ -166,8 +167,8 @@ OS_Error UDPSocket::SetMulticastInterface(UInt32 inLocalAddr)
 OS_Error UDPSocket::LeaveMulticast(UInt32 inRemoteAddr)
 {
     struct ip_mreq  theMulti;
-    theMulti.imr_multiaddr.s_addr = htonl(inRemoteAddr);
-    theMulti.imr_interface.s_addr = htonl(fLocalAddr.sin_addr.s_addr);
+    theMulti.imr_multiaddr.s_addr = bswap_32(inRemoteAddr);
+    theMulti.imr_interface.s_addr = bswap_32(fLocalAddr.sin_addr.s_addr);
     int err = setsockopt(fFileDesc, IPPROTO_IP, IP_DROP_MEMBERSHIP, (char*)&theMulti, sizeof(theMulti));
     if (err == -1)
         return (OS_Error)OSThread::GetErrno();

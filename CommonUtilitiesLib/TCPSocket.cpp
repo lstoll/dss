@@ -32,6 +32,7 @@
 */
 
 #ifndef __Win32__
+#include <byteswap.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
@@ -100,8 +101,8 @@ OS_Error  TCPSocket::Connect(UInt32 inRemoteAddr, UInt16 inRemotePort)
 {
     ::memset(&fRemoteAddr, 0, sizeof(fRemoteAddr));
     fRemoteAddr.sin_family = AF_INET;        /* host byte order */
-    fRemoteAddr.sin_port = htons(inRemotePort); /* short, network byte order */
-    fRemoteAddr.sin_addr.s_addr = htonl(inRemoteAddr);
+    fRemoteAddr.sin_port = bswap_16(inRemotePort); /* short, network byte order */
+    fRemoteAddr.sin_addr.s_addr = bswap_32(inRemoteAddr);
 
     /* don't forget to error check the connect()! */
     int err = ::connect(fFileDesc, (sockaddr *)&fRemoteAddr, sizeof(fRemoteAddr));

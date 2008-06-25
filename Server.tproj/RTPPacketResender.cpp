@@ -30,6 +30,7 @@
     
 */
 
+#include <byteswap.h>
 #include <stdio.h>
 
 #include "RTPPacketResender.h"
@@ -315,7 +316,7 @@ void RTPPacketResender::AddPacket( void * inRTPPacket, UInt32 packetSize, SInt32
     // we compute a re-transmit timeout based on the Karns RTT esmitate
     
     UInt16* theSeqNumP = (UInt16*)inRTPPacket;
-    UInt16 theSeqNum = ntohs(theSeqNumP[1]);
+    UInt16 theSeqNum = bswap_16(theSeqNumP[1]);
     
     if ( ageLimit > 0 )
     {   
@@ -348,7 +349,7 @@ void RTPPacketResender::AddPacket( void * inRTPPacket, UInt32 packetSize, SInt32
     else
     {
 #if RTP_PACKET_RESENDER_DEBUGGING   
-        this->logprintf( "packet too old to add: seq# %li, age limit %li, cur late %li, track id %li\n", (SInt32)ntohs( *((UInt16*)(((char*)inRTPPacket)+2)) ), (SInt32)ageLimit, fCurrentPacketDelay, fTrackID );
+        this->logprintf( "packet too old to add: seq# %li, age limit %li, cur late %li, track id %li\n", (SInt32)bswap_16( *((UInt16*)(((char*)inRTPPacket)+2)) ), (SInt32)ageLimit, fCurrentPacketDelay, fTrackID );
 #endif
         fNumExpired++;
     }
@@ -425,7 +426,7 @@ void RTPPacketResender::AckPacket( UInt16 inSeqNum, SInt64& inCurTimeInMsec )
         {
     #if RTP_PACKET_RESENDER_DEBUGGING
             this->logprintf( "re-tx'd packet acked.  ack num : %li, pack seq #: %li, num resends %li, track id %li, size %li, OS::MSecs %qd\n" \
-            , (SInt32)inSeqNum, (SInt32)ntohs( *((UInt16*)(((char*)theEntry->fPacketData)+2)) ), (SInt32)theEntry->fNumResends
+            , (SInt32)inSeqNum, (SInt32)bswap_16( *((UInt16*)(((char*)theEntry->fPacketData)+2)) ), (SInt32)theEntry->fNumResends
             , (SInt32)fTrackID, theEntry->fPacketSize, OS::Milliseconds() );
     #endif
         }
@@ -508,8 +509,8 @@ void RTPPacketResender::ResendDueEntries()
                 version &= 0x84;    // grab most sig 2 bits
                 version = version >> 6; // shift by 6 bits
                 this->logprintf( "expired:  seq number %li, track id %li (port: %li), vers # %li, pack seq # %li, size: %li, OS::Msecs: %qd\n", \
-                                    (SInt32)ntohs( *((UInt16*)(((char*)theEntry->fPacketData)+2)) ), fTrackID,  (SInt32) ntohs(fDestPort), \
-                                    (SInt32)version, (SInt32)ntohs( *((UInt16*)(((char*)theEntry->fPacketData)+2))), theEntry->fPacketSize, OS::Milliseconds() );
+                                    (SInt32)bswap_16( *((UInt16*)(((char*)theEntry->fPacketData)+2)) ), fTrackID,  (SInt32) bswap_16(fDestPort), \
+                                    (SInt32)version, (SInt32)bswap_16( *((UInt16*)(((char*)theEntry->fPacketData)+2))), theEntry->fPacketSize, OS::Milliseconds() );
     #endif
                 //
                 // This packet is expired
@@ -527,8 +528,8 @@ void RTPPacketResender::ResendDueEntries()
 
             theEntry->fNumResends++;
     #if RTP_PACKET_RESENDER_DEBUGGING   
-            this->logprintf( "re-sent: %li RTO %li, track id %li (port %li), size: %li, OS::Ms %qd\n", (SInt32)ntohs( *((UInt16*)(((char*)theEntry->fPacketData)+2)) ),  curTime - theEntry->fAddedTime, \
-                    fTrackID, (SInt32) ntohs(fDestPort) \
+            this->logprintf( "re-sent: %li RTO %li, track id %li (port %li), size: %li, OS::Ms %qd\n", (SInt32)bswap_16( *((UInt16*)(((char*)theEntry->fPacketData)+2)) ),  curTime - theEntry->fAddedTime, \
+                    fTrackID, (SInt32) bswap_16(fDestPort) \
                     , theEntry->fPacketSize, OS::Milliseconds());
     #endif      
 

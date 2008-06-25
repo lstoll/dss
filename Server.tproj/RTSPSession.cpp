@@ -34,6 +34,7 @@
 #define __RTSP_AUTH_DEBUG__ 0
 #define debug_printf if (__RTSP_AUTH_DEBUG__) qtss_printf
 
+#include <byteswap.h>
 #include "RTSPSession.h"
 #include "RTSPRequest.h"
 #include "QTSServerInterface.h"
@@ -1556,7 +1557,7 @@ void RTSPSession::CheckAuthentication() {
                     QTSSDataConverter::ConvertCHexStringToBytes(tempString.Ptr,
                                                         &ncValue,
                                                         &bufSize);
-                    ncValue = ntohl(ncValue);
+                    ncValue = bswap_32(ncValue);
                                                         
                 }
                 // nonce count must not be repeated by the client

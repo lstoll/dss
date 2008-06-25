@@ -37,6 +37,7 @@
 #ifndef _REFLECTOR_STREAM_H_
 #define _REFLECTOR_STREAM_H_
 
+#include <byteswap.h>
 #include "QTSS.h"
 
 #include "IdleTask.h"
@@ -121,12 +122,12 @@ UInt32  ReflectorPacket::GetSSRC(Bool16 isRTCP)
                 
     UInt32* theSsrcPtr = (UInt32*)fPacketPtr.Ptr;
     if (isRTCP)// RTCP 
-        return ntohl(theSsrcPtr[1]); 
+        return bswap_32(theSsrcPtr[1]); 
             
     if (fPacketPtr.Len < 12)
         return 0;
     
-    return ntohl(theSsrcPtr[2]);  // RTP SSRC
+    return bswap_32(theSsrcPtr[2]);  // RTP SSRC
 }
 
 UInt32 ReflectorPacket::GetPacketRTPTime()
@@ -138,13 +139,13 @@ UInt32 ReflectorPacket::GetPacketRTPTime()
         //The RTP timestamp number is the second long of the packet
         if (fPacketPtr.Ptr == NULL || fPacketPtr.Len < 8)
             return 0;
-        timestamp = ntohl( ((UInt32*)fPacketPtr.Ptr)[1]);
+        timestamp = bswap_32( ((UInt32*)fPacketPtr.Ptr)[1]);
     }
     else
     {
         if (fPacketPtr.Ptr == NULL || fPacketPtr.Len < 20)
             return 0;
-        timestamp = ntohl( ((UInt32*)fPacketPtr.Ptr)[4]);
+        timestamp = bswap_32( ((UInt32*)fPacketPtr.Ptr)[4]);
     }
     return timestamp;
 }
@@ -156,7 +157,7 @@ UInt16 ReflectorPacket::GetPacketRTPSeqNum()
    if (fPacketPtr.Ptr == NULL || fPacketPtr.Len < 4 || fIsRTCP)
         return 0;
      
-    UInt16 sequence = ntohs( ((UInt16*)fPacketPtr.Ptr)[1]); //The RTP sequenc number is the second short of the packet
+    UInt16 sequence = bswap_16( ((UInt16*)fPacketPtr.Ptr)[1]); //The RTP sequenc number is the second short of the packet
     return sequence;
 }
 

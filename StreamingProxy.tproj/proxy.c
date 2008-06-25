@@ -29,6 +29,7 @@
  *
  */
 
+#include <byteswap.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -56,6 +57,7 @@
 #include "./proxy_plat.h"
 #include "util.h"
 #include "proxy.h"
+#include "OSHeaders.h"
 
 #include <unistd.h>
 
@@ -862,7 +864,7 @@ static int is_command(char *inp, char *cmd, int cmdLen, char *server, int server
     }
     *cmd = '\0';
     if (gVerbose)
-        printf("%x\ncommand str=%s\ncommand count with term=%d\n",*cmd, firstCmdChar, (cmd - firstCmdChar) + 1);
+        printf("%x\ncommand str=%s\ncommand count with term=%"_SPOINTERSIZEARG_"\n",*cmd, firstCmdChar, (cmd - firstCmdChar) + 1);
      
     if (strn_casecmp(p, " rtsp://", 8) != 0)
         return 0;
@@ -877,7 +879,7 @@ static int is_command(char *inp, char *cmd, int cmdLen, char *server, int server
     }
     *server = '\0';
      if (gVerbose)
-        printf("%x\nserver str=%s\nserver count with term=%d\n",*server, firstServerChar, (server - firstServerChar) + 1);
+        printf("%x\nserver str=%s\nserver count with term=%"_SPOINTERSIZEARG_"\n",*server, firstServerChar, (server - firstServerChar) + 1);
 
     return 1;
 }
@@ -1821,7 +1823,7 @@ void read_config() {
                 temp[num] = '\0';
                 range = atoi(line + pmatch[2].rm_so);
                 //name_to_ip_num(temp, &ip, false);
-                ip = ntohl(inet_addr(temp));
+                ip = bswap_32(inet_addr(temp));
                 if (gVerbose)
                     printf("Allow connections from %s/%d\n", ip_to_string(ip), range);
                 add_allow_subnet(ip, range);
@@ -1836,7 +1838,7 @@ void read_config() {
                 int port = atoi(line + pmatch[2].rm_so);
 
                     if(pmatch[1].rm_so==-1)
-                  bindaddr.s_addr= (in_addr_t) htonl(ANY_ADDRESS);
+                  bindaddr.s_addr= (in_addr_t) bswap_32(ANY_ADDRESS);
                 else
                   {
                     *(line+pmatch[1].rm_eo)='\0';
@@ -1849,7 +1851,7 @@ void read_config() {
                             printf("listen: failed to parse IP address %s\n",line+pmatch[1].rm_so);
               }
 
-                add_rtsp_port_listener( (int) ntohl(bindaddr.s_addr),port);
+                add_rtsp_port_listener( (int) bswap_32(bindaddr.s_addr),port);
             }
             else if (regexec(&regexpPortRange, line, 3, pmatch, 0) == 0) {
                 int minPort, maxPort;

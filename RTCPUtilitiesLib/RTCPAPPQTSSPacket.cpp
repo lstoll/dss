@@ -31,6 +31,7 @@
 */
 
 
+#include <byteswap.h>
 #include "RTCPAPPQTSSPacket.h"
 #include "MyAssert.h"
 #include "OS.h"
@@ -120,7 +121,7 @@ Bool16 RTCPCompressedQTSSPacket::ParseAPPData(UInt8* inPacketBuffer, UInt32 inPa
         // DMS - There is no guarentee that qtssDataBuffer will be 4 byte aligned, because
         // individual APP packet fields can be 6 bytes or 4 bytes or 8 bytes. So we have to
         // use the 4-byte align protection functions. Sparc and MIPS processors will crash otherwise
-        UInt32 theHeader = ntohl(OS::GetUInt32FromMemory((UInt32*)&qtssDataBuffer[kQTSSItemTypeOffset]));
+        UInt32 theHeader = bswap_32(OS::GetUInt32FromMemory((UInt32*)&qtssDataBuffer[kQTSSItemTypeOffset]));
         UInt16 itemType = (UInt16)((theHeader & kQTSSItemTypeMask) >> kQTSSItemTypeShift);
         UInt8 itemVersion = (UInt8)((theHeader & kQTSSItemVersionMask) >> kQTSSItemVersionShift);
         UInt8 itemLengthInBytes = (UInt8)(theHeader & kQTSSItemLengthMask);
@@ -144,7 +145,7 @@ Bool16 RTCPCompressedQTSSPacket::ParseAPPData(UInt8* inPacketBuffer, UInt32 inPa
         {
             case  TW0_CHARS_TO_INT( 'r', 'r' ): //'rr': //'rrcv':
             {
-                fReceiverBitRate = ntohl(OS::GetUInt32FromMemory((UInt32*)qtssDataBuffer));
+                fReceiverBitRate = bswap_32(OS::GetUInt32FromMemory((UInt32*)qtssDataBuffer));
                 qtssDataBuffer += sizeof(fReceiverBitRate);
                 APPEND_TO_DUMP_ARRAY(", rcvr_bit_rate=%"_U32BITARG_"", fReceiverBitRate);
             }
@@ -152,7 +153,7 @@ Bool16 RTCPCompressedQTSSPacket::ParseAPPData(UInt8* inPacketBuffer, UInt32 inPa
             
             case TW0_CHARS_TO_INT('l', 't'): //'lt':    //'late':
             {
-                fAverageLateMilliseconds = ntohs(*(UInt16*)qtssDataBuffer);
+                fAverageLateMilliseconds = bswap_16(*(UInt16*)qtssDataBuffer);
                 qtssDataBuffer += sizeof(fAverageLateMilliseconds);
                 APPEND_TO_DUMP_ARRAY(", avg_late=%u", fAverageLateMilliseconds);
             }
@@ -160,7 +161,7 @@ Bool16 RTCPCompressedQTSSPacket::ParseAPPData(UInt8* inPacketBuffer, UInt32 inPa
             
             case TW0_CHARS_TO_INT('l', 's'): // 'ls':   //'loss':
             {
-                fPercentPacketsLost = ntohs(*(UInt16*)qtssDataBuffer);
+                fPercentPacketsLost = bswap_16(*(UInt16*)qtssDataBuffer);
                 qtssDataBuffer += sizeof(fPercentPacketsLost);
                 APPEND_TO_DUMP_ARRAY(", percent_loss=%u", fPercentPacketsLost);
             }
@@ -168,7 +169,7 @@ Bool16 RTCPCompressedQTSSPacket::ParseAPPData(UInt8* inPacketBuffer, UInt32 inPa
             
             case TW0_CHARS_TO_INT('d', 'l'): //'dl':    //'bdly':
             {
-                fAverageBufferDelayMilliseconds = ntohs(*(UInt16*)qtssDataBuffer);
+                fAverageBufferDelayMilliseconds = bswap_16(*(UInt16*)qtssDataBuffer);
                 qtssDataBuffer += sizeof(fAverageBufferDelayMilliseconds);
                 APPEND_TO_DUMP_ARRAY(", avg_buf_delay=%u", fAverageBufferDelayMilliseconds);
             }
@@ -196,19 +197,19 @@ Bool16 RTCPCompressedQTSSPacket::ParseAPPData(UInt8* inPacketBuffer, UInt32 inPa
                         
             case TW0_CHARS_TO_INT('e', 'y' ): //'ey':   //'eyes':
             {
-                fNumEyes = ntohl(OS::GetUInt32FromMemory((UInt32*)qtssDataBuffer));
+                fNumEyes = bswap_32(OS::GetUInt32FromMemory((UInt32*)qtssDataBuffer));
                 qtssDataBuffer += sizeof(fNumEyes);             
                 APPEND_TO_DUMP_ARRAY(", eyes=%"_U32BITARG_"", fNumEyes);
 
                 if (itemLengthInBytes >= 2)
                 {
-                    fNumEyesActive = ntohl(OS::GetUInt32FromMemory((UInt32*)qtssDataBuffer));
+                    fNumEyesActive = bswap_32(OS::GetUInt32FromMemory((UInt32*)qtssDataBuffer));
                     qtssDataBuffer += sizeof(fNumEyesActive);
                     APPEND_TO_DUMP_ARRAY(", eyes_actv=%"_U32BITARG_"", fNumEyesActive);
                 }
                 if (itemLengthInBytes >= 3)
                 {
-                    fNumEyesPaused = ntohl(OS::GetUInt32FromMemory((UInt32*)qtssDataBuffer));
+                    fNumEyesPaused = bswap_32(OS::GetUInt32FromMemory((UInt32*)qtssDataBuffer));
                     qtssDataBuffer += sizeof(fNumEyesPaused);
                     APPEND_TO_DUMP_ARRAY(", eyes_pausd=%"_U32BITARG_"", fNumEyesPaused);
                 }
@@ -217,7 +218,7 @@ Bool16 RTCPCompressedQTSSPacket::ParseAPPData(UInt8* inPacketBuffer, UInt32 inPa
             
             case TW0_CHARS_TO_INT('p', 'r' ): // 'pr':  //'prcv':
             {
-                fTotalPacketsReceived = ntohl(OS::GetUInt32FromMemory((UInt32*)qtssDataBuffer));
+                fTotalPacketsReceived = bswap_32(OS::GetUInt32FromMemory((UInt32*)qtssDataBuffer));
                 qtssDataBuffer += sizeof(fTotalPacketsReceived);
                 APPEND_TO_DUMP_ARRAY(", pckts_rcvd=%"_U32BITARG_"", fTotalPacketsReceived);
             }
@@ -225,7 +226,7 @@ Bool16 RTCPCompressedQTSSPacket::ParseAPPData(UInt8* inPacketBuffer, UInt32 inPa
             
             case TW0_CHARS_TO_INT('p', 'd'): //'pd':    //'pdrp':
             {
-                fTotalPacketsDropped = ntohs(*(UInt16*)qtssDataBuffer);
+                fTotalPacketsDropped = bswap_16(*(UInt16*)qtssDataBuffer);
                 qtssDataBuffer += sizeof(fTotalPacketsDropped);
                 APPEND_TO_DUMP_ARRAY(", pckts_drppd=%u", fTotalPacketsDropped);
             }
@@ -233,7 +234,7 @@ Bool16 RTCPCompressedQTSSPacket::ParseAPPData(UInt8* inPacketBuffer, UInt32 inPa
             
             case TW0_CHARS_TO_INT('p', 'l'): //'pl':    //'p???':
             {
-                fTotalPacketsLost = ntohs(*(UInt16*)qtssDataBuffer);
+                fTotalPacketsLost = bswap_16(*(UInt16*)qtssDataBuffer);
                 qtssDataBuffer += sizeof(fTotalPacketsLost);
                 APPEND_TO_DUMP_ARRAY(", ttl_pckts_lost=%u", fTotalPacketsLost);
             }
@@ -242,7 +243,7 @@ Bool16 RTCPCompressedQTSSPacket::ParseAPPData(UInt8* inPacketBuffer, UInt32 inPa
             
             case TW0_CHARS_TO_INT('b', 'l'): //'bl':    //'bufl':
             {
-                fClientBufferFill = ntohs(*(UInt16*)qtssDataBuffer);
+                fClientBufferFill = bswap_16(*(UInt16*)qtssDataBuffer);
                 qtssDataBuffer += sizeof(fClientBufferFill);
                 APPEND_TO_DUMP_ARRAY(", buffr_fill=%u", fClientBufferFill);
             }
@@ -251,7 +252,7 @@ Bool16 RTCPCompressedQTSSPacket::ParseAPPData(UInt8* inPacketBuffer, UInt32 inPa
             
             case TW0_CHARS_TO_INT('f', 'r'): //'fr':    //'frat':
             {
-                fFrameRate = ntohs(*(UInt16*)qtssDataBuffer);
+                fFrameRate = bswap_16(*(UInt16*)qtssDataBuffer);
                 qtssDataBuffer += sizeof(fFrameRate);
                 APPEND_TO_DUMP_ARRAY(", frame_rate=%u", fFrameRate);
             }
@@ -260,7 +261,7 @@ Bool16 RTCPCompressedQTSSPacket::ParseAPPData(UInt8* inPacketBuffer, UInt32 inPa
             
             case TW0_CHARS_TO_INT('x', 'r'): //'xr':    //'xrat':
             {
-                fExpectedFrameRate = ntohs(*(UInt16*)qtssDataBuffer);
+                fExpectedFrameRate = bswap_16(*(UInt16*)qtssDataBuffer);
                 qtssDataBuffer += sizeof(fExpectedFrameRate);
                 APPEND_TO_DUMP_ARRAY(", xpectd_frame_rate=%u", fExpectedFrameRate);
             }
@@ -269,7 +270,7 @@ Bool16 RTCPCompressedQTSSPacket::ParseAPPData(UInt8* inPacketBuffer, UInt32 inPa
             
             case TW0_CHARS_TO_INT('d', '#'): //'d#':    //'dry#':
             {
-                fAudioDryCount = ntohs(*(UInt16*)qtssDataBuffer);
+                fAudioDryCount = bswap_16(*(UInt16*)qtssDataBuffer);
                 qtssDataBuffer += sizeof(fAudioDryCount);
                 APPEND_TO_DUMP_ARRAY(", aud_dry_count=%u", fAudioDryCount);
             }
@@ -277,7 +278,7 @@ Bool16 RTCPCompressedQTSSPacket::ParseAPPData(UInt8* inPacketBuffer, UInt32 inPa
             
             case TW0_CHARS_TO_INT('o', 'b'): //'ob': // overbuffer window size
             {
-                fOverbufferWindowSize = ntohl(OS::GetUInt32FromMemory((UInt32*)qtssDataBuffer));
+                fOverbufferWindowSize = bswap_32(OS::GetUInt32FromMemory((UInt32*)qtssDataBuffer));
                 qtssDataBuffer += sizeof(fOverbufferWindowSize);
                 APPEND_TO_DUMP_ARRAY(", ovr_buffr_windw_siz=%"_U32BITARG_"", fOverbufferWindowSize);
             }

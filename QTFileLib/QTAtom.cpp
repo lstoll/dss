@@ -30,6 +30,7 @@
 // -------------------------------------
 // Includes
 //
+#include <byteswap.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "SafeStdLib.h"
@@ -126,7 +127,7 @@ Bool16 QTAtom::ReadInt16(UInt64 Offset, UInt16 * Datum)
     if( !ReadBytes(Offset, (char *)&tempDatum, 2) )
         return false;
     
-    *Datum = ntohs(tempDatum);
+    *Datum = bswap_16(tempDatum);
     return true;
 }
 
@@ -141,7 +142,7 @@ Bool16 QTAtom::ReadInt32(UInt64 Offset, UInt32 * Datum)
     if( !ReadBytes(Offset, (char *)&tempDatum, 4) )
         return false;
     
-    *Datum = ntohl(tempDatum);
+    *Datum = bswap_32(tempDatum);
     return true;
 }
 
@@ -156,7 +157,7 @@ Bool16 QTAtom::ReadInt32To64(UInt64 Offset, UInt64 * Datum)
     if( !ReadBytes(Offset, (char *)&tempDatum, 4) )
         return false;
     
-    tempDatum =  ntohl(tempDatum);
+    tempDatum =  bswap_32(tempDatum);
     *Datum = (UInt64) tempDatum;
     return true;
 }
@@ -171,7 +172,7 @@ Bool16 QTAtom::ReadInt32To64Signed(UInt64 Offset, SInt64 * Datum)
 	if( !ReadBytes(Offset, (char *)&tempDatum, 4) )
 		return false;
 	
-	tempDatum =  ntohl(tempDatum);
+	tempDatum =  bswap_32(tempDatum);
 	*Datum = (SInt64) (SInt32) tempDatum;
 	return true;
 }
@@ -233,7 +234,7 @@ Bool16 QTAtom::ReadSubAtomInt16(const char * AtomPath, UInt16 * Datum)
     if( !ReadSubAtomBytes(AtomPath, (char *)&tempDatum, 2) )
         return false;
     
-    *Datum = ntohs(tempDatum);
+    *Datum = bswap_16(tempDatum);
     return true;
 }
 
@@ -248,7 +249,7 @@ Bool16 QTAtom::ReadSubAtomInt32(const char * AtomPath, UInt32 * Datum)
     if( !ReadSubAtomBytes(AtomPath, (char *)&tempDatum, 4) )
         return false;
     
-    *Datum = ntohl(tempDatum);
+    *Datum = bswap_32(tempDatum);
     return true;
 }
 

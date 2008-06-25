@@ -32,6 +32,7 @@
 // Includes
 //
 
+#include <byteswap.h>
 #include <fcntl.h>
 
 #include <stdio.h>
@@ -656,7 +657,7 @@ Bool16 QTFile::GenerateAtomTOC(void)
         //
         // Swap the AtomLength for little-endian machines.
         CurPos += 4;
-        atomLength = ntohl(atomLength);
+        atomLength = bswap_32(atomLength);
         BigAtomLength = (UInt64) atomLength;
         hasBigAtom = false;
 
@@ -691,12 +692,12 @@ Bool16 QTFile::GenerateAtomTOC(void)
             if( !Read(CurPos, (char *)&atomLength, 4) )
                 return false;
             CurPos += 4;
-            BigAtomLength =  (UInt64) ntohl(atomLength);
+            BigAtomLength =  (UInt64) bswap_32(atomLength);
             
             if( !Read(CurPos, (char *)&AtomType, 4) )
                 return false;
             CurPos += 4;
-            AtomType = ntohl(AtomType);
+            AtomType = bswap_32(AtomType);
 
             //
             // Skip over the rest of the fields.
@@ -716,7 +717,7 @@ Bool16 QTFile::GenerateAtomTOC(void)
 
             CurPos += 4;
             CurAtomHeaderSize = 4 + 4; // AtomLength + AtomType
-            AtomType = ntohl(AtomType);
+            AtomType = bswap_32(AtomType);
 
             if ( atomLength == 1 ) //large size atom
             {
@@ -799,7 +800,7 @@ Bool16 QTFile::GenerateAtomTOC(void)
         NewTOCEntry->TOCID = fNextTOCID++;
 
         NewTOCEntry->AtomType = AtomType;
-        NewTOCEntry->beAtomType = htonl(AtomType);
+        NewTOCEntry->beAtomType = bswap_32(AtomType);
 
         NewTOCEntry->AtomDataPos = CurPos;
         NewTOCEntry->AtomDataLength = BigAtomLength - CurAtomHeaderSize;

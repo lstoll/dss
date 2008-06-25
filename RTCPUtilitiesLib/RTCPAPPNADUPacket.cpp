@@ -31,6 +31,7 @@
 */
 
 
+#include <byteswap.h>
 #include "RTCPAPPNADUPacket.h"
 #include "MyAssert.h"
 #include "OS.h"
@@ -131,46 +132,46 @@ lengths are 32 bit words, include header, are minus 1
     UInt32  *theWriterStart = (UInt32*)sRTCPTestBuffer;
     UInt32  *theWriter = (UInt32*)sRTCPTestBuffer;
 
-    *(theWriter++) = htonl(0x81c90007);     // 1 RR  packet header, full report
-    *(theWriter++) = htonl(0x2935F2D6);     // 1 Sender SSRC = 691401430
-    *(theWriter++) = htonl(0x6078CE22);     // 1 SSRC_1 = 1618529826
-    *(theWriter++) = htonl(0x01000001);     // fraction lost | cumulative num packets lost 1% , 1 packet
-    *(theWriter++) = htonl(0x0000361A);     // extended highest seq number received = 13850
-    *(theWriter++) = htonl(0x00C7ED4D);     // interarrival jitter = 13102413
-    *(theWriter++) = htonl(0x00000000);     // LSR last sender report = 0
-    *(theWriter++) = htonl(0x04625238);     // Delay since last SR (DLSR) = 73552440 (garbage)
+    *(theWriter++) = bswap_32(0x81c90007);     // 1 RR  packet header, full report
+    *(theWriter++) = bswap_32(0x2935F2D6);     // 1 Sender SSRC = 691401430
+    *(theWriter++) = bswap_32(0x6078CE22);     // 1 SSRC_1 = 1618529826
+    *(theWriter++) = bswap_32(0x01000001);     // fraction lost | cumulative num packets lost 1% , 1 packet
+    *(theWriter++) = bswap_32(0x0000361A);     // extended highest seq number received = 13850
+    *(theWriter++) = bswap_32(0x00C7ED4D);     // interarrival jitter = 13102413
+    *(theWriter++) = bswap_32(0x00000000);     // LSR last sender report = 0
+    *(theWriter++) = bswap_32(0x04625238);     // Delay since last SR (DLSR) = 73552440 (garbage)
     
-    *(theWriter++) = htonl(0x81ca0005);     // 1 SDES  packet header,
-    *(theWriter++) = htonl(0x2935F2D6);     // 1 Sender SSRC = 691401430
-    *(theWriter++) = htonl(0x010A5344);     // 1 CNAME = 01, len=10, "SD"
-    *(theWriter++) = htonl(0x45532043);     // 1 CNAME = "ES C"
-    *(theWriter++) = htonl(0x4e414d45);     // 1 CNAME = "NAME"
-    *(theWriter++) = htonl(0x00000000);     // NULL item = end of list + 32bit padding
+    *(theWriter++) = bswap_32(0x81ca0005);     // 1 SDES  packet header,
+    *(theWriter++) = bswap_32(0x2935F2D6);     // 1 Sender SSRC = 691401430
+    *(theWriter++) = bswap_32(0x010A5344);     // 1 CNAME = 01, len=10, "SD"
+    *(theWriter++) = bswap_32(0x45532043);     // 1 CNAME = "ES C"
+    *(theWriter++) = bswap_32(0x4e414d45);     // 1 CNAME = "NAME"
+    *(theWriter++) = bswap_32(0x00000000);     // NULL item = end of list + 32bit padding
     
     
      
-    *(theWriter++) = htonl(0x80CC0000);     // 1 APP packet header, needs len -> assigned beow
+    *(theWriter++) = bswap_32(0x80CC0000);     // 1 APP packet header, needs len -> assigned beow
     
     UInt32  *appPacketLenStart = theWriter;
     
-    *(theWriter++) = htonl(FOUR_CHARS_TO_INT('S', 'S', 'R', 'C')); //nadu ssrc
-    *(theWriter++) = htonl(FOUR_CHARS_TO_INT('P', 'S', 'S', '0')); //nadu app packet name
+    *(theWriter++) = bswap_32(FOUR_CHARS_TO_INT('S', 'S', 'R', 'C')); //nadu ssrc
+    *(theWriter++) = bswap_32(FOUR_CHARS_TO_INT('P', 'S', 'S', '0')); //nadu app packet name
     
     // first (typically only) ssrc block
-    *(theWriter++) = htonl(0x423A35C7); //ssrc = 1111111111
-    *(theWriter++) = htonl(0x2B6756CE); //delay | nsn = 11111 | 22222
-    *(theWriter++) = htonl(0xFFFFAD9C); //nun | fbs= 31 | 44444
+    *(theWriter++) = bswap_32(0x423A35C7); //ssrc = 1111111111
+    *(theWriter++) = bswap_32(0x2B6756CE); //delay | nsn = 11111 | 22222
+    *(theWriter++) = bswap_32(0xFFFFAD9C); //nun | fbs= 31 | 44444
     
     // optional 2nd or more ssrc blocks
-    *(theWriter++) = htonl(0x84746B8E); //ssrc = 222222222
-    *(theWriter++) = htonl(0x2B6756CE); //delay | nsn = 11111 | 22222
-    *(theWriter++) = htonl(0xFFFFAD9C); //nun | fbs= 31 | 44444
+    *(theWriter++) = bswap_32(0x84746B8E); //ssrc = 222222222
+    *(theWriter++) = bswap_32(0x2B6756CE); //delay | nsn = 11111 | 22222
+    *(theWriter++) = bswap_32(0xFFFFAD9C); //nun | fbs= 31 | 44444
 
     UInt16 *packetLenOffsetPtr = &( (UInt16*)theWriterStart)[29];
-    UInt16  packetLenInWords = htons( ((UInt32*)theWriter - (UInt32*)appPacketLenStart) ) ;
+    UInt16  packetLenInWords = bswap_16( ((UInt32*)theWriter - (UInt32*)appPacketLenStart) ) ;
     
     *packetLenOffsetPtr = packetLenInWords;
-    qtss_printf("packetLenInWords =%lu\n", ntohs(packetLenInWords));
+    qtss_printf("packetLenInWords =%lu\n", bswap_16(packetLenInWords));
     UInt32 len = (char*)theWriter - (char*)theWriterStart;
     if (resultPtr)
         resultPtr->Set(sRTCPTestBuffer, len);
@@ -181,36 +182,36 @@ lengths are 32 bit words, include header, are minus 1
     UInt32  *theWriterStart = (UInt32*)sRTCPTestBuffer;
     UInt32  *theWriter = (UInt32*)sRTCPTestBuffer;
 
-    *(theWriter++) = htonl(0x80c90007);     // 1 RR  packet header, empty len is ok but could be a full report
-    *(theWriter++) = htonl(0x2935F2D6);     // 1 SSRC = 691401430
-    *(theWriter++) = htonl(0x6078CE22);     // 1 SSRC_1 = 1618529826
-    *(theWriter++) = htonl(0x01000001);     // fraction lost | cumulative num packets lost 1% , 1 packet
-    *(theWriter++) = htonl(0x0000361A);     // extended highest seq number received = 13850
-    *(theWriter++) = htonl(0x00C7ED4D);     // interarrival jitter = 13102413
-    *(theWriter++) = htonl(0x00000000);     // LSR last sender report = 0
-    *(theWriter++) = htonl(0x04625238);     // Delay since last SR (DLSR) = 73552440 (garbage)
+    *(theWriter++) = bswap_32(0x80c90007);     // 1 RR  packet header, empty len is ok but could be a full report
+    *(theWriter++) = bswap_32(0x2935F2D6);     // 1 SSRC = 691401430
+    *(theWriter++) = bswap_32(0x6078CE22);     // 1 SSRC_1 = 1618529826
+    *(theWriter++) = bswap_32(0x01000001);     // fraction lost | cumulative num packets lost 1% , 1 packet
+    *(theWriter++) = bswap_32(0x0000361A);     // extended highest seq number received = 13850
+    *(theWriter++) = bswap_32(0x00C7ED4D);     // interarrival jitter = 13102413
+    *(theWriter++) = bswap_32(0x00000000);     // LSR last sender report = 0
+    *(theWriter++) = bswap_32(0x04625238);     // Delay since last SR (DLSR) = 73552440 (garbage)
     
     
      
-    *(theWriter++) = htonl(0x80CC0000);     // 1 APP packet header, needs len -> assigned beow
+    *(theWriter++) = bswap_32(0x80CC0000);     // 1 APP packet header, needs len -> assigned beow
     
     UInt32  *appPacketLenStart = theWriter;
     
-    *(theWriter++) = htonl(FOUR_CHARS_TO_INT('S', 'S', 'R', 'C')); //nadu ssrc
-    *(theWriter++) = htonl(FOUR_CHARS_TO_INT('P', 'S', 'S', '0')); //nadu app packet name
+    *(theWriter++) = bswap_32(FOUR_CHARS_TO_INT('S', 'S', 'R', 'C')); //nadu ssrc
+    *(theWriter++) = bswap_32(FOUR_CHARS_TO_INT('P', 'S', 'S', '0')); //nadu app packet name
     
     // first (typically only) ssrc block
-    *(theWriter++) = htonl(0x423A35C7); //ssrc = 1111111111
-    *(theWriter++) = htonl(0x2B6756CE); //delay | nsn = 11111 | 22222
-    *(theWriter++) = htonl(0xFFFFAD9C); //nun | fbs= 31 | 44444
+    *(theWriter++) = bswap_32(0x423A35C7); //ssrc = 1111111111
+    *(theWriter++) = bswap_32(0x2B6756CE); //delay | nsn = 11111 | 22222
+    *(theWriter++) = bswap_32(0xFFFFAD9C); //nun | fbs= 31 | 44444
     
     // optional 2nd or more ssrc blocks
-    *(theWriter++) = htonl(0x84746B8E); //ssrc = 222222222
-    *(theWriter++) = htonl(0x2B6756CE); //delay | nsn = 11111 | 22222
-    *(theWriter++) = htonl(0xFFFFAD9C); //nun | fbs= 31 | 44444
+    *(theWriter++) = bswap_32(0x84746B8E); //ssrc = 222222222
+    *(theWriter++) = bswap_32(0x2B6756CE); //delay | nsn = 11111 | 22222
+    *(theWriter++) = bswap_32(0xFFFFAD9C); //nun | fbs= 31 | 44444
 
     UInt16 *packetLenOffsetPtr = &( (UInt16*)theWriterStart)[17];
-    UInt16  packetLenInWords = htons( (UInt32*)theWriter - (UInt32*)appPacketLenStart) ;
+    UInt16  packetLenInWords = bswap_16( (UInt32*)theWriter - (UInt32*)appPacketLenStart) ;
     
     *packetLenOffsetPtr = packetLenInWords;
     
@@ -224,27 +225,27 @@ lengths are 32 bit words, include header, are minus 1
     UInt32  *theWriterStart = (UInt32*)sRTCPTestBuffer;
     UInt32  *theWriter = (UInt32*)sRTCPTestBuffer;
 
-    *(theWriter++) = htonl(0x80c90000);     // 1 RR  packet header, empty len is ok but could be a full report
+    *(theWriter++) = bswap_32(0x80c90000);     // 1 RR  packet header, empty len is ok but could be a full report
     
-    *(theWriter++) = htonl(0x80CC0000);     // 1 APP packet header, needs len -> assigned beow
+    *(theWriter++) = bswap_32(0x80CC0000);     // 1 APP packet header, needs len -> assigned beow
     
     UInt32  *appPacketLenStart = theWriter;
     
-    *(theWriter++) = htonl(FOUR_CHARS_TO_INT('S', 'S', 'R', 'C')); //nadu ssrc
-    *(theWriter++) = htonl(FOUR_CHARS_TO_INT('P', 'S', 'S', '0')); //nadu app packet name
+    *(theWriter++) = bswap_32(FOUR_CHARS_TO_INT('S', 'S', 'R', 'C')); //nadu ssrc
+    *(theWriter++) = bswap_32(FOUR_CHARS_TO_INT('P', 'S', 'S', '0')); //nadu app packet name
     
     // first (typically only) ssrc block
-    *(theWriter++) = htonl(0x423A35C7); //ssrc = 1111111111
-    *(theWriter++) = htonl(0x2B6756CE); //delay | nsn = 11111 | 22222
-    *(theWriter++) = htonl(0xFFFFAD9C); //nun | fbs= 31 | 44444
+    *(theWriter++) = bswap_32(0x423A35C7); //ssrc = 1111111111
+    *(theWriter++) = bswap_32(0x2B6756CE); //delay | nsn = 11111 | 22222
+    *(theWriter++) = bswap_32(0xFFFFAD9C); //nun | fbs= 31 | 44444
     
     // optional 2nd or more ssrc blocks
-    *(theWriter++) = htonl(0x84746B8E); //ssrc = 222222222
-    *(theWriter++) = htonl(0x2B6756CE); //delay | nsn = 11111 | 22222
-    *(theWriter++) = htonl(0xFFFFAD9C); //nun | fbs= 31 | 44444
+    *(theWriter++) = bswap_32(0x84746B8E); //ssrc = 222222222
+    *(theWriter++) = bswap_32(0x2B6756CE); //delay | nsn = 11111 | 22222
+    *(theWriter++) = bswap_32(0xFFFFAD9C); //nun | fbs= 31 | 44444
 
     UInt16 *packetLenOffsetPtr = &( (UInt16*)theWriterStart)[3];
-    UInt16  packetLenInWords = htons( (UInt32*)theWriter - (UInt32*)appPacketLenStart) ;
+    UInt16  packetLenInWords = bswap_16( (UInt32*)theWriter - (UInt32*)appPacketLenStart) ;
     
     *packetLenOffsetPtr = packetLenInWords;
     
@@ -375,7 +376,7 @@ SInt32 RTCPNaduPacket::GetSSRCBlockIndex(UInt32 inSSRC)
     for (; count < fNumBlocks ; count ++)
     {
         blockBuffer = fNaduDataBuffer + (count * 3);            
-        ssrc = (UInt32) ntohl(*(UInt32*)&blockBuffer[kOffsetNaduSSRC]);
+        ssrc = (UInt32) bswap_32(*(UInt32*)&blockBuffer[kOffsetNaduSSRC]);
         
         if (ssrc == inSSRC)
             return count;
@@ -398,7 +399,7 @@ UInt32 RTCPNaduPacket::GetSSRC(SInt32 index)
         return 0;
 
     UInt32 *blockBufferPtr = fNaduDataBuffer + (index * 3);
-    UInt32 ssrc = (UInt32) ntohl(*(UInt32*)&blockBufferPtr[kOffsetNaduSSRC]);
+    UInt32 ssrc = (UInt32) bswap_32(*(UInt32*)&blockBufferPtr[kOffsetNaduSSRC]);
 
     return ssrc;
 
@@ -416,7 +417,7 @@ UInt16 RTCPNaduPacket::GetPlayOutDelay(SInt32 index)
         return 0;
         
     UInt32 *blockBufferPtr = fNaduDataBuffer + (index * 3);
-    UInt16 delay = (UInt16) ( ( ntohl(*(UInt32*)&blockBufferPtr[kOffsetNaduPlayoutDelay])  & kPlayoutMask) >> 16);
+    UInt16 delay = (UInt16) ( ( bswap_32(*(UInt32*)&blockBufferPtr[kOffsetNaduPlayoutDelay])  & kPlayoutMask) >> 16);
 
     return delay;
 }
@@ -433,7 +434,7 @@ UInt16 RTCPNaduPacket::GetNSN(SInt32 index)
         return 0;
         
     UInt32 *blockBufferPtr = fNaduDataBuffer + (index * 3);
-    UInt16 nsn = (UInt16) ( ntohl(blockBufferPtr[kOffsetNSN]) & kNSNMask );
+    UInt16 nsn = (UInt16) ( bswap_32(blockBufferPtr[kOffsetNSN]) & kNSNMask );
 
     return nsn;
 }
@@ -450,7 +451,7 @@ UInt16 RTCPNaduPacket::GetNUN(SInt32 index)
         return 0;
         
     UInt32 *blockBufferPtr = fNaduDataBuffer + (index * 3);
-    UInt16 nun = (UInt16) ((ntohl(blockBufferPtr[kOffsetNUN]) & kNUNMask) >> 16);
+    UInt16 nun = (UInt16) ((bswap_32(blockBufferPtr[kOffsetNUN]) & kNUNMask) >> 16);
 
     return nun;
 }
@@ -467,7 +468,7 @@ UInt16 RTCPNaduPacket::GetFBS(SInt32 index)
         return 0;
         
     UInt32 *blockBufferPtr = fNaduDataBuffer + (index * 3);
-    UInt16 fbs = (UInt16) ntohl(blockBufferPtr[kOffsetFBS]) & kFBSMask;
+    UInt16 fbs = (UInt16) bswap_32(blockBufferPtr[kOffsetFBS]) & kFBSMask;
 
     return fbs;
 }

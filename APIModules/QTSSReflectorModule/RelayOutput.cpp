@@ -31,6 +31,7 @@
 
 */
 
+#include <byteswap.h>
 #include "RelayOutput.h"
 
 #include "OSMemory.h"
@@ -234,7 +235,7 @@ RelayOutput::RelayOutput(SourceInfo* inInfo, UInt32 inWhichOutput, RelaySession*
     char theIPAddrBuf[20];
     StrPtrLen theIPAddr(theIPAddrBuf, 20);
     struct in_addr theAddr;
-    theAddr.s_addr = htonl(fOutputInfo.fDestAddr);
+    theAddr.s_addr = bswap_32(fOutputInfo.fDestAddr);
     SocketUtils::ConvertAddrToString(theAddr, &theIPAddr);
 
     // Begin writing the HTML
@@ -538,14 +539,14 @@ void RelayOutput::SetupRelayOutputObject(RTSPOutputInfo* inRTSPInfo)
     StrPtrLen theIPAddr(theIPAddrBuf, 20);
     
     struct in_addr theDestAddr;     // output destination address
-    theDestAddr.s_addr = htonl(fOutputInfo.fDestAddr);
+    theDestAddr.s_addr = bswap_32(fOutputInfo.fDestAddr);
     SocketUtils::ConvertAddrToString(theDestAddr, &theIPAddr);  
     
     theErr = QTSS_SetValue (fRelayOutputObject, sOutputDestAddr, 0, (void*)theIPAddr.Ptr, theIPAddr.Len);
     Assert(theErr == QTSS_NoErr);
     
     struct in_addr theLocalAddr;        // output local address
-    theLocalAddr.s_addr = htonl(fOutputInfo.fLocalAddr);
+    theLocalAddr.s_addr = bswap_32(fOutputInfo.fLocalAddr);
     SocketUtils::ConvertAddrToString(theLocalAddr, &theIPAddr); 
     
     theErr = QTSS_SetValue (fRelayOutputObject, sOutputLocalAddr, 0, (void*)theIPAddr.Ptr, theIPAddr.Len);

@@ -15,6 +15,7 @@ CCFLAGS += -O3
 
 CCFLAGS += -I.
 CCFLAGS += -I..
+CCFLAGS += -I../CommonUtilitiesLib
 
 C++FLAGS = $(CCFLAGS)
 

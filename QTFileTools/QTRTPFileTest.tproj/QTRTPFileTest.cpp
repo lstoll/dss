@@ -23,6 +23,7 @@
  *
  */
 
+#include <byteswap.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "SafeStdLib.h"
@@ -203,7 +204,7 @@ int main(int argc, char *argv[]) {
                 break;
             }
 
-            RTPFile->SetTrackCookies(hinttracks[trackcount], (char *)hinttracks[trackcount], 0);
+            RTPFile->SetTrackCookies(hinttracks[trackcount], (char *)intptr_t(hinttracks[trackcount]), 0);
             (void)RTPFile->GetSeekTimestamp(hinttracks[trackcount]);
             trackcount --;
         }
@@ -228,7 +229,7 @@ int main(int argc, char *argv[]) {
             }
 
             RTPFile->FindTrackEntry(atoi(*argv), &trackListEntry);
-            RTPFile->SetTrackCookies(atoi(*argv), (char *)atoi(*argv), 0);
+            RTPFile->SetTrackCookies(atoi(*argv), (char *)intptr_t(atoi(*argv)), 0);
             (void)RTPFile->GetSeekTimestamp(atoi(*argv));
             argv++;
         }
@@ -293,9 +294,9 @@ int main(int argc, char *argv[]) {
         }
             
         memcpy(&RTPSequenceNumber, Packet + 2, 2);
-        RTPSequenceNumber = ntohs(RTPSequenceNumber);
+        RTPSequenceNumber = bswap_16(RTPSequenceNumber);
         memcpy(&RTPTimestamp, Packet + 4, 4);
-        RTPTimestamp = ntohl(RTPTimestamp);
+        RTPTimestamp = bswap_32(RTPTimestamp);
         
         if (!hintOnly)
             if (!silent)

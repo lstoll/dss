@@ -33,6 +33,7 @@
 
 //
 // Includes
+#include <byteswap.h>
 #include "QTFile.h"
 #include "QTAtom.h"
 
@@ -62,7 +63,7 @@ public:
                                     return true; \
                                 } else if(SampleNumber && (SampleNumber<=fNumEntries)) { \
                                     if( Size != NULL ) \
-                                        *Size = ntohl(fTable[SampleNumber-1]); \
+                                        *Size = bswap_32(fTable[SampleNumber-1]); \
                                     return true; \
                                 } else \
                                     return false; \

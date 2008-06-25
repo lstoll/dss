@@ -28,6 +28,7 @@
 	Contains:       Tool that simulates streaming movie load
 */
 
+#include <byteswap.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -135,7 +136,7 @@ int main(int argc, char *argv[])
 #ifndef __Win32__
 	struct sigaction act;
 	
-#if defined(sun) || defined(i386) || defined (__MacOSX__) || defined(__powerpc__) || defined (__osf__) || defined (__sgi_cc__) || defined (__hpux__)
+#if defined(sun) || defined(i386) || defined (__MacOSX__) || defined(__powerpc__) || defined (__osf__) || defined (__sgi_cc__) || defined (__hpux__) || defined (__linux__)
     sigemptyset(&act.sa_mask);
     act.sa_flags = 0;
     act.sa_handler = (void(*)(int))&sigcatcher;
@@ -913,7 +914,7 @@ void	CheckForStreamingLoadToolDotMov(SVector<UInt32> &ioIPAddrArray, SVector<cha
 		char theAddrBuf[50];
 		StrPtrLen theAddrBufPtr(theAddrBuf, 50);
 		struct in_addr theAddr;
-		theAddr.s_addr = htonl(ioIPAddrArray[count]);
+		theAddr.s_addr = bswap_32(ioIPAddrArray[count]);
 		
 		SocketUtils::ConvertAddrToString(theAddr, &theAddrBufPtr);
 
@@ -1015,7 +1016,7 @@ void	DoDNSLookup(SVector<char *> &theURLlist, SVector<UInt32> &ioIPAddrs)
 		struct hostent* theHostent = ::gethostbyname(theDNSName);
 		
 		if (theHostent != NULL)
-			ioIPAddrs[x] = ntohl(*(UInt32*)(theHostent->h_addr_list[0]));
+			ioIPAddrs[x] = bswap_32(*(UInt32*)(theHostent->h_addr_list[0]));
 		else
 			ioIPAddrs[x] = SocketUtils::ConvertStringToAddr(theDNSName);
 		
@@ -1117,7 +1118,7 @@ void RecordClientInfoBeforeDeath(ClientSession* inSession)
 	{
 		UInt32 theReason = inSession->GetReasonForDying();
 		in_addr theAddr;
-		theAddr.s_addr = htonl(inSession->GetSocket()->GetHostAddr());
+		theAddr.s_addr = bswap_32(inSession->GetSocket()->GetHostAddr());
 		char* theAddrStr = ::inet_ntoa(theAddr);
 		
 		//

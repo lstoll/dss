@@ -31,6 +31,7 @@
 // -------------------------------------
 // Includes
 //
+#include <byteswap.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "SafeStdLib.h"
@@ -148,7 +149,7 @@ Bool16 QTAtom_stss::Initialize(void)
             
             for ( sampleIndex = 0; sampleIndex < fNumEntries; sampleIndex++ )
             {
-                fTable[sampleIndex] = ntohl( fTable[sampleIndex] );
+                fTable[sampleIndex] = bswap_32( fTable[sampleIndex] );
             
             }
         

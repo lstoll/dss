@@ -23,6 +23,7 @@
  *
  */
 
+#include <byteswap.h>
 #include "MP3FileBroadcaster.h"
 #include <fcntl.h>
 //#include <unistd.h>
@@ -312,7 +313,7 @@ bool MP3FileBroadcaster::ReadV2_2Tags()
             break;
             
         // next three bytes are length, so go two bytes, copy 4 and mask off one
-        int fieldLen = ntohl(OS::GetUInt32FromMemory((UInt32*)(ptr+2))) & 0x00ffffff;
+        int fieldLen = bswap_32(OS::GetUInt32FromMemory((UInt32*)(ptr+2))) & 0x00ffffff;
         
         if (!strncmp(ptr, "TP1", 3))    // Artist
         {
@@ -404,7 +405,7 @@ bool MP3FileBroadcaster::ReadV2_3Tags()
         if (*ptr == 0)
             break;
             
-        int fieldLen = ntohl(OS::GetUInt32FromMemory((UInt32*)(ptr+4)));
+        int fieldLen = bswap_32(OS::GetUInt32FromMemory((UInt32*)(ptr+4)));
         
         // should check compression and encryption flags for these fields, but I
         // wouldn't really expect them to be set for title or artist

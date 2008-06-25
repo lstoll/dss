@@ -122,16 +122,16 @@
 #elif __linux__ || __linuxppc__ || __FreeBSD__
     /* Defines */
     #define _64BITARG_ "q"
-    #define _S64BITARG_ "lld"
-    #define _U64BITARG_ "llu"
+    #define _S32BITARG_ "d"
+    #define _U32BITARG_ "u"
 #if __LP64__
-	#define _S32BITARG_ "d"
-	#define _U32BITARG_ "u"
+	#define _S64BITARG_ "ld"
+	#define _U64BITARG_ "lu"
         #define _SPOINTERSIZEARG_ _S64BITARG_
         #define _UPOINTERSIZEARG_ _U64BITARG_
 #else
-	#define _S32BITARG_ "d"
-	#define _U32BITARG_ "u"
+	#define _S64BITARG_ "lld"
+	#define _U64BITARG_ "llu"
         #define _SPOINTERSIZEARG_ _S32BITARG_
         #define _UPOINTERSIZEARG_ _U32BITARG_
 #endif
@@ -181,14 +181,14 @@
         
     #define TW0_CHARS_TO_INT( c1, c2 )  ( c1 << 8 | c2 )
 
-    #define kSInt16_Max USHRT_MAX
-    #define kUInt16_Max USHRT_MAX
+    #define kSInt16_Max (SInt16) SHRT_MAX
+    #define kUInt16_Max (UInt16) USHRT_MAX
 
-    #define kSInt32_Max LONG_MAX
-    #define kUInt32_Max ULONG_MAX
+    #define kSInt32_Max (SInt32) LONG_MAX
+    #define kUInt32_Max (UInt32) ULONG_MAX
 
-    #define kSInt64_Max LONG_LONG_MAX
-    #define kUInt64_Max ULONG_LONG_MAX
+    #define kSInt64_Max (SInt64) LONG_LONG_MAX
+    #define kUInt64_Max (UInt64) ULONG_LONG_MAX
 
 #elif __Win32__
     

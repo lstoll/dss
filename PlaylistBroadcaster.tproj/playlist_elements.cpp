@@ -23,6 +23,7 @@
  *
  */
 
+#include <byteswap.h>
 #include "playlist_elements.h"
 #include "playlist_utils.h"
 #include "OS.h"
@@ -100,7 +101,7 @@ void MediaStream::TestAndIncSoundDescriptor(RTpPacket *packetPtr)
             fData.fSavedSoundDescSize = descSize;
             fData.fSavedDataRefIndex ++ ; // it is different than saved so change the index
         }
-        packetSDPtr->dataRefIndex = htons(fData.fSavedDataRefIndex);
+        packetSDPtr->dataRefIndex = bswap_16(fData.fSavedDataRefIndex);
          
     } while (false);
 }
@@ -168,10 +169,10 @@ void MediaStream::BuildStaticRTCpReport()
     
     //write the SR & SDES headers
     UInt32* theSRWriter = (UInt32*)&fData.fSenderReportBuffer;
-    *theSRWriter = htonl(0x80c80006);
+    *theSRWriter = bswap_32(0x80c80006);
     theSRWriter += 7;
     //SDES length is the length of the CName, plus 2 32bit words
-    *theSRWriter = htonl(0x81ca0000 + (cNameLen >> 2) + 1);
+    *theSRWriter = bswap_32(0x81ca0000 + (cNameLen >> 2) + 1);
     ::memcpy(&fData.fSenderReportBuffer[kSenderReportSizeInBytes], theTempCName, cNameLen);
     fData.fSenderReportSize = kSenderReportSizeInBytes + cNameLen;
 }
@@ -345,7 +346,7 @@ int MediaStream::UpdateSenderReport(SInt64 theTime)
         UInt32* theReport = (UInt32*) fData.fSenderReportBuffer;
         
         theReport++;
-        *theReport = htonl(fData.fSsrc);
+        *theReport = bswap_32(fData.fSsrc);
         
         theReport++;
         SInt64* theNTPTimestampP = (SInt64*)theReport;      
@@ -353,7 +354,7 @@ int MediaStream::UpdateSenderReport(SInt64 theTime)
                                 PlayListUtils::TimeMilli_To_Fixed64Secs(theTime - fData.fStreamStartTime));
                                 
         theReport += 2;
-        *theReport = htonl(fData.fTimeStamp);
+        *theReport = bswap_32(fData.fTimeStamp);
 
         Float64 curTimeInScale =   (Float64) (SInt64) PlayListUtils::Milliseconds() / (Float64)  PlayListUtils::eMilli; // convert to float seconds
         curTimeInScale = curTimeInScale  * (Float64)  fData.fMovieMediaTypePtr->fTimeScale; // curTime in media time scale
@@ -361,18 +362,18 @@ int MediaStream::UpdateSenderReport(SInt64 theTime)
         curTimeInScale = (UInt32) ( (UInt64) curTimeInScale & (UInt64) 0xFFFFFFFF ); 
 
         //qtss_printf("MediaStream::UpdateSenderReport RTCP timestamp = %"_U32BITARG_"\n",(UInt32) curTimeInScale);
-        *theReport = htonl((UInt32) curTimeInScale);
+        *theReport = bswap_32((UInt32) curTimeInScale);
         
         theReport++;        
         fData.fPacketCount = (UInt32) fData.fPacketsSent;
-        *theReport = htonl(fData.fPacketCount);
+        *theReport = bswap_32(fData.fPacketCount);
     
         theReport++;
         fData.fByteCount = (UInt32)  fData.fBytesSent; 
-        *theReport = htonl(fData.fByteCount);
+        *theReport = bswap_32(fData.fByteCount);
         
         theReport += 2;
-        *theReport = htonl(fData.fSsrc);
+        *theReport = bswap_32(fData.fSsrc);
         
         LogStr("Sender Report\n");
         LogUInt("NTP ",(UInt32) ((*theNTPTimestampP) >> 32)," ");
@@ -463,23 +464,23 @@ void UDPSocketPair::InitPorts(UInt32 addr)
 {
     ::memset(&fLocalAddrRTp, 0, sizeof(fLocalAddrRTp));
     fLocalAddrRTp.sin_family = PF_INET;
-    fLocalAddrRTp.sin_port = htons(0);
-    fLocalAddrRTp.sin_addr.s_addr = htonl(addr);
+    fLocalAddrRTp.sin_port = bswap_16(0);
+    fLocalAddrRTp.sin_addr.s_addr = bswap_32(addr);
 
     ::memset(&fLocalAddrRTCp, 0, sizeof(fLocalAddrRTCp));
     fLocalAddrRTCp.sin_family = PF_INET;
-    fLocalAddrRTCp.sin_port = htons(0);
-    fLocalAddrRTCp.sin_addr.s_addr = htonl(addr);
+    fLocalAddrRTCp.sin_port = bswap_16(0);
+    fLocalAddrRTCp.sin_addr.s_addr = bswap_32(addr);
 
     ::memset(&fDestAddrRTp, 0, sizeof(fDestAddrRTp));
     fDestAddrRTp.sin_family = PF_INET;
-    fDestAddrRTp.sin_port = htons(0);
-    fDestAddrRTp.sin_addr.s_addr = htonl(addr);
+    fDestAddrRTp.sin_port = bswap_16(0);
+    fDestAddrRTp.sin_addr.s_addr = bswap_32(addr);
 
     ::memset(&fDestAddrRTCp, 0, sizeof(fDestAddrRTCp));
     fDestAddrRTCp.sin_family = PF_INET;
-    fDestAddrRTCp.sin_port = htons(0);
-    fDestAddrRTCp.sin_addr.s_addr = htonl(addr);
+    fDestAddrRTCp.sin_port = bswap_16(0);
+    fDestAddrRTCp.sin_addr.s_addr = bswap_32(addr);
 }
 
 SInt16 UDPSocketPair::Bind(UInt32 addr)
@@ -502,8 +503,8 @@ SInt16 UDPSocketPair::Bind(UInt32 addr)
         PortRTCp = count;
         Assert( (PortRTCp & 1) == 1);// must be odd and one more than rtp port
         
-        fLocalAddrRTp.sin_port = htons( (UInt16) PortRTp);
-        fLocalAddrRTCp.sin_port = htons( (UInt16) PortRTCp);
+        fLocalAddrRTp.sin_port = bswap_16( (UInt16) PortRTp);
+        fLocalAddrRTCp.sin_port = bswap_16( (UInt16) PortRTCp);
             
         //qtss_printf("Attempting to bind to rtp port %d \n",PortRTp);
         
@@ -546,7 +547,7 @@ SInt16 UDPSocketPair::SendTo(int socket, sockaddr *destAddrPtr, char* inBuffer, 
         if (destAddrPtr == NULL) break;         
         if (socket == kInvalidSocket) break;
         
-        //qtss_printf("Sending data to %d. Addr = %d inLength = %d\n", ntohs(theAddr->sin_port), ntohl(theAddr->sin_addr.s_addr), inLength);
+        //qtss_printf("Sending data to %d. Addr = %d inLength = %d\n", bswap_16(theAddr->sin_port), bswap_32(theAddr->sin_addr.s_addr), inLength);
         ::sendto(socket, inBuffer, inLength, 0, destAddrPtr, sizeof(sockaddr));
         
         result = 0;
@@ -585,14 +586,14 @@ SInt16  UDPSocketPair::SetDestination (char *destAddress,UInt16 destPortRTp, UIn
     {   UInt32 netAddress = inet_addr(destAddress);
     
         fDestAddrRTp = fLocalAddrRTp; 
-        fDestAddrRTp.sin_port = htons(destPortRTp); 
+        fDestAddrRTp.sin_port = bswap_16(destPortRTp); 
         fDestAddrRTp.sin_addr.s_addr = netAddress;
         
         fDestAddrRTCp = fLocalAddrRTCp;
-        fDestAddrRTCp.sin_port = htons(destPortRTCp);       
+        fDestAddrRTCp.sin_port = bswap_16(destPortRTCp);       
         fDestAddrRTCp.sin_addr.s_addr =  netAddress;
         
-        fIsMultiCast = SocketUtils::IsMulticastIPAddr(ntohl(netAddress));
+        fIsMultiCast = SocketUtils::IsMulticastIPAddr(bswap_32(netAddress));
 
         result = 0;
     }
@@ -619,8 +620,8 @@ SInt16 UDPSocketPair::JoinMulticast()
     UInt32 localAddr = fLocalAddrRTp.sin_addr.s_addr; // Already in network byte order
 
 #if __solaris__
-    if( localAddr == htonl(INADDR_ANY) )
-         localAddr = htonl(SocketUtils::GetIPAddr(0));
+    if( localAddr == bswap_32(INADDR_ANY) )
+         localAddr = bswap_32(SocketUtils::GetIPAddr(0));
 #endif
 
     struct ip_mreq  theMulti;
@@ -656,8 +657,8 @@ SInt16 UDPSocketPair::LeaveMulticast()
    UInt32 localAddr = fLocalAddrRTp.sin_addr.s_addr; // Already in network byte order
 
 #if __solaris__
-    if( localAddr == htonl(INADDR_ANY) )
-         localAddr = htonl(SocketUtils::GetIPAddr(0));
+    if( localAddr == bswap_32(INADDR_ANY) )
+         localAddr = bswap_32(SocketUtils::GetIPAddr(0));
 #endif
 
     struct ip_mreq  theMulti;
@@ -771,7 +772,7 @@ SInt16 RTpPacket::GetSoundDescriptionRef(SoundDescription **soundDescriptionPtr)
         {
             char *offsetPtr = fThePacket + kRTpHeaderSize + sizeof(SoundHeader);
             *soundDescriptionPtr = (SoundDescription *) offsetPtr;
-            SInt32 descSize = ntohl( (**soundDescriptionPtr).descSize);
+            SInt32 descSize = bswap_32( (**soundDescriptionPtr).descSize);
             fSoundDescriptionLen = descSize;
             result = 0;
         }
@@ -828,9 +829,9 @@ SInt16 RTpPacket::GetHeaderInfo(UInt32 *timeStampPtr, UInt16 *sequencePtr,UInt32
     if (fThePacket && timeStampPtr && sequencePtr && SSRCPtr && payloadTypeAndMarkPtr)
     {
         *payloadTypeAndMarkPtr = header8Ptr[cPayloadType];
-        *sequencePtr = ntohs(header16Ptr[cSequenceNumber]);
-        *timeStampPtr = ntohl(header32Ptr[cTimeStamp]);
-        *SSRCPtr = ntohl(header32Ptr[cSSRC]);
+        *sequencePtr = bswap_16(header16Ptr[cSequenceNumber]);
+        *timeStampPtr = bswap_32(header32Ptr[cTimeStamp]);
+        *SSRCPtr = bswap_32(header32Ptr[cSSRC]);
         result = 0; 
     }
     
@@ -859,9 +860,9 @@ SInt16 RTpPacket::SetHeaderInfo(UInt32 timeStamp, UInt16 sequence, UInt32 SSRC, 
         LogUInt("ssrc = ", SSRC, "\n");
 
         header8Ptr[cPayloadType] = payloadTypeAndMark;
-        header16Ptr[cSequenceNumber] = htons(sequence);
-        header32Ptr[cTimeStamp] = htonl(timeStamp);     
-        header32Ptr[cSSRC] = htonl(SSRC);       
+        header16Ptr[cSequenceNumber] = bswap_16(sequence);
+        header32Ptr[cTimeStamp] = bswap_32(timeStamp);     
+        header32Ptr[cSSRC] = bswap_32(SSRC);       
         result = 0; 
 
         LogBuffer();

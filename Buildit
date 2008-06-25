@@ -65,14 +65,14 @@ echo "-----------------------"
 case $PLAT in
 
 	Linux.ppc)
-        echo "Configuring for the "$OSNAME" "$HARDWARENAME" platform"
+        	echo "Configuring for the "$OSNAME" "$HARDWARENAME" platform"
 		CPLUS=gcc
 		CCOMP=gcc
 		LINKER='gcc'
  		MAKE=make
  		
 		COMPILER_FLAGS="-D_REENTRANT -D__USE_POSIX -D__linuxppc__ -pipe"
-        INCLUDE_FLAG="-include"
+        	INCLUDE_FLAG="-include"
 		
 		CORE_LINK_LIBS="-lpthread -ldl -lstdc++ -lm -lcrypt"
 
@@ -83,8 +83,10 @@ case $PLAT in
 			NEED_SOCKETBITS=1
 			export NEED_SOCKETBITS
 		fi
-		;;		
-
+		;;	
+			
+	Linux.i386 | \
+	Linux.i486 | \
 	Linux.i586 | \
 	Linux.i686)
         echo "Configuring for the "$OSNAME" "$HARDWARENAME" platform"
@@ -106,16 +108,37 @@ case $PLAT in
 			export NEED_SOCKETBITS
 		fi
 		;;
+		
+	Linux.x86_64)
+		echo "Configuring for the "$OSNAME" "$HARDWARENAME" platform"
+		CPLUS=gcc
+		CCOMP=gcc
+		LINKER='gcc'
+		MAKE='make -j8'
+	 		
+		COMPILER_FLAGS="-D_REENTRANT -D__USE_POSIX -D__linux__ -pipe -fPIC"
+		INCLUDE_FLAG="-include"
+
+		CORE_LINK_LIBS="-lpthread -ldl -lstdc++ -lm -lcrypt"
+		
+		SHARED=-shared
+		MODULE_LIBS=
+		
+		if [ -f /usr/include/socketbits.h ]; then
+			NEED_SOCKETBITS=1
+			export NEED_SOCKETBITS
+		fi
+		;;
 
 	Linux.mips)
-        echo "Configuring for the "$OSNAME" "$HARDWARENAME" platform"
+	        echo "Configuring for the "$OSNAME" "$HARDWARENAME" platform"
 		CPLUS=gcc
 		CCOMP=gcc
 		LINKER='egcs'
  		MAKE=make
  		
 		COMPILER_FLAGS="-D_REENTRANT -D__linux__ -Wno-multichar -pipe"
-        INCLUDE_FLAG="-include"
+		INCLUDE_FLAG="-include"
 		
 		CORE_LINK_LIBS="-lpthread -ldl -lm -lcrypt"
 
@@ -129,14 +152,14 @@ case $PLAT in
 		;;
 
 	FreeBSD.i386)
-        echo "Configuring for the "$OSNAME" "$HARDWARENAME" platform"
+        	echo "Configuring for the "$OSNAME" "$HARDWARENAME" platform"
 		CPLUS=gcc
 		CCOMP=gcc
 		LINKER="gcc"
  		MAKE=make
  		
 		COMPILER_FLAGS=
-        INCLUDE_FLAG="-include"
+		INCLUDE_FLAG="-include"
 		
 		CORE_LINK_LIBS="-pthread -lm -lcrypt"
 
@@ -147,14 +170,14 @@ case $PLAT in
 #	SunOS.sun4m | \
 #	SunOS.sun4u)
 	SunOS.*)
-        echo "Configuring for the "$OSNAME" "$HARDWARENAME" platform"
+	        echo "Configuring for the "$OSNAME" "$HARDWARENAME" platform"
 		CPLUS=g++
 		CCOMP=gcc
 		LINKER="g++"
  		MAKE=make
  		
 		COMPILER_FLAGS="-D__solaris__ -D_REENTRANT -DFD_SETSIZE=65536 -L/usr/local/lib -R/usr/local/lib"
-        INCLUDE_FLAG="-include"
+		INCLUDE_FLAG="-include"
 
 		CORE_LINK_LIBS="-lpthread -ldl -lsocket -lnsl -lresolv -lm -lcrypt -lstdc++"
 
@@ -163,9 +186,9 @@ case $PLAT in
 		;;
 		
 	IRIX*.*)
-# IRIX with MipsPro compiler
-# Change all references of Makefile.POSIX below to Makefile.IRIX
-	echo "Configuring for the "$OSNAME" "$HARDWARENAME" SGI platform"
+		# IRIX with MipsPro compiler
+		# Change all references of Makefile.POSIX below to Makefile.IRIX
+		echo "Configuring for the "$OSNAME" "$HARDWARENAME" SGI platform"
 		CPLUS=CC
 		CCOMP=cc
 		LINKER="CC"
@@ -179,31 +202,31 @@ case $PLAT in
 		MODULE_LIBS=
 		;;
 		
-    HP-UX.*)
-        echo "Configuring for the "$OSNAME" "$HARDWARENAME" platform"
-        CPLUS=gcc
-        CCOMP=gcc
-        LINKER=gcc
-        MAKE=make
+    	HP-UX.*)
+        	echo "Configuring for the "$OSNAME" "$HARDWARENAME" platform"
+        	CPLUS=gcc
+        	CCOMP=gcc
+        	LINKER=gcc
+        	MAKE=make
  
-        COMPILER_FLAGS="-D__hpux__ -g -fPIC"
-        INCLUDE_FLAG="-include"
+	        COMPILER_FLAGS="-D__hpux__ -g -fPIC"
+        	INCLUDE_FLAG="-include"
  
-        CORE_LINK_LIBS="-lpthread -lnsl -lm -lcrypt -lstdc++"
+	        CORE_LINK_LIBS="-lpthread -lnsl -lm -lcrypt -lstdc++"
  
-        SHARED=-shared
-        MODULE_LIBS="-lgcc -lstdc++"
-        ;;
+        	SHARED=-shared
+	        MODULE_LIBS="-lgcc -lstdc++"
+        	;;
  
  	OSF1.alpha)
-         echo "Configuring for the "$OSNAME" "$HARDWARENAME" Tru64 UNIX platform"
+		echo "Configuring for the "$OSNAME" "$HARDWARENAME" Tru64 UNIX platform"
  		CPLUS=`pwd`/my_tru64_cxx
  		CCOMP=`pwd`/my_tru64_cc
 		LINKER="cxx"
 		MAKE=/usr/local/bin/make
 
  		COMPILER_FLAGS="-D__osf__ -DTRUCLUSTER -pthread"
-        INCLUDE_FLAG="-FI"
+		INCLUDE_FLAG="-FI"
 
 		CORE_LINK_LIBS="-lpthread -lclu -lm"
 
@@ -213,7 +236,7 @@ case $PLAT in
 
 	"Darwin.i386" | \
 	"Darwin.Power Macintosh")
-         echo "Configuring for "$OSNAME" on "$HARDWARENAME". This is an OS X build of the QuickTimeStreamingServer."
+        	echo "Configuring for "$OSNAME" on "$HARDWARENAME". This is an OS X build of the QuickTimeStreamingServer."
  	
  		;;
 
@@ -227,7 +250,7 @@ case $PLAT in
  		MAKE=make
  		
 		COMPILER_FLAGS=-D__linux__
-        INCLUDE_FLAG="-include"
+	        INCLUDE_FLAG="-include"
 
 		CORE_LINK_LIBS="-lpthread -ldl -lm -lcrypt"
 
@@ -338,7 +361,11 @@ else
 	echo Building StreamingServer for $PLAT with $CPLUS
 	cd ..
 	
-	$MAKE -f Makefile.POSIX $*
+	if [ "$*" = "clean" ] ; then
+		$MAKE -B -f Makefile.POSIX $*
+	else
+		$MAKE -f Makefile.POSIX $*
+	fi
 	
 	echo Building RefMovieModule for $PLAT with $CPLUS
 	cd APIModules/QTSSRefMovieModule/

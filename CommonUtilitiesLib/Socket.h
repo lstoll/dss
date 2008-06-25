@@ -37,6 +37,7 @@
 #define __SOCKET_H__
 
 #ifndef __Win32__
+#include <byteswap.h>
 #include <netinet/in.h>
 #endif
 
@@ -94,8 +95,8 @@ class Socket : public EventContext
         Bool16  IsBound()       { return (Bool16) (fState & kBound); }
         
         //If the socket is bound, you may find out to which addr it is bound
-        UInt32  GetLocalAddr()  { return ntohl(fLocalAddr.sin_addr.s_addr); }
-        UInt16  GetLocalPort()  { return ntohs(fLocalAddr.sin_port); }
+        UInt32  GetLocalAddr()  { return bswap_32(fLocalAddr.sin_addr.s_addr); }
+        UInt16  GetLocalPort()  { return bswap_16(fLocalAddr.sin_port); }
         
         StrPtrLen*  GetLocalAddrStr();
         StrPtrLen*  GetLocalPortStr();

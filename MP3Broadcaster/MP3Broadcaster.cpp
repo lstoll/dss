@@ -23,6 +23,7 @@
  *
  */
 
+#include <byteswap.h>
 #include "MP3Broadcaster.h"
 #include "MP3MetaInfoUpdater.h"
 #include "StringTranslator.h"
@@ -874,7 +875,7 @@ int MP3Broadcaster::ConnectToServer()
     {
         struct hostent* theHostent = ::gethostbyname(mIPAddr);      
         if (theHostent != NULL)
-            addr = ntohl(*(UInt32*)(theHostent->h_addr_list[0]));
+            addr = bswap_32(*(UInt32*)(theHostent->h_addr_list[0]));
         else
             qtss_printf("Couldn't resolve address %s\n", mIPAddr);
     }

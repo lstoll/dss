@@ -31,6 +31,7 @@
 // -------------------------------------
 // Includes
 //
+#include <byteswap.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "SafeStdLib.h"
@@ -195,9 +196,9 @@ Bool16 QTAtom_stts::MediaTimeToSampleNumber(UInt32 MediaTime, UInt32 * SampleNum
         //
         // Copy this sample count and duration.
         memcpy(&SampleCount, fTimeToSampleTable + (STCB->fMTtSN_CurEntry * 8), 4);
-        SampleCount = ntohl(SampleCount);
+        SampleCount = bswap_32(SampleCount);
         memcpy(&SampleDuration, fTimeToSampleTable + (STCB->fMTtSN_CurEntry * 8) + 4, 4);
-        SampleDuration = ntohl(SampleDuration);
+        SampleDuration = bswap_32(SampleDuration);
 
         //
         // Can we skip over this entry?
@@ -255,9 +256,9 @@ Bool16 QTAtom_stts::SampleNumberToMediaTime(UInt32 SampleNumber, UInt32 * MediaT
         //
         // Copy this sample count and duration.
         memcpy(&SampleCount, fTimeToSampleTable + (STCB->fSNtMT_CurEntry * 8), 4);
-        SampleCount = ntohl(SampleCount);
+        SampleCount = bswap_32(SampleCount);
         memcpy(&SampleDuration, fTimeToSampleTable + (STCB->fSNtMT_CurEntry * 8) + 4, 4);
-        SampleDuration = ntohl(SampleDuration);
+        SampleDuration = bswap_32(SampleDuration);
 
         //
         // Can we skip over this entry?
@@ -312,9 +313,9 @@ void QTAtom_stts::DumpTable(void)
         //
         // Copy this sample count and duration.
         memcpy(&SampleCount, fTimeToSampleTable + (CurEntry * 8), 4);
-        SampleCount = ntohl(SampleCount);
+        SampleCount = bswap_32(SampleCount);
         memcpy(&SampleDuration, fTimeToSampleTable + (CurEntry* 8) + 4, 4);
-        SampleDuration = ntohl(SampleDuration);
+        SampleDuration = bswap_32(SampleDuration);
 
         // Print out a listing.
         qtss_printf("  %10"_U32BITARG_" : %10"_U32BITARG_"  %10"_U32BITARG_"\n", CurEntry, SampleCount, SampleDuration);
@@ -454,9 +455,9 @@ Bool16 QTAtom_ctts::MediaTimeToSampleNumber(UInt32 MediaTime, UInt32 * SampleNum
         //
         // Copy this sample count and duration.
         memcpy(&SampleCount, fTimeToSampleTable + (STCB->fMTtSN_CurEntry * 8), 4);
-        SampleCount = ntohl(SampleCount);
+        SampleCount = bswap_32(SampleCount);
         memcpy(&SampleDuration, fTimeToSampleTable + (STCB->fMTtSN_CurEntry * 8) + 4, 4);
-        SampleDuration = ntohl(SampleDuration);
+        SampleDuration = bswap_32(SampleDuration);
 
         //
         // Can we skip over this entry?
@@ -514,9 +515,9 @@ Bool16 QTAtom_ctts::SampleNumberToMediaTimeOffset(UInt32 SampleNumber, UInt32 * 
         //
         // Copy this sample count and duration.
         memcpy(&SampleCount, fTimeToSampleTable + (STCB->fSNtMT_CurEntry * 8), 4);
-        SampleCount = ntohl(SampleCount);
+        SampleCount = bswap_32(SampleCount);
         memcpy(&SampleOffset, fTimeToSampleTable + (STCB->fSNtMT_CurEntry * 8) + 4, 4);
-        SampleOffset = ntohl(SampleOffset);
+        SampleOffset = bswap_32(SampleOffset);
 
         //
         // Can we skip over this entry?
@@ -571,9 +572,9 @@ void QTAtom_ctts::DumpTable(void)
         //
         // Copy this sample count and duration.
         memcpy(&SampleCount, fTimeToSampleTable + (CurEntry * 8), 4);
-        SampleCount = ntohl(SampleCount);
+        SampleCount = bswap_32(SampleCount);
         memcpy(&SampleOffset, fTimeToSampleTable + (CurEntry* 8) + 4, 4);
-        SampleOffset = ntohl(SampleOffset);
+        SampleOffset = bswap_32(SampleOffset);
 
         // Print out a listing.
         qtss_printf("  %10"_U32BITARG_" : %10"_U32BITARG_"  %10"_U32BITARG_"\n", CurEntry, SampleCount, SampleOffset);

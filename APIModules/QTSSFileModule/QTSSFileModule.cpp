@@ -31,6 +31,7 @@
 
 */
 
+#include <byteswap.h>
 #include <string.h>
 
 #include "QTSSFileModule.h"
@@ -190,7 +191,7 @@ QTSS_Error QTSSFileModule_Main(void* inPrivateArgs)
 
 inline UInt16 GetPacketSequenceNumber(void * packetDataPtr)
 {
-    return ntohs( ((UInt16*)packetDataPtr)[1]);
+    return bswap_16( ((UInt16*)packetDataPtr)[1]);
 }
 
 inline UInt16 GetLastPacketSeqNum(QTSS_Object stream)
@@ -218,18 +219,18 @@ inline SInt32 GetLastSentSeqNumber(QTSS_Object stream)
 
 inline void SetPacketSequenceNumber(UInt16 newSequenceNumber, void * packetDataPtr)
 {
-    ((UInt16*)packetDataPtr)[1] = htons(newSequenceNumber);
+    ((UInt16*)packetDataPtr)[1] = bswap_16(newSequenceNumber);
 }
 
 
 inline UInt32 GetPacketTimeStamp(void * packetDataPtr)
 {
-    return ntohl( ((UInt32*)packetDataPtr)[1]);
+    return bswap_32( ((UInt32*)packetDataPtr)[1]);
 }
 
 inline void SetPacketTimeStamp(UInt32 newTimeStamp, void * packetDataPtr)
 {
-    ((UInt32*)packetDataPtr)[1] = htonl(newTimeStamp);
+    ((UInt32*)packetDataPtr)[1] = bswap_32(newTimeStamp);
 }
 
 inline UInt32 CalculatePauseTimeStamp(UInt32 timescale, SInt64 totalPauseTime, UInt32 currentTimeStamp)

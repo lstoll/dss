@@ -31,6 +31,7 @@
     
 */
 
+#include <byteswap.h>
 #include <arpa/inet.h>
 //#include <stdlib.h>
 #include "ClientSession.h"
@@ -985,11 +986,11 @@ OS_Error ClientSession::SendRTCPPackets(UInt32 trackIndex)
 
     // RECEIVER REPORT
 	/*
-    *(theWriter++) = htonl(0x81c90007);     // 1 src RR packet
-    *(theWriter++) = htonl(0);
-    *(theWriter++) = htonl(0);
-    *(theWriter++) = htonl(0);
-    *(theWriter++) = htonl(trackStats.fHighestSeqNum == kUInt32_Max ? 0 : trackStats.fHighestSeqNum);				//EHSN
+    *(theWriter++) = bswap_32(0x81c90007);     // 1 src RR packet
+    *(theWriter++) = bswap_32(0);
+    *(theWriter++) = bswap_32(0);
+    *(theWriter++) = bswap_32(0);
+    *(theWriter++) = bswap_32(trackStats.fHighestSeqNum == kUInt32_Max ? 0 : trackStats.fHighestSeqNum);				//EHSN
     *(theWriter++) = 0;                         // don't do jitter yet.
     *(theWriter++) = 0;                         // don't do last SR timestamp
     *(theWriter++) = 0;                         // don't do delay since last SR
@@ -1000,19 +1001,19 @@ OS_Error ClientSession::SendRTCPPackets(UInt32 trackIndex)
 	if(fTransportType == kRTSPReliableUDPClientType)
 	{
 		// APP PACKET - QoS info
-		*(theWriter++) = htonl(0x80CC000C); 
-		//*(ia++) = htonl(trk[i].TrackSSRC);
-		*(theWriter++) = htonl(trackStats.fClientSSRC);
+		*(theWriter++) = bswap_32(0x80CC000C); 
+		//*(ia++) = bswap_32(trk[i].TrackSSRC);
+		*(theWriter++) = bswap_32(trackStats.fClientSSRC);
 	// this QTSS changes after beta to 'qtss'
-		*(theWriter++) = htonl(FOUR_CHARS_TO_INT('Q', 'T', 'S', 'S'));
+		*(theWriter++) = bswap_32(FOUR_CHARS_TO_INT('Q', 'T', 'S', 'S'));
 		//*(ia++) = toBigEndian_ulong(trk[i].rcvrSSRC);
-		*(theWriter++) = htonl(trackStats.fServerSSRC);
-		*(theWriter++) = htonl(8);          // number of 4-byte quants below
+		*(theWriter++) = bswap_32(trackStats.fServerSSRC);
+		*(theWriter++) = bswap_32(8);          // number of 4-byte quants below
 	#define RR 0x72720004
 	#define PR 0x70720004
 	#define PD 0x70640002
 	#define OB 0x6F620004
-		*(theWriter++) = htonl(RR);
+		*(theWriter++) = bswap_32(RR);
 		//unsigned int now, secs;
 		//now = microseconds();
 		//secs = now - trk[i].last_rtcp_packet_sent_us / USEC_PER_SEC;
@@ -1020,18 +1021,18 @@ OS_Error ClientSession::SendRTCPPackets(UInt32 trackIndex)
 		//  temp = trk[i].bytes_received_since_last_rtcp / secs;
 		//else
 		//  temp = 0;
-		//*(ia++) = htonl(temp);
-		*(theWriter++) = htonl(0);
-		*(theWriter++) = htonl(PR);
-		//*(ia++) = htonl(trk[i].rtp_num_received);
-		*(theWriter++) = htonl(0);
-		//*(theWriter++) = htonl(PL);
-		//*(ia++) = htonl(trk[i].rtp_num_lost);
-		//*(theWriter++) = htonl(0);
-		*(theWriter++) = htonl(OB);
-		*(theWriter++) = htonl(fOverbufferWindowSizeInK * 1024);
-		*(theWriter++) = htonl(PD);
-		*(theWriter++) = htonl(0);      // should be a short, but we need to pad to a long for the entire RTCP app packet
+		//*(ia++) = bswap_32(temp);
+		*(theWriter++) = bswap_32(0);
+		*(theWriter++) = bswap_32(PR);
+		//*(ia++) = bswap_32(trk[i].rtp_num_received);
+		*(theWriter++) = bswap_32(0);
+		//*(theWriter++) = bswap_32(PL);
+		//*(ia++) = bswap_32(trk[i].rtp_num_lost);
+		//*(theWriter++) = bswap_32(0);
+		*(theWriter++) = bswap_32(OB);
+		*(theWriter++) = bswap_32(fOverbufferWindowSizeInK * 1024);
+		*(theWriter++) = bswap_32(PD);
+		*(theWriter++) = bswap_32(0);      // should be a short, but we need to pad to a long for the entire RTCP app packet
 	}
 
 	char *buf = reinterpret_cast<char *>(theWriter);

@@ -29,6 +29,7 @@
 */
 
  
+#include <byteswap.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -113,7 +114,7 @@ again:
         *pb->result = -1;
         pthread_exit(NULL);
     } while(0);
-    id = ntohl(((struct in_addr *)(hent->h_addr_list[0]))->s_addr);
+    id = bswap_32(((struct in_addr *)(hent->h_addr_list[0]))->s_addr);
     *pb->result = id;
     free(pb);
     pthread_exit(NULL);
@@ -155,7 +156,7 @@ again:
 
     tryAgain ++;
     if ( inet_aton( name, &addr ) )
-    {   *ip = ntohl( addr.s_addr );
+    {   *ip = bswap_32( addr.s_addr );
         add_to_IP_cache(name, *ip ); 
         return 0;
     }
@@ -168,7 +169,7 @@ again:
         add_to_IP_cache(name, -1);
         return -1;
     }
-    *ip = ntohl(((struct in_addr *) (hent->h_addr_list[0]))->s_addr);
+    *ip = bswap_32(((struct in_addr *) (hent->h_addr_list[0]))->s_addr);
     add_to_IP_cache(name, *ip);
     return 0;
 }
@@ -188,8 +189,8 @@ int get_remote_address(int skt, int *port)
     if (status >= 0) 
         {
         if (port)
-            *port = ntohs(remAddr.sin_port);
-        return ntohl(remAddr.sin_addr.s_addr);
+            *port = bswap_16(remAddr.sin_port);
+        return bswap_32(remAddr.sin_addr.s_addr);
     }
     return -1;
 }
@@ -207,8 +208,8 @@ int get_local_address(int skt, int *port) {
     if (status >= 0) 
         {
         if (port)
-                    *port = ntohs(remAddr.sin_port);
-        return ntohl(remAddr.sin_addr.s_addr);
+                    *port = bswap_16(remAddr.sin_port);
+        return bswap_32(remAddr.sin_addr.s_addr);
     }
     return -1;
 }
@@ -243,7 +244,7 @@ again:
         }
         return -1;
     }
-    __local_ip_address = ntohl(((struct in_addr *)hent->h_addr)->s_addr);
+    __local_ip_address = bswap_32(((struct in_addr *)hent->h_addr)->s_addr);
     return __local_ip_address;
 }
 
@@ -397,8 +398,8 @@ int bind_socket_to_address(int skt, int address, int port, int is_listener)
         
     memset(&sin, 0, sizeof(sin));
     sin.sin_family = AF_INET;
-    sin.sin_port = htons(port);
-    sin.sin_addr.s_addr = htonl(address);
+    sin.sin_port = bswap_16(port);
+    sin.sin_addr.s_addr = bswap_32(address);
     return bind(skt, (struct sockaddr*)&sin, sizeof(sin));
 }
 
@@ -454,8 +455,8 @@ int connect_to_address(int skt, int address, int port)
     
     memset(&sin, 0, sizeof(sin));
     sin.sin_family = AF_INET;
-    sin.sin_port = htons(port);
-    sin.sin_addr.s_addr = htonl(address);;
+    sin.sin_port = bswap_16(port);
+    sin.sin_addr.s_addr = bswap_32(address);;
     return connect(skt, (struct sockaddr*)&sin, sizeof(sin));
 }
 
@@ -467,7 +468,7 @@ int get_interface_addr(int skt)
     memset(&localAddr, 0, sizeof(localAddr));
     
     err = getsockname(skt, (struct sockaddr*)&localAddr, &len);
-    return ntohl(localAddr.sin_addr.s_addr);
+    return bswap_32(localAddr.sin_addr.s_addr);
 }
 
 /**********************************************/
@@ -482,9 +483,9 @@ int recv_udp(int socket, char *buf, int amt, int *fromip, int *fromport)
     ret = recvfrom(socket, buf, (size_t) amt, 0, (struct sockaddr*)&sin, &len);
     if (ret != -1) {
         if (fromip)
-            *fromip = ntohl(sin.sin_addr.s_addr);
+            *fromip = bswap_32(sin.sin_addr.s_addr);
         if (fromport)
-            *fromport = ntohs(sin.sin_port);
+            *fromport = bswap_16(sin.sin_port);
     }
     return ret;
 }
@@ -496,8 +497,8 @@ int send_udp(int skt, char *buf, int amt, int address, int port)
     
     memset(&sin, 0, sizeof(sin));
     sin.sin_family = AF_INET;
-    sin.sin_port = htons(port);
-    sin.sin_addr.s_addr = htonl(address);
+    sin.sin_port = bswap_16(port);
+    sin.sin_addr.s_addr = bswap_32(address);
     return sendto(skt, buf, (size_t) amt, 0, (struct sockaddr*)&sin, sizeof(sin));
 }
 
