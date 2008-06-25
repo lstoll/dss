@@ -4,6 +4,10 @@
     <logicalFolder name="f1"
                    displayName="build/package scripts"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="APIStubLib" projectFiles="true">
+        <itemPath>APIStubLib/BuildAPIStubLib</itemPath>
+        <itemPath>APIStubLib/makefile.apistublib.POSIX</itemPath>
+      </logicalFolder>
       <itemPath>builddpkg.sh</itemPath>
       <itemPath>Buildit</itemPath>
       <itemPath>BuildOSXInstallerPkg</itemPath>
@@ -1072,6 +1076,9 @@
       <item path="APIModules/QTSSWebStatsModule/QTSSWebStatsModule.h">
         <itemTool>3</itemTool>
       </item>
+      <item path="APIStubLib/BuildAPIStubLib">
+        <itemTool>3</itemTool>
+      </item>
       <item path="APIStubLib/QTSS.h">
         <itemTool>3</itemTool>
       </item>
@@ -1082,6 +1089,9 @@
         <itemTool>1</itemTool>
       </item>
       <item path="APIStubLib/QTSS_Private.h">
+        <itemTool>3</itemTool>
+      </item>
+      <item path="APIStubLib/makefile.apistublib.POSIX">
         <itemTool>3</itemTool>
       </item>
       <item path="AtomicLib/atomic.h">
