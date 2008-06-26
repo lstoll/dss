@@ -95,8 +95,8 @@ case $PLAT in
 		LINKER='gcc'
  		MAKE='make -j8 '
  		
-		COMPILER_FLAGS="-D_REENTRANT -D__USE_POSIX -D__linux__ -pipe"
-        INCLUDE_FLAG="-include"
+		COMPILER_FLAGS="-D_REENTRANT -D__USE_POSIX -D__linux__ -pipe" # -g add this flag to enable debug builds
+                INCLUDE_FLAG="-include"
 		
 		CORE_LINK_LIBS="-lpthread -ldl -lstdc++ -lm -lcrypt"
 
