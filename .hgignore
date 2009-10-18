@@ -1,2 +1,3 @@
+syntax:glob
 *.tmproj
 StreamingServer.xcodeproj/*.perspectivev3
