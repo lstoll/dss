@@ -23,3 +23,5 @@ QTFileTools/QTTrackInfo.tproj/QTTrackInfo
 StreamingLoadTool/StreamingLoadTool
 StreamingProxy.tproj/StreamingProxy
 qtpasswd.tproj/qtpasswd
+DarwinStreamingSrvr*
+StreamingProxy-*
