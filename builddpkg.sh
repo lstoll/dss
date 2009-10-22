@@ -23,6 +23,8 @@ echo '--- Creating unflatted dist directory'
 echo '--- Creating debian control directory, and copying files over'
 mkdir $PACKAGING_DIR/DEBIAN
 cp -r dpkg/* $PACKAGING_DIR/DEBIAN/
+eval `dpkg-architecture`
+sed -i "s/@@DEB_BUILD_ARCH@@/${DEB_BUILD_ARCH}/g" $PACKAGING_DIR/DEBIAN/control
 
 echo '--- Appending version to control file'
 # Append the version number to the control file
