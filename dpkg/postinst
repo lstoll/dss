@@ -33,7 +33,7 @@ if [ ! -f /etc/streaming/qtusers ]; then
 fi
 
 
-echo 'Setting the ownsership to qtss on /etc/streaming'
+echo 'Setting the ownership to qtss on /etc/streaming'
 chown -R -f qtss /etc/streaming/
 
 echo 'Creating /var/streaming/playlists'
