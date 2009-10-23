@@ -557,10 +557,16 @@ Bool16 SocketUtils::IncrementIfReqIter(char** inIfReqIter, ifreq* ifr)
         switch (ifr->ifr_addr.sa_family)
         {
             case AF_INET:
-                *inIfReqIter += sizeof(struct sockaddr_in);
+                if (sizeof(struct ifmap) > sizeof(struct sockaddr_in))
+                   *inIfReqIter += sizeof(struct ifmap);
+                else
+                   *inIfReqIter += sizeof(struct sockaddr_in);
                 break;
             default:
-                *inIfReqIter += sizeof(struct sockaddr);
+                if (sizeof(struct ifmap) > sizeof(struct sockaddr_in))
+                   *inIfReqIter += sizeof(struct ifmap);
+                else
+                   *inIfReqIter += sizeof(struct sockaddr);
 //              Assert(0);
 //              sNumIPAddrs = 0;
 //              return false;
