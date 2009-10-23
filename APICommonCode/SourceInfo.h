@@ -153,7 +153,7 @@ class SourceInfo
     protected:
         
         //utility function used by IsReflectable
-        virtual Bool16 IsReflectableIPAddr(UInt32 inIPAddr);
+        Bool16 IsReflectableIPAddr(UInt32 inIPAddr);
 
         StreamInfo* fStreamArray;
         UInt32      fNumStreams;
