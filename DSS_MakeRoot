@@ -16,6 +16,11 @@ else
 	INSTALLROOT=$1
 fi
 
+OSNAME=`uname`
+HARDWARENAME=`uname -m`
+ 
+PLAT=$OSNAME.$HARDWARENAME
+
 echo Installing source build of Darwin Streaming Server
 
 if [ -z $INSTALLROOT ]; then
@@ -54,11 +59,15 @@ if [ $FLATTEN != 1 ]; then
 	
 	echo creating "$INSTALLROOT/usr/local/sbin/StreamingServerModules" directory
 	mkdir -p $INSTALLROOT/usr/local/sbin/StreamingServerModules
-	cp -f APIModules/QTSSHomeDirectoryModule/QTSSHomeDirectoryModule $INSTALLROOT/usr/local/sbin/StreamingServerModules/
+	if [ $PLAT != Linux.x86_64]; then
+  	cp -f APIModules/QTSSHomeDirectoryModule/QTSSHomeDirectoryModule $INSTALLROOT/usr/local/sbin/StreamingServerModules/
+  fi
 	cp -f APIModules/QTSSRefMovieModule/QTSSRefMovieModule $INSTALLROOT/usr/local/sbin/StreamingServerModules/
 
-	echo copying "createuserstreamingdir" to "$INSTALLROOT/usr/local/bin/createuserstreamingdir"
-	cp -f APIModules/QTSSHomeDirectoryModule/createuserstreamingdir $INSTALLROOT/usr/local/bin/
+  if [ $PLAT != Linux.x86_64]; then
+  	echo copying "createuserstreamingdir" to "$INSTALLROOT/usr/local/bin/createuserstreamingdir"
+  	cp -f APIModules/QTSSHomeDirectoryModule/createuserstreamingdir $INSTALLROOT/usr/local/bin/
+  fi
 
 	echo creating "$INSTALLROOT/etc/streaming" directory
 	mkdir -p $INSTALLROOT/etc/streaming
@@ -177,11 +186,15 @@ else
 
 	echo creating "$INSTALLROOT/StreamingServerModules" directory
 	mkdir -p $INSTALLROOT/StreamingServerModules
-	cp -f APIModules/QTSSHomeDirectoryModule/QTSSHomeDirectoryModule $INSTALLROOT/StreamingServerModules/
+  if [ $PLAT != Linux.x86_64]; then
+  	cp -f APIModules/QTSSHomeDirectoryModule/QTSSHomeDirectoryModule $INSTALLROOT/StreamingServerModules/
+  fi
 	cp -f APIModules/QTSSRefMovieModule/QTSSRefMovieModule $INSTALLROOT/StreamingServerModules/
 	
-	echo copying "createuserstreamingdir" to "$INSTALLROOT/createuserstreamingdir"
-	cp -f APIModules/QTSSHomeDirectoryModule/createuserstreamingdir $INSTALLROOT/createuserstreamingdir
+	if [ $PLAT != Linux.x86_64]; then
+  	echo copying "createuserstreamingdir" to "$INSTALLROOT/createuserstreamingdir"
+  	cp -f APIModules/QTSSHomeDirectoryModule/createuserstreamingdir $INSTALLROOT/createuserstreamingdir
+  fi
 
 	echo copying "streamingserver.xml-POSIX" to "$INSTALLROOT/streamingserver.xml"
 	cp -f streamingserver.xml-POSIX $INSTALLROOT/streamingserver.xml

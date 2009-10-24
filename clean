@@ -242,5 +242,8 @@ rm -rf StreamingServer.pbproject/StreamingServer.pbproj
 rm -f StreamingServer.xcodeproj/*.mode1
 rm -f StreamingServer.xcodeproj/*.pbxuser
 
+echo "rm home directory module (as it's not built in all configs)"
+rm -f APIModules/QTSSHomeDirectoryModule/QTSSHomeDirectoryModule
+
 # always want to indicate success, otherwise the fact that some files above dont exist can cause breakage.
 exit 0

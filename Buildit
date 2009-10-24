@@ -383,9 +383,12 @@ else
 	cd ../QTSSSpamDefenseModule.bproj/
 	$MAKE -f Makefile.POSIX $*
 
-	echo Building HomeDirectoryModule for $PLAT with $CPLUS
-	cd ../QTSSHomeDirectoryModule/
-	$MAKE -f Makefile.POSIX $*
+  # Doesn't work properly on x64.
+  if [ $PLAT != Linux.x86_64]; then
+  	echo Building HomeDirectoryModule for $PLAT with $CPLUS
+  	cd ../QTSSHomeDirectoryModule/
+  	$MAKE -f Makefile.POSIX $*
+  fi
 	
 	cd ..
 	
