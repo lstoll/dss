@@ -10,7 +10,8 @@ fi
 
 # Add system user
 echo 'Adding qtss user & group'
-/usr/sbin/useradd qtss > /dev/null 2>&1
+/usr/sbin/addgroup --system qtss > /dev/null 2>&1
+/usr/sbin/adduser --system --group --home /usr/local/movies --no-create-home qtss > /dev/null 2>&1
 
 # if there is no qtuser file, move the dist version over, and update the admin user
 # to the default
