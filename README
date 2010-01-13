@@ -1,0 +1,20 @@
+Darwin Streaming Server for Ubuntu
+
+Two packages are here - download either the 32 or 64 bit package (whichever is appropriate for your machine), and run
+
+Note: The 64 bit package has had minimal testing - if you try it out, please let me know how you go
+
+$ sudo dpkg -i <packagename>
+Once it's installed you can open the admin interface at http://<ip>:1220 - the default username is admin, and the password is admin - you'll want to change this.
+
+See the Download tab for the packages.
+
+You can also checkout the code to built it yourself
+
+hg clone http://bitbucket.org/lstoll/dss/
+or tarballs of the source can be found at http://bitbucket.org/lstoll/dss/downloads/
+
+If you have any problems please log them in the Issue Tracker
+
+A big thanks goes out to the people on the streaming-server-dev group for the awesome patches I've used here!
+
